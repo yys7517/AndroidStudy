@@ -1,7 +1,7 @@
 package com.example.smartvendingmachine;
 
 import android.view.MenuItem;
-import android.view.View;
+
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
@@ -10,9 +10,9 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
 public class MainActivity extends AppCompatActivity {
 
     private BottomNavigationView bottomNavigationView;
-    BottomNavigationFrag1 fragment1;
-    BottomNavigationFrag2 fragment2;
-    BottomNavigationFrag3 fragment3;
+    BoardFragment boardFragment;
+    HomeFragment homeFragment;
+    ProfileFragment profileFragment;
 
 
     @Override
@@ -22,12 +22,15 @@ public class MainActivity extends AppCompatActivity {
         bottomNavigationView = findViewById(R.id.nav_view);
 
         //프래그먼트 생성
-        fragment1 = new BottomNavigationFrag1();
-        fragment2 = new BottomNavigationFrag2();
-        fragment3 = new BottomNavigationFrag3();
+        boardFragment = new BoardFragment();
+        homeFragment = new HomeFragment();
+        profileFragment = new ProfileFragment();
 
-        //처음에 띄울화면 이걸로 기릿~
-        getSupportFragmentManager().beginTransaction().replace(R.id.nav_host_fragment, fragment1).commitAllowingStateLoss();
+        // 처음에 띄울화면 이걸로 기릿~
+        getSupportFragmentManager().beginTransaction().replace(R.id.nav_host_fragment, homeFragment).commitAllowingStateLoss();
+
+        // 바텀 내비게이션 뷰 초기 선택 값 (홈)
+        bottomNavigationView.setSelectedItemId(R.id.frag_navigation_home);
 
         //bottomnavigationview의 아이콘을 선택 했을때 원하는 프래그먼트가 띄워질 수 있도록 리스터 추가
         bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
@@ -35,15 +38,15 @@ public class MainActivity extends AppCompatActivity {
             public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
                 switch (menuItem.getItemId()) {
                     case R.id.frag_navigation_home: {
-                        getSupportFragmentManager().beginTransaction().replace(R.id.nav_host_fragment, fragment1).commitAllowingStateLoss();
+                        getSupportFragmentManager().beginTransaction().replace(R.id.nav_host_fragment, homeFragment).commitAllowingStateLoss();
                         return true;
                     }
-                    case R.id.frag_navigation_story: {
-                        getSupportFragmentManager().beginTransaction().replace(R.id.nav_host_fragment, fragment2).commitAllowingStateLoss();
+                    case R.id.frag_navigation_board: {
+                        getSupportFragmentManager().beginTransaction().replace(R.id.nav_host_fragment, boardFragment).commitAllowingStateLoss();
                         return true;
                     }
                     case R.id.frag_navigation_profile: {
-                        getSupportFragmentManager().beginTransaction().replace(R.id.nav_host_fragment, fragment3).commitAllowingStateLoss();
+                        getSupportFragmentManager().beginTransaction().replace(R.id.nav_host_fragment, profileFragment).commitAllowingStateLoss();
                         return true;
                     }
 
