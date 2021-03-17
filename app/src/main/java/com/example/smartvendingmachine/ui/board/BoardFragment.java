@@ -1,15 +1,16 @@
-package com.example.smartvendingmachine;
+package com.example.smartvendingmachine.ui.board;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import androidx.fragment.app.Fragment;
+import com.example.smartvendingmachine.R;
 
-public class ProfileFragment extends Fragment {
+public class BoardFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        ViewGroup rootView = (ViewGroup) inflater.inflate(R.layout.fragment_profile, container, false);
+        ViewGroup rootView = (ViewGroup) inflater.inflate(R.layout.fragment_board, container, false);
 
         return rootView;
     }

@@ -1,10 +1,11 @@
-package com.example.smartvendingmachine;
+package com.example.smartvendingmachine.ui.Home;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import androidx.fragment.app.Fragment;
+import com.example.smartvendingmachine.R;
 
 public class HomeFragment extends Fragment {
     @Override
