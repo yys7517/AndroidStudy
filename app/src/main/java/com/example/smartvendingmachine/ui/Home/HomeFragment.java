@@ -58,7 +58,7 @@ public class HomeFragment extends Fragment {
         mTextViewGalbaeStock = (TextView) v.findViewById(R.id.mTextViewGalbaeStock);
 
         mRecyclerView = (RecyclerView) v.findViewById(R.id.mRecyclerView);
-        mRecyclerView.setLayoutManager(new LinearLayoutManager(this.getActivity()));
+        mRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
 
         mArrayList = new ArrayList<>();
 
@@ -69,7 +69,7 @@ public class HomeFragment extends Fragment {
         mAdapter.notifyDataSetChanged();
 
         GetData task = new GetData();
-        task.execute("http://" + IP_ADDRESS + "/DRINK.php", "");
+        task.execute("http://" + IP_ADDRESS + "/drink.php", "");
 
         swipeRefreshLayout = v.findViewById(R.id.refresh_layout);
 
@@ -80,7 +80,7 @@ public class HomeFragment extends Fragment {
                 mAdapter.notifyDataSetChanged();
 
                 GetData task = new GetData();
-                task.execute("http://" + IP_ADDRESS + "/DRINK.php", "");
+                task.execute("http://" + IP_ADDRESS + "/drink.php", "");
                 swipeRefreshLayout.setRefreshing(false); //새로고침표시 없애기
             }
         });
@@ -185,7 +185,7 @@ public class HomeFragment extends Fragment {
 
     private void showResult() {
 
-        String TAG_JSON = "DRINK_DATA"; // 원래 값 SmartVendingMachine
+        String TAG_JSON = "drink_data";
         String TAG_DRID = "DRID";
         String TAG_DRCode = "DRCode";
         String TAG_DRStock = "DRStock";
@@ -228,10 +228,14 @@ public class HomeFragment extends Fragment {
                     case "Fanta Orange":
                         mTextViewFantaStock.setText("현재 재고 : " + mArrayList.get(i).getDRStock() + " 개");
                         break;
+
                     case "Mountain Dew":
                         mTextViewMountainStock.setText("현재 재고: " + mArrayList.get(i).getDRStock() + " 개");
+                        break;
+
                     case "Galbae":
                         mTextViewGalbaeStock.setText("현재 재고: " + mArrayList.get(i).getDRStock() + " 개");
+                        break;
 
                     default:
                         break;
