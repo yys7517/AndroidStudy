@@ -4,6 +4,7 @@ public class DRData {
     private String DRID;
     private String DRCode;
     private String DRStock;
+    private String DRPrice;
 
     public String getDRID() {
         return DRID;
@@ -17,6 +18,8 @@ public class DRData {
         return DRStock;
     }
 
+    public String getDRPrice() { return DRPrice;}
+
     public void setDRID(String DRID) {
         this.DRID = DRID;
     }
@@ -28,5 +31,7 @@ public class DRData {
     public void setDRStock(String DRStock) {
         this.DRStock = DRStock;
     }
+
+    public void setDRPrice(String DRPrice) { this.DRPrice = DRPrice; }
 }
 

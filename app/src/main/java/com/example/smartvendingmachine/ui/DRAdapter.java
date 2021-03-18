@@ -29,6 +29,7 @@ public class DRAdapter extends RecyclerView.Adapter<com.example.smartvendingmach
         protected TextView mTextViewDRID;
         protected TextView mTextViewDRCode;
         protected TextView mTextViewDRStock;
+        protected TextView mTextViewDRPrice;
 
 
         public CustomViewHolder(View view) {
@@ -36,6 +37,7 @@ public class DRAdapter extends RecyclerView.Adapter<com.example.smartvendingmach
             this.mTextViewDRID = (TextView) view.findViewById(R.id.mTextViewDRID);
             this.mTextViewDRCode = (TextView) view.findViewById(R.id.mTextViewDRCode);
             this.mTextViewDRStock = (TextView) view.findViewById(R.id.mTextViewDRStock);
+            this.mTextViewDRPrice = (TextView) view.findViewById(R.id.mTextViewDRPrice);
         }
     }
 
@@ -54,6 +56,7 @@ public class DRAdapter extends RecyclerView.Adapter<com.example.smartvendingmach
         viewholder.mTextViewDRID.setText(mList.get(position).getDRID());
         viewholder.mTextViewDRCode.setText(mList.get(position).getDRCode());
         viewholder.mTextViewDRStock.setText(mList.get(position).getDRStock());
+        viewholder.mTextViewDRPrice.setText(mList.get(position).getDRPrice());
 
     }
 

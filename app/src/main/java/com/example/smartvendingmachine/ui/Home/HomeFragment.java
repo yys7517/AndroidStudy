@@ -33,7 +33,12 @@ import com.example.smartvendingmachine.R;
 
 public class HomeFragment extends Fragment {
 
+    //수량 TextView
     private TextView mTextViewCocacolaStock, mTextViewChilsungStock, mTextViewSsekssekStock, mTextViewFantaStock, mTextViewMountainStock, mTextViewGalbaeStock;
+
+    //가격 TextView
+    private TextView mTextViewCocacolaPrice, mTextViewChilsungPrice, mTextViewSsekssekPrice, mTextViewFantaPrice, mTextViewMountainPrice, mTextViewGalbaePrice;
+
     private static String IP_ADDRESS = "211.211.158.42/yongrun/svm";
     private static String TAG = "phptest";
 
@@ -50,12 +55,24 @@ public class HomeFragment extends Fragment {
 
         View v = inflater.inflate(R.layout.fragment_home, container, false);
 
+
+
+        // 수량
         mTextViewCocacolaStock = (TextView) v.findViewById(R.id.mTextViewCocacolaStock);
         mTextViewChilsungStock = (TextView) v.findViewById(R.id.mTextViewChilsungStock);
         mTextViewSsekssekStock = (TextView) v.findViewById(R.id.mTextViewSsekssekStock);
         mTextViewFantaStock = (TextView) v.findViewById(R.id.mTextViewFantaStock);
         mTextViewMountainStock = (TextView) v.findViewById(R.id.mTextViewMountainStock);
         mTextViewGalbaeStock = (TextView) v.findViewById(R.id.mTextViewGalbaeStock);
+
+        // 가격
+        mTextViewCocacolaPrice = (TextView) v.findViewById(R.id.mTextViewCocacolaPrice);
+        mTextViewChilsungPrice = (TextView) v.findViewById(R.id.mTextViewChilsungPrice);
+        mTextViewSsekssekPrice = (TextView) v.findViewById(R.id.mTextViewSsekssekPrice);
+        mTextViewFantaPrice = (TextView) v.findViewById(R.id.mTextViewFantaPrice);
+        mTextViewMountainPrice = (TextView) v.findViewById(R.id.mTextViewMountainPrice);
+        mTextViewGalbaePrice = (TextView) v.findViewById(R.id.mTextViewGalbaePrice);
+
 
         mRecyclerView = (RecyclerView) v.findViewById(R.id.mRecyclerView);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
@@ -189,6 +206,7 @@ public class HomeFragment extends Fragment {
         String TAG_DRID = "DRID";
         String TAG_DRCode = "DRCode";
         String TAG_DRStock = "DRStock";
+        String TAG_DRPrice = "DRPrice";
 
 
         try {
@@ -202,46 +220,57 @@ public class HomeFragment extends Fragment {
                 String DRID = item.getString(TAG_DRID);
                 String DRCode = item.getString(TAG_DRCode);
                 String DRStock = item.getString(TAG_DRStock);
+                String DRPrice = item.getString(TAG_DRPrice);
 
                 DRData personalData = new DRData();
 
                 personalData.setDRID(DRID);
                 personalData.setDRCode(DRCode);
                 personalData.setDRStock(DRStock);
+                personalData.setDRPrice(DRPrice);
 
                 mArrayList.add(personalData);
                 mAdapter.notifyDataSetChanged();
 
+
+                //출력 switch 문
                 switch (mArrayList.get(i).getDRCode()) {
                     case "CocaCola":
-                        mTextViewCocacolaStock.setText("현재 재고 : " + mArrayList.get(i).getDRStock() + " 개");
+                        mTextViewCocacolaPrice.setText("가격 : " + mArrayList.get(i).getDRPrice() + " 원");
+                        mTextViewCocacolaStock.setText("수량 : " + mArrayList.get(i).getDRStock() + " 개");
                         break;
 
                     case "Chilsung Cider":
-                        mTextViewChilsungStock.setText("현재 재고 : " + mArrayList.get(i).getDRStock() + " 개");
+                        mTextViewChilsungPrice.setText("가격 : " + mArrayList.get(i).getDRPrice() + " 원");
+                        mTextViewChilsungStock.setText("수량 : " + mArrayList.get(i).getDRStock() + " 개");
                         break;
 
                     case "Ssekssek":
-                        mTextViewSsekssekStock.setText("현재 재고 : " + mArrayList.get(i).getDRStock() + " 개");
+                        mTextViewSsekssekPrice.setText("가격 : " + mArrayList.get(i).getDRPrice() + " 원");
+                        mTextViewSsekssekStock.setText("수량 : " + mArrayList.get(i).getDRStock() + " 개");
                         break;
 
                     case "Fanta Orange":
-                        mTextViewFantaStock.setText("현재 재고 : " + mArrayList.get(i).getDRStock() + " 개");
+                        mTextViewFantaPrice.setText("가격 : " + mArrayList.get(i).getDRPrice() + " 원");
+                        mTextViewFantaStock.setText("수량 : " + mArrayList.get(i).getDRStock() + " 개");
                         break;
 
                     case "Mountain Dew":
-                        mTextViewMountainStock.setText("현재 재고: " + mArrayList.get(i).getDRStock() + " 개");
+                        mTextViewMountainPrice.setText("가격 : " + mArrayList.get(i).getDRPrice() + " 원");
+                        mTextViewMountainStock.setText("수량: " + mArrayList.get(i).getDRStock() + " 개");
                         break;
 
                     case "Galbae":
-                        mTextViewGalbaeStock.setText("현재 재고: " + mArrayList.get(i).getDRStock() + " 개");
+                        mTextViewGalbaePrice.setText("가격 : " + mArrayList.get(i).getDRPrice() + " 원");
+                        mTextViewGalbaeStock.setText("수량: " + mArrayList.get(i).getDRStock() + " 개");
                         break;
 
                     default:
                         break;
                 }
-            }
 
+
+            }
 
         } catch (JSONException e) {
 
