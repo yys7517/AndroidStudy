@@ -96,6 +96,7 @@
         android:text="관리자 답변"
         android:textColor="#767676"
         android:textSize="12sp"
+        app:layout_constraintTop_toBottomOf="@+id/txtCommentContents"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
 
@@ -104,5 +105,7 @@
         android:layout_width="match_parent"
         android:layout_height="1dp"
         android:background="#e3e3e3"
+        android:layout_marginTop="10dp"
+        app:layout_constraintTop_toBottomOf="@+id/txtCommentDate"
         app:layout_constraintBottom_toBottomOf="parent"/>
 </androidx.constraintlayout.widget.ConstraintLayout>
