@@ -330,7 +330,7 @@
                             android:fontFamily="@font/notosanscjkkrmedium"
                             android:textColor="#000000"
                             android:gravity="center"
-                            android:text="환타 오렌지"
+                            android:text="마운틴 듀"
                             android:textSize="20sp" />
 
                         <LinearLayout
@@ -390,7 +390,7 @@
                             android:fontFamily="@font/notosanscjkkrmedium"
                             android:textColor="#000000"
                             android:gravity="center"
-                            android:text="환타 오렌지"
+                            android:text="갈배 사이다"
                             android:textSize="20sp" />
 
                         <LinearLayout
