@@ -55,5 +55,14 @@ public class BoardFragment extends Fragment {
         mSearchData.add(new BoardData("용현1", "우유가 안나와요","12월","12시 30분", "확인"));
         mSearchData.add(new BoardData("용현2", "콜라가 뜨거워요", "1월","11시 20분","확인안함"));
         mSearchData.add(new BoardData("용현3", "아침햇살 추가해 주세요.", "7월","11시 28분", "확인"));
+        mSearchData.add(new BoardData("용현3", "아침햇살 추가해 주세요.", "7월","11시 28분", "확인"));
+        mSearchData.add(new BoardData("용현3", "아침햇살 추가해 주세요.", "7월","11시 28분", "확인"));
+        mSearchData.add(new BoardData("용현3", "아침햇살 추가해 주세요.", "7월","11시 28분", "확인"));
+        mSearchData.add(new BoardData("용현3", "아침햇살 추가해 주세요.", "7월","11시 28분", "확인"));
+        mSearchData.add(new BoardData("용현3", "아침햇살 추가해 주세요.", "7월","11시 28분", "확인"));
+        mSearchData.add(new BoardData("용현3", "아침햇살 추가해 주세요.", "7월","11시 28분", "확인"));
+        mSearchData.add(new BoardData("용현3", "아침햇살 추가해 주세요.", "7월","11시 28분", "확인"));
+        mSearchData.add(new BoardData("용현3", "아침햇살 추가해 주세요.", "7월","11시 28분", "확인"));
+        
     }
 }

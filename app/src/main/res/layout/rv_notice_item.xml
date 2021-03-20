@@ -85,8 +85,8 @@
         app:layout_constraintStart_toEndOf="@+id/txtCommentDate"
         app:layout_constraintTop_toBottomOf="@+id/txtCommentContents" />
 
-    //관리자 답변 유무
 
+    //관리자 답변 유무
     <TextView
         android:id="@+id/txtCommentmanager"
         android:layout_width="wrap_content"
@@ -98,4 +98,11 @@
         android:textSize="12sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
+
+    <View
+        android:id="@+id/view"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="#e3e3e3"
+        app:layout_constraintBottom_toBottomOf="parent"/>
 </androidx.constraintlayout.widget.ConstraintLayout>
