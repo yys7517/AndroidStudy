@@ -32,7 +32,7 @@ public class BoardFragment extends Fragment {
         mLayoutManager = new LinearLayoutManager(getActivity());
         recyclerView.setLayoutManager(mLayoutManager);
         recyclerView.scrollToPosition(0);
-        adapter = new BoardAdapter(list);
+        adapter = new BoardAdapter(mSearchData);
         recyclerView.setAdapter(adapter);
         recyclerView.setItemAnimator(new DefaultItemAnimator());
         return rootView;
