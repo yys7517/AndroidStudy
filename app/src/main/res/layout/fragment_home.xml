@@ -92,6 +92,7 @@
                                 android:fontFamily="@font/notosanscjkkrmedium"
                                 android:textColor="#000000"
                                 android:gravity="center"
+                                android:layout_marginRight="1dp"
                                 android:layout_weight="1"
                                 android:text="가격 정보 없음"
                                 android:textSize="13dp" />
@@ -108,6 +109,7 @@
                                 android:textColor="#000000"
                                 android:layout_weight="1"
                                 android:text="알 수 없음"
+                                android:layout_marginLeft="1dp"
                                 android:textSize="13dp" />
                         </LinearLayout>
 
@@ -151,6 +153,7 @@
                                 android:fontFamily="@font/notosanscjkkrmedium"
                                 android:textColor="#000000"
                                 android:gravity="center"
+                                android:layout_marginRight="1dp"
                                 android:layout_weight="1"
                                 android:text="가격 정보 없음"
                                 android:textSize="13dp" />
@@ -166,6 +169,7 @@
                                 android:gravity="center"
                                 android:textColor="#000000"
                                 android:layout_weight="1"
+                                android:layout_marginLeft="1dp"
                                 android:text="알 수 없음"
                                 android:textSize="13dp" />
                         </LinearLayout>
@@ -216,6 +220,7 @@
                                 android:layout_weight="1"
                                 android:background="@drawable/price_text"
                                 android:fontFamily="@font/notosanscjkkrmedium"
+                                android:layout_marginRight="1dp"
                                 android:gravity="center"
                                 android:text="가격 정보 없음"
                                 android:textColor="#000000"
@@ -231,6 +236,7 @@
                                 android:gravity="center"
                                 android:textColor="#000000"
                                 android:layout_weight="1"
+                                android:layout_marginLeft="1dp"
                                 android:text="알 수 없음"
                                 android:textSize="13dp" />
                         </LinearLayout>
@@ -274,6 +280,7 @@
                                 android:fontFamily="@font/notosanscjkkrmedium"
                                 android:textColor="#000000"
                                 android:gravity="center"
+                                android:layout_marginRight="1dp"
                                 android:layout_weight="1"
                                 android:text="가격 정보 없음"
                                 android:textSize="13dp" />
@@ -290,6 +297,7 @@
                                 android:textColor="#000000"
                                 android:layout_weight="1"
                                 android:text="알 수 없음"
+                                android:layout_marginLeft="1dp"
                                 android:textSize="13dp" />
                         </LinearLayout>
                     </LinearLayout>
@@ -339,6 +347,7 @@
                                 android:fontFamily="@font/notosanscjkkrmedium"
                                 android:textColor="#000000"
                                 android:gravity="center"
+                                android:layout_marginRight="1dp"
                                 android:layout_weight="1"
                                 android:text="가격 정보 없음"
                                 android:textSize="13dp" />
@@ -353,6 +362,7 @@
                                 android:fontFamily="@font/notosanscjkkrmedium"
                                 android:gravity="center"
                                 android:textColor="#000000"
+                                android:layout_marginLeft="1dp"
                                 android:layout_weight="1"
                                 android:text="알 수 없음"
                                 android:textSize="13dp" />
@@ -399,6 +409,7 @@
                                 android:gravity="center"
                                 android:layout_weight="1"
                                 android:text="가격 정보 없음"
+                                android:layout_marginRight="1dp"
                                 android:textSize="13dp" />
 
 
@@ -412,6 +423,7 @@
                                 android:gravity="center"
                                 android:textColor="#000000"
                                 android:layout_weight="1"
+                                android:layout_marginLeft="1dp"
                                 android:text="알 수 없음"
                                 android:textSize="13dp" />
                         </LinearLayout>
