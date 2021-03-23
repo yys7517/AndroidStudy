@@ -53,28 +53,28 @@ public class HomeFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
 
-        View v = inflater.inflate(R.layout.fragment_home, container, false);
+        View rootview = inflater.inflate(R.layout.fragment_home, container, false);
 
 
 
         // 수량
-        mTextViewCocacolaStock = (TextView) v.findViewById(R.id.mTextViewCocacolaStock);
-        mTextViewChilsungStock = (TextView) v.findViewById(R.id.mTextViewChilsungStock);
-        mTextViewSsekssekStock = (TextView) v.findViewById(R.id.mTextViewSsekssekStock);
-        mTextViewFantaStock = (TextView) v.findViewById(R.id.mTextViewFantaStock);
-        mTextViewMountainStock = (TextView) v.findViewById(R.id.mTextViewMountainStock);
-        mTextViewGalbaeStock = (TextView) v.findViewById(R.id.mTextViewGalbaeStock);
+        mTextViewCocacolaStock = (TextView) rootview.findViewById(R.id.mTextViewCocacolaStock);
+        mTextViewChilsungStock = (TextView) rootview.findViewById(R.id.mTextViewChilsungStock);
+        mTextViewSsekssekStock = (TextView) rootview.findViewById(R.id.mTextViewSsekssekStock);
+        mTextViewFantaStock = (TextView) rootview.findViewById(R.id.mTextViewFantaStock);
+        mTextViewMountainStock = (TextView) rootview.findViewById(R.id.mTextViewMountainStock);
+        mTextViewGalbaeStock = (TextView) rootview.findViewById(R.id.mTextViewGalbaeStock);
 
         // 가격
-        mTextViewCocacolaPrice = (TextView) v.findViewById(R.id.mTextViewCocacolaPrice);
-        mTextViewChilsungPrice = (TextView) v.findViewById(R.id.mTextViewChilsungPrice);
-        mTextViewSsekssekPrice = (TextView) v.findViewById(R.id.mTextViewSsekssekPrice);
-        mTextViewFantaPrice = (TextView) v.findViewById(R.id.mTextViewFantaPrice);
-        mTextViewMountainPrice = (TextView) v.findViewById(R.id.mTextViewMountainPrice);
-        mTextViewGalbaePrice = (TextView) v.findViewById(R.id.mTextViewGalbaePrice);
+        mTextViewCocacolaPrice = (TextView) rootview.findViewById(R.id.mTextViewCocacolaPrice);
+        mTextViewChilsungPrice = (TextView) rootview.findViewById(R.id.mTextViewChilsungPrice);
+        mTextViewSsekssekPrice = (TextView) rootview.findViewById(R.id.mTextViewSsekssekPrice);
+        mTextViewFantaPrice = (TextView) rootview.findViewById(R.id.mTextViewFantaPrice);
+        mTextViewMountainPrice = (TextView) rootview.findViewById(R.id.mTextViewMountainPrice);
+        mTextViewGalbaePrice = (TextView) rootview.findViewById(R.id.mTextViewGalbaePrice);
 
 
-        mRecyclerView = (RecyclerView) v.findViewById(R.id.mRecyclerView);
+        mRecyclerView = (RecyclerView) rootview.findViewById(R.id.mRecyclerView);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
 
         mArrayList = new ArrayList<>();
@@ -88,7 +88,7 @@ public class HomeFragment extends Fragment {
         GetData task = new GetData();
         task.execute("http://" + IP_ADDRESS + "/drink.php", "");
 
-        swipeRefreshLayout = v.findViewById(R.id.refresh_layout);
+        swipeRefreshLayout = rootview.findViewById(R.id.refresh_layout);
 
         swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
@@ -103,7 +103,7 @@ public class HomeFragment extends Fragment {
         });
 
 
-        return v;
+        return rootview;
     }
 
     private class GetData extends AsyncTask<String, Void, String> {
