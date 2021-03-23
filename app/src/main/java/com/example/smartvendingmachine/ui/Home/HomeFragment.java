@@ -15,9 +15,6 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
-import com.example.smartvendingmachine.ui.DRAdapter;
-import com.example.smartvendingmachine.ui.DRData;
-
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -45,8 +42,8 @@ public class HomeFragment extends Fragment {
 
     private SwipeRefreshLayout swipeRefreshLayout;
 
-    private ArrayList<DRData> mArrayList;
-    private DRAdapter mAdapter;
+    private ArrayList<HomeData> mArrayList;
+    private HomeAdapter mAdapter;
     private RecyclerView mRecyclerView;
     private String mJsonString;
 
@@ -79,7 +76,7 @@ public class HomeFragment extends Fragment {
 
         mArrayList = new ArrayList<>();
 
-        mAdapter = new DRAdapter(getActivity(), mArrayList);
+        mAdapter = new HomeAdapter(getActivity(), mArrayList);
         mRecyclerView.setAdapter(mAdapter);
 
         mArrayList.clear();
@@ -222,7 +219,7 @@ public class HomeFragment extends Fragment {
                 String DRStock = item.getString(TAG_DRStock);
                 String DRPrice = item.getString(TAG_DRPrice);
 
-                DRData personalData = new DRData();
+                HomeData personalData = new HomeData();
 
                 personalData.setDRID(DRID);
                 personalData.setDRCode(DRCode);

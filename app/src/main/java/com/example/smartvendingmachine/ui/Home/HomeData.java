@@ -1,6 +1,6 @@
-package com.example.smartvendingmachine.ui;
+package com.example.smartvendingmachine.ui.Home;
 
-public class DRData {
+public class HomeData {
     private String DRID;
     private String DRCode;
     private String DRStock;
