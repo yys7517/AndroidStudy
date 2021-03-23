@@ -52,8 +52,6 @@ public class HomeFragment extends Fragment {
 
         View rootview = inflater.inflate(R.layout.fragment_home, container, false);
 
-
-
         // 수량
         mTextViewCocacolaStock = (TextView) rootview.findViewById(R.id.mTextViewCocacolaStock);
         mTextViewChilsungStock = (TextView) rootview.findViewById(R.id.mTextViewChilsungStock);
