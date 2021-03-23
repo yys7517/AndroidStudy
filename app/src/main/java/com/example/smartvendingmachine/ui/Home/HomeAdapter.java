@@ -1,4 +1,4 @@
-package com.example.smartvendingmachine.ui;
+package com.example.smartvendingmachine.ui.Home;
 
 import android.app.Activity;
 import android.view.LayoutInflater;
@@ -14,13 +14,13 @@ import com.example.smartvendingmachine.R;
 import java.util.ArrayList;
 
 
-public class DRAdapter extends RecyclerView.Adapter<com.example.smartvendingmachine.ui.DRAdapter.CustomViewHolder> {
+public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.CustomViewHolder> {
 
-    private ArrayList<DRData> mList = null;
+    private ArrayList<HomeData> mList = null;
     private Activity context = null;
 
 
-    public DRAdapter(Activity context, ArrayList<DRData> list) {
+    public HomeAdapter(Activity context, ArrayList<HomeData> list) {
         this.context = context;
         this.mList = list;
     }
