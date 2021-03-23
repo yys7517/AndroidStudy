@@ -1,5 +1,6 @@
 package com.example.smartvendingmachine.ui.board;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -50,6 +51,7 @@ public class BoardFragment extends Fragment {
             @Override
             public void onItemClick(View v, int position) {
                 // TODO : 아이템 클릭 이벤트를 플레그먼트에서 처뤼
+                getActivity().startActivity(new Intent(getActivity(), BoardActivity.class));
             }
         });
 
@@ -58,7 +60,7 @@ public class BoardFragment extends Fragment {
         swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
-
+                //데이터 새로고침 코드 넣어야 함.
                 swipeRefreshLayout.setRefreshing(false); //새로고침표시 없애기
             }
         });
