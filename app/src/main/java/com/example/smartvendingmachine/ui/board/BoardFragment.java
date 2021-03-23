@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
@@ -41,7 +42,13 @@ public class BoardFragment extends Fragment {
         recyclerView.setAdapter(adapter);
         recyclerView.setItemAnimator(new DefaultItemAnimator());
 
-
+        //커스텀 리스터 객체 생성 및 전달.
+        adapter.setOnItemClickListener(new BoardAdapter.OnItemClickListener() {
+            @Override
+            public void onItemClick(View v, int position) {
+                // TODO : 아이템 클릭 이벤트를 플레그먼트에서 처뤼
+            }
+        });
 
         swipeRefreshLayout = rootview.findViewById(R.id.refresh_layout);
 
@@ -72,14 +79,14 @@ public class BoardFragment extends Fragment {
         mSearchData.add(new BoardData("용현1", "우유가 안나와요","12월","12시 30분", "확인"));
         mSearchData.add(new BoardData("용현2", "콜라가 뜨거워요", "1월","11시 20분","확인안함"));
         mSearchData.add(new BoardData("용현3", "아침햇살 추가해 주세요.", "7월","11시 28분", "확인"));
-        mSearchData.add(new BoardData("용현3", "아침햇살 추가해 주세요.", "7월","11시 28분", "확인"));
-        mSearchData.add(new BoardData("용현3", "아침햇살 추가해 주세요.", "7월","11시 28분", "확인"));
-        mSearchData.add(new BoardData("용현3", "아침햇살 추가해 주세요.", "7월","11시 28분", "확인"));
-        mSearchData.add(new BoardData("용현3", "아침햇살 추가해 주세요.", "7월","11시 28분", "확인"));
-        mSearchData.add(new BoardData("용현3", "아침햇살 추가해 주세요.", "7월","11시 28분", "확인"));
-        mSearchData.add(new BoardData("용현3", "아침햇살 추가해 주세요.", "7월","11시 28분", "확인"));
-        mSearchData.add(new BoardData("용현3", "아침햇살 추가해 주세요.", "7월","11시 28분", "확인"));
-        mSearchData.add(new BoardData("용현3", "아침햇살 추가해 주세요.", "7월","11시 28분", "확인"));
+        mSearchData.add(new BoardData("용현4", "아침햇살 추가해 주세요.", "7월","11시 28분", "확인"));
+        mSearchData.add(new BoardData("용현5", "아침햇살 추가해 주세요.", "7월","11시 28분", "확인"));
+        mSearchData.add(new BoardData("용현6", "아침햇살 추가해 주세요.", "7월","11시 28분", "확인"));
+        mSearchData.add(new BoardData("용현7", "아침햇살 추가해 주세요.", "7월","11시 28분", "확인"));
+        mSearchData.add(new BoardData("용현8", "아침햇살 추가해 주세요.", "7월","11시 28분", "확인"));
+        mSearchData.add(new BoardData("용현9", "아침햇살 추가해 주세요.", "7월","11시 28분", "확인"));
+        mSearchData.add(new BoardData("용현10", "아침햇살 추가해 주세요.", "7월","11시 28분", "확인"));
+        mSearchData.add(new BoardData("용현11", "아침햇살 추가해 주세요.", "7월","11시 28분", "확인"));
         
     }
 }

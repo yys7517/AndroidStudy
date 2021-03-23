@@ -2,13 +2,16 @@ package com.example.smartvendingmachine.ui.board;
 
 import android.app.Activity;
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
+
 import com.example.smartvendingmachine.R;
 
 import java.util.ArrayList;
@@ -16,7 +19,20 @@ import java.util.List;
 
 public class BoardAdapter extends RecyclerView.Adapter<BoardAdapter.ViewHolder> {
 
+    final private String TAG = "테스트중이에요옹";
+
     private ArrayList<BoardData> iData;
+    //리스너 객체 참조를 저장하는 변수
+    private OnItemClickListener mListener = null;
+
+    public interface OnItemClickListener {
+        void onItemClick(View v, int position);
+    }
+
+    //OnItemClickListener 리스너 객체 참조를 어댑터에 전달하는 메소드
+    public void setOnItemClickListener(OnItemClickListener listener) {
+        this.mListener = listener;
+    }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
         //ImageView profile;
@@ -36,6 +52,20 @@ public class BoardAdapter extends RecyclerView.Adapter<BoardAdapter.ViewHolder> 
             date = itemView.findViewById(R.id.txtCommentDate);
             time = itemView.findViewById(R.id.txtCommentTime);
             manager = itemView.findViewById(R.id.txtCommentmanager);
+
+            itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    int pos = getAdapterPosition();
+                    if (pos != RecyclerView.NO_POSITION) {
+                        // 데이터 리스트로부터 아이템 참조.
+                        if (mListener != null) {
+                            mListener.onItemClick(view, pos);
+                            Log.d(TAG, "onClick: "+pos+"번째");
+                        }
+                    }
+                }
+            });
         }
     }
 
@@ -49,7 +79,7 @@ public class BoardAdapter extends RecyclerView.Adapter<BoardAdapter.ViewHolder> 
     @Override
     public BoardAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         Context context = parent.getContext();
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.rv_notice_item, parent,false);
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.rv_notice_item, parent, false);
         ViewHolder viewHolder = new ViewHolder(view);
         return viewHolder;
     }
