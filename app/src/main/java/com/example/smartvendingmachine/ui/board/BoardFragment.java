@@ -10,7 +10,10 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.DefaultItemAnimator;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
+
 import com.example.smartvendingmachine.R;
+import com.example.smartvendingmachine.ui.Home.HomeFragment;
 
 import java.util.ArrayList;
 
@@ -23,11 +26,13 @@ public class BoardFragment extends Fragment {
     private ArrayList<BoardData> list = new ArrayList<>();
     private ArrayList<BoardData> mSearchData = new ArrayList<>();
 
+    private SwipeRefreshLayout swipeRefreshLayout;
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        ViewGroup rootView = (ViewGroup) inflater.inflate(R.layout.fragment_board, container, false);
+        ViewGroup rootview = (ViewGroup) inflater.inflate(R.layout.fragment_board, container, false);
 
-        recyclerView = (RecyclerView) rootView.findViewById(R.id.recyclerView);
+        recyclerView = (RecyclerView) rootview.findViewById(R.id.recyclerView);
         recyclerView.setHasFixedSize(true);
         mLayoutManager = new LinearLayoutManager(getActivity());
         recyclerView.setLayoutManager(mLayoutManager);
@@ -35,7 +40,19 @@ public class BoardFragment extends Fragment {
         adapter = new BoardAdapter(mSearchData);
         recyclerView.setAdapter(adapter);
         recyclerView.setItemAnimator(new DefaultItemAnimator());
-        return rootView;
+
+
+
+        swipeRefreshLayout = rootview.findViewById(R.id.refresh_layout);
+
+        swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+
+                swipeRefreshLayout.setRefreshing(false); //새로고침표시 없애기
+            }
+        });
+        return rootview;
     }
 
     @Override
