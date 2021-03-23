@@ -29,6 +29,9 @@ public class BoardFragment extends Fragment {
 
     private SwipeRefreshLayout swipeRefreshLayout;
 
+    private static String IP_ADDRESS = "211.211.158.42/yongrun/svm";
+    private static String TAG = "phptest";
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         ViewGroup rootview = (ViewGroup) inflater.inflate(R.layout.fragment_board, container, false);

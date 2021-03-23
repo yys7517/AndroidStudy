@@ -19,7 +19,7 @@ import java.util.List;
 
 public class BoardAdapter extends RecyclerView.Adapter<BoardAdapter.ViewHolder> {
 
-    final private String TAG = "테스트중이에요옹";
+    final private String TAG1 = "테스트중이에요옹";
 
     private ArrayList<BoardData> iData;
     //리스너 객체 참조를 저장하는 변수
@@ -61,7 +61,7 @@ public class BoardAdapter extends RecyclerView.Adapter<BoardAdapter.ViewHolder> 
                         // 데이터 리스트로부터 아이템 참조.
                         if (mListener != null) {
                             mListener.onItemClick(view, pos);
-                            Log.d(TAG, "onClick: "+pos+"번째");
+                            Log.d(TAG1, "onClick: "+pos+"번째");
                         }
                     }
                 }
