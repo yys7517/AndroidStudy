@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/rvCommentItem"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -46,18 +47,22 @@
         android:background="#e3e3e3"
         app:layout_constraintTop_toBottomOf="@+id/constraintLayout_edit" />
 
-    <ScrollView
-        android:id="@+id/scroll"
+    <androidx.core.widget.NestedScrollView
+        android:id="@+id/nestedscroll"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        app:layout_constraintTop_toBottomOf="@id/view1">
+        android:background="#f4f4f4"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toTopOf="@id/view1"
+        app:layout_constraintVertical_bias="0.0"
+        tools:layout_editor_absoluteX="0dp">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/constraint_entire"
             android:layout_width="match_parent"
             android:layout_height="0dp"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintTop_toTopOf="@id/scroll">
+            app:layout_constraintTop_toTopOf="@id/nestedscroll">
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/userlayout"
@@ -261,7 +266,7 @@
 
             </androidx.constraintlayout.widget.ConstraintLayout>
         </androidx.constraintlayout.widget.ConstraintLayout>
-    </ScrollView>
+    </androidx.core.widget.NestedScrollView>
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
