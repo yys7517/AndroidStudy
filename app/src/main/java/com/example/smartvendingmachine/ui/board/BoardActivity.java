@@ -15,13 +15,16 @@ import com.example.smartvendingmachine.R;
 public class BoardActivity extends AppCompatActivity {
 
     private ImageView backspace;
+
     TextView username;
     String TAG = "유저 이름 테스트";
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.board_activity);
 
+        //유저 아이디 넘겨주는 코드
         username = findViewById(R.id.txtCommentNick);
         Intent intent = getIntent();
         String test = intent.getStringExtra("name");
