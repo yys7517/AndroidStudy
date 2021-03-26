@@ -14,7 +14,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.smartvendingmachine.R;
-
+import android.content.Intent;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -58,12 +58,12 @@ public class BoardAdapter extends RecyclerView.Adapter<BoardAdapter.ViewHolder> 
                 @Override
                 public void onClick(View view) {
                     int pos = getAdapterPosition();
+
                     if (pos != RecyclerView.NO_POSITION) {
                         // 데이터 리스트로부터 아이템 참조.
                         if (mListener != null) {
                             mListener.onItemClick(view, pos);
                             Log.d(TAG1, "onClick: "+pos+"번째");
-
                         }
                     }
                 }
@@ -94,7 +94,6 @@ public class BoardAdapter extends RecyclerView.Adapter<BoardAdapter.ViewHolder> 
         holder.date.setText(iData.get(position).getDate());
         holder.time.setText(iData.get(position).getTime());
         holder.manager.setText(iData.get(position).getManager());
-
 
     }
 

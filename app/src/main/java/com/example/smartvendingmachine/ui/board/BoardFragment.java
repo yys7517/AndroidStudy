@@ -51,7 +51,9 @@ public class BoardFragment extends Fragment {
             @Override
             public void onItemClick(View v, int position) {
                 // TODO : 아이템 클릭 이벤트를 플레그먼트에서 처뤼
-                getActivity().startActivity(new Intent(getActivity(), BoardActivity.class));
+                Intent intent = new Intent(getActivity(), BoardActivity.class);
+                intent.putExtra("name", mSearchData.get(position).getNickname()).toString();
+                startActivity(intent);
             }
         });
 
