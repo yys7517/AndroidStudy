@@ -26,11 +26,11 @@ public class BoardActivity extends AppCompatActivity {
 
         //유저 아이디 넘겨주는 코드
         username = findViewById(R.id.txtCommentNick);
+
         Intent intent = getIntent();
         String test = intent.getStringExtra("name");
         Log.d(TAG, test);
         username.setText(test);
-
 
         /// 뒤로가기 버튼
         backspace = findViewById(R.id.backspace);

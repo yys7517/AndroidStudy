@@ -9,6 +9,8 @@ import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.DefaultItemAnimator;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -29,6 +31,7 @@ public class BoardFragment extends Fragment {
     private ArrayList<BoardData> mSearchData = new ArrayList<>();
 
     private SwipeRefreshLayout swipeRefreshLayout;
+
 
     private static String IP_ADDRESS = "211.211.158.42/yongrun/svm";
     private static String TAG = "phptest";
@@ -51,9 +54,12 @@ public class BoardFragment extends Fragment {
             @Override
             public void onItemClick(View v, int position) {
                 // TODO : 아이템 클릭 이벤트를 플레그먼트에서 처뤼
-                Intent intent = new Intent(getActivity(), BoardActivity.class);
-                intent.putExtra("name", mSearchData.get(position).getNickname()).toString();
-                startActivity(intent);
+                Bundle arguments = new Bundle();
+                arguments.putString("name",mSearchData.get(position).getNickname());
+                FragmentTransaction transaction = getActivity().getSupportFragmentManager().beginTransaction();
+                BoardMainFragment boardMainFragment = new BoardMainFragment();
+                boardMainFragment.setArguments(arguments);
+                transaction.replace(R.id.nav_host_fragment,boardMainFragment).commit();
             }
         });
 

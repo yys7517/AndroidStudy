@@ -4,6 +4,7 @@ import android.widget.ImageView;
 
 public class BoardData {
     //ImageView profile;
+    //게시물 ID
     private String nickname;
     private String contents;
     private String date;

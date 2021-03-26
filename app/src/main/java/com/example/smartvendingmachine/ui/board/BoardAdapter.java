@@ -20,6 +20,7 @@ import java.util.List;
 
 public class BoardAdapter extends RecyclerView.Adapter<BoardAdapter.ViewHolder> {
 
+
     final private String TAG1 = "테스트중이에요옹";
 
     private ArrayList<BoardData> iData;
@@ -43,6 +44,10 @@ public class BoardAdapter extends RecyclerView.Adapter<BoardAdapter.ViewHolder> 
         public TextView time;
         public TextView manager;
 
+
+
+
+
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
 
@@ -53,6 +58,8 @@ public class BoardAdapter extends RecyclerView.Adapter<BoardAdapter.ViewHolder> 
             date = itemView.findViewById(R.id.txtCommentDate);
             time = itemView.findViewById(R.id.txtCommentTime);
             manager = itemView.findViewById(R.id.txtCommentmanager);
+
+
 
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -68,6 +75,8 @@ public class BoardAdapter extends RecyclerView.Adapter<BoardAdapter.ViewHolder> 
                     }
                 }
             });
+
+
         }
     }
 
@@ -83,12 +92,14 @@ public class BoardAdapter extends RecyclerView.Adapter<BoardAdapter.ViewHolder> 
         Context context = parent.getContext();
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.rv_notice_item, parent, false);
         ViewHolder viewHolder = new ViewHolder(view);
+
         return viewHolder;
     }
 
     //position에 해당하는 데이터를 뷰홀더의 아이템뷰에 표시
     @Override
     public void onBindViewHolder(@NonNull BoardAdapter.ViewHolder holder, int position) {
+
         holder.nickname.setText(iData.get(position).getNickname());
         holder.contents.setText(iData.get(position).getContents());
         holder.date.setText(iData.get(position).getDate());

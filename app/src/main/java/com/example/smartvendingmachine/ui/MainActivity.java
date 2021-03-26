@@ -4,6 +4,8 @@ import android.view.MenuItem;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.FragmentTransaction;
+
 import android.os.Bundle;
 import com.example.smartvendingmachine.R;
 import com.example.smartvendingmachine.ui.Home.HomeFragment;
@@ -12,6 +14,7 @@ import com.example.smartvendingmachine.ui.board.BoardFragment;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 public class MainActivity extends AppCompatActivity {
+
 
     private BottomNavigationView bottomNavigationView;
     BoardFragment boardFragment;

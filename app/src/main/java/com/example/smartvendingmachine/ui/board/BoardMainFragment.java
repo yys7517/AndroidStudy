@@ -20,25 +20,26 @@ public class BoardMainFragment extends Fragment {
 
     private ImageView backspace;
 
-    TextView username;
+    private String nickname;
+    private TextView username;
     String TAG = "유저 이름 테스트";
 
     // Create new fragment and transaction
     FragmentManager fragmentManager = getFragmentManager();
-    FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        ViewGroup rootView = (ViewGroup) inflater.inflate(R.layout.fragment_profile, container, false);
+        ViewGroup rootView = (ViewGroup) inflater.inflate(R.layout.fragment_boardmain, container, false);
 
-
-        //유저 아이디 넘겨주는 코드
         username = rootView.findViewById(R.id.txtCommentNick);
-        Intent intent = getIntent();
-        String test = intent.getStringExtra("name");
-        Log.d(TAG, test);
-        username.setText(test);
+
+        if(getArguments() != null)
+        {
+            nickname = getArguments().getString("name");
+            username.setText(nickname);
+        }
 
 
         /// 뒤로가기 버튼
@@ -47,10 +48,10 @@ public class BoardMainFragment extends Fragment {
         backspace.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                // Replace whatever is in the fragment_container view with this fragment,
-                // and add the transaction to the back stack
-                transaction.replace(R.id., newFragment);
-                transaction.addToBackStack(null);
+                FragmentTransaction transaction = getActivity().getSupportFragmentManager().beginTransaction();
+                BoardFragment boardFragment = new BoardFragment();
+
+                transaction.replace(R.id.nav_host_fragment,boardFragment).commit();
             }
         });
 
