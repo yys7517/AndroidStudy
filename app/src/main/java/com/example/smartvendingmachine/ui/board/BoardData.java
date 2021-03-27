@@ -5,11 +5,28 @@ import android.widget.ImageView;
 public class BoardData {
     //ImageView profile;
     //게시물 ID
+    private String code; //기본키
+    private String title;
     private String nickname;
-    private String contents;
+    private String contents; //내용
     private String date;
-    private String time;
-    private String manager;
+    private String answercontents;
+
+    public String getCode() {
+        return code;
+    }
+
+    public void setCode(String code) {
+        this.code = code;
+    }
+
+    public String getTitle() {
+        return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
+    }
 
     public String getNickname() {
         return nickname;
@@ -35,28 +52,69 @@ public class BoardData {
         this.date = date;
     }
 
-    public String getTime() {
-        return time;
+    public String getAnswercontents() {
+        return answercontents;
     }
 
-    public void setTime(String time) {
-        this.time = time;
-    }
-
-    public String getManager() {
-        return manager;
-    }
-
-    public void setManager(String manager) {
-        this.manager = manager;
+    public void setAnswercontents(String answercontents) {
+        this.answercontents = answercontents;
     }
 
     //프로필 이미지는 넣지 않았음
-    public BoardData(String nickname, String contents,String date,String time, String manager){
+    public BoardData(String code, String title, String nickname, String contents, String date, String answercontents) {
+        this.code = code;
+        this.title = title;
         this.nickname = nickname;
         this.contents = contents;
         this.date = date;
-        this.time = time;
-        this.manager = manager;
+        this.answercontents = answercontents;
     }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+//
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

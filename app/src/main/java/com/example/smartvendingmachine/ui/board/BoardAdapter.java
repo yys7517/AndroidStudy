@@ -39,10 +39,13 @@ public class BoardAdapter extends RecyclerView.Adapter<BoardAdapter.ViewHolder> 
     public class ViewHolder extends RecyclerView.ViewHolder {
         //ImageView profile;
         public TextView nickname;
+        public TextView title;
+        public TextView code;
         public TextView contents;
         public TextView date;
-        public TextView time;
-        public TextView manager;
+        public TextView answercontents;
+        // public TextView time; 안씀
+
 
 
 
@@ -52,12 +55,14 @@ public class BoardAdapter extends RecyclerView.Adapter<BoardAdapter.ViewHolder> 
             super(itemView);
 
             //뷰 객체에 대한 참조.(Hold Strong reference)
-            //profile = itemView.findViewById(R.id.imgCommentProfile);
-            nickname = itemView.findViewById(R.id.txtCommentNick);
-            contents = itemView.findViewById(R.id.txtCommentContents);
-            date = itemView.findViewById(R.id.txtCommentDate);
-            time = itemView.findViewById(R.id.txtCommentTime);
-            manager = itemView.findViewById(R.id.txtCommentmanager);
+            //profile = itemView.findViewById(R.id.imgProfile);
+            // time = itemView.findViewById(R.id.txtTime); 안씀
+            nickname = itemView.findViewById(R.id.txtNick);
+            title = itemView.findViewById(R.id.txtTitle);
+            code = itemView.findViewById(R.id.code);
+            contents = itemView.findViewById(R.id.contents);
+            date = itemView.findViewById(R.id.txtDate);
+            answercontents = itemView.findViewById(R.id.txtManager);
 
 
 
@@ -75,7 +80,6 @@ public class BoardAdapter extends RecyclerView.Adapter<BoardAdapter.ViewHolder> 
                     }
                 }
             });
-
 
         }
     }
@@ -99,12 +103,12 @@ public class BoardAdapter extends RecyclerView.Adapter<BoardAdapter.ViewHolder> 
     //position에 해당하는 데이터를 뷰홀더의 아이템뷰에 표시
     @Override
     public void onBindViewHolder(@NonNull BoardAdapter.ViewHolder holder, int position) {
-
+        holder.code.setText(iData.get(position).getCode()); //코드는 숨김
+        holder.title.setText(iData.get(position).getTitle());
         holder.nickname.setText(iData.get(position).getNickname());
         holder.contents.setText(iData.get(position).getContents());
         holder.date.setText(iData.get(position).getDate());
-        holder.time.setText(iData.get(position).getTime());
-        holder.manager.setText(iData.get(position).getManager());
+        holder.answercontents.setText(iData.get(position).getAnswercontents());
 
     }
 

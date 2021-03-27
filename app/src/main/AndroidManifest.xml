@@ -23,7 +23,7 @@
             </intent-filter>
         </activity>
 
-        <activity android:name=".ui.board.BoardActivity" />    <!-- 게시글 Activity -->
+        <!-- 게시글 Activity -->
         <activity android:name=".ui.board.BoardWriteActivity"/> <!-- 게시글 작성 Activity -->
 
     </application>

@@ -24,8 +24,6 @@ public class BoardMainFragment extends Fragment {
     private TextView username;
     String TAG = "유저 이름 테스트";
 
-    // Create new fragment and transaction
-    FragmentManager fragmentManager = getFragmentManager();
 
 
     @Override
