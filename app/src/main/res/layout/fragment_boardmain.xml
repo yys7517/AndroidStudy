@@ -138,32 +138,6 @@
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/txtCommentContents" />
 
-                <TextView
-                    android:id="@+id/txtCommentTime"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="5dp"
-                    android:layout_marginTop="15dp"
-                    android:lineSpacingExtra="6sp"
-                    android:text="시간"
-                    android:textColor="#767676"
-                    android:textSize="12sp"
-                    app:layout_constraintStart_toEndOf="@+id/textView23"
-                    app:layout_constraintTop_toBottomOf="@+id/txtCommentContents" />
-
-                <TextView
-                    android:id="@+id/textView23"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="5dp"
-                    android:layout_marginTop="15dp"
-                    android:lineSpacingExtra="6sp"
-                    android:text="|"
-                    android:textColor="#767676"
-                    android:textSize="12sp"
-                    app:layout_constraintStart_toEndOf="@+id/txtCommentDate"
-                    app:layout_constraintTop_toBottomOf="@+id/txtCommentContents" />
-
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -185,6 +159,15 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/view2">
+
+                <View
+                    android:id="@+id/view3"
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_marginBottom="10dp"
+                    android:background="#e3e3e3"
+                    app:layout_constraintTop_toTopOf="@id/managerlayout" />
+
 
                 <ImageView
                     android:id="@+id/imgManagerProfile"
@@ -238,34 +221,6 @@
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/txtManagerComments" />
 
-                <TextView
-                    android:id="@+id/txtManagerCommentTime"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="5dp"
-                    android:layout_marginTop="15dp"
-                    android:paddingBottom="10dp"
-                    android:lineSpacingExtra="6sp"
-                    android:text="시간"
-                    android:textColor="#767676"
-                    android:textSize="12sp"
-                    app:layout_constraintStart_toEndOf="@+id/textview24"
-                    app:layout_constraintTop_toBottomOf="@+id/txtManagerComments" />
-
-                <TextView
-                    android:id="@+id/textview24"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="5dp"
-                    android:layout_marginTop="15dp"
-                    android:paddingBottom="10dp"
-                    android:lineSpacingExtra="6sp"
-                    android:text="|"
-                    android:layout_marginBottom="10dp"
-                    android:textColor="#767676"
-                    android:textSize="12sp"
-                    app:layout_constraintStart_toEndOf="@+id/txtManagerCommentDate"
-                    app:layout_constraintTop_toBottomOf="@+id/txtManagerComments" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
         </androidx.constraintlayout.widget.ConstraintLayout>

@@ -55,12 +55,16 @@ public class BoardFragment extends Fragment {
             public void onItemClick(View v, int position) {
                 // TODO : 아이템 클릭 이벤트를 플레그먼트에서 처뤼
                 Bundle arguments = new Bundle();
-                arguments.putString("name",mSearchData.get(position).getNickname());
-                arguments.putString("")
+                arguments.putString("nickname", mSearchData.get(position).getNickname());
+                arguments.putString("contents", mSearchData.get(position).getContents());
+                arguments.putString("date", mSearchData.get(position).getDate());
+                arguments.putString("title", mSearchData.get(position).getTitle());
+                arguments.putString("answer", mSearchData.get(position).getAnswercontents());
+                arguments.putString("answerdate", mSearchData.get(position).getAnswerdate());
                 FragmentTransaction transaction = getActivity().getSupportFragmentManager().beginTransaction();
                 BoardMainFragment boardMainFragment = new BoardMainFragment();
                 boardMainFragment.setArguments(arguments);
-                transaction.replace(R.id.nav_host_fragment,boardMainFragment).commit();
+                transaction.replace(R.id.nav_host_fragment, boardMainFragment).commit();
             }
         });
 
@@ -87,20 +91,20 @@ public class BoardFragment extends Fragment {
         initDataset();
     }
 
-    private void initDataset(){
+    private void initDataset() {
         //테스트
         mSearchData = new ArrayList<>();
-        mSearchData.add(new BoardData("1", "우유가 안나와요","용현1","우유가 안나와요1", "2021-03-15 14:46:16", "확인안함"));
-        mSearchData.add(new BoardData("2", "콜라가 뜨거워요", "용현2","우유가 안나와요2","2021-03-15 14:46:16", "확인안함"));
-        mSearchData.add(new BoardData("3", "아침햇살 추가해 주세요1.", "용현3","우유가 안나와요3", "2021-03-15 14:46:16","확인안함"));
-        mSearchData.add(new BoardData("4", "아침햇살 추가해 주세요2.", "용현4","우유가 안나와요4", "2021-03-15 14:46:16", "확인안함"));
-        mSearchData.add(new BoardData("5", "아침햇살 추가해 주세요3.", "용현5","우유가 안나와요5", "2021-03-15 14:46:16", "확인안함"));
-        mSearchData.add(new BoardData("6", "아침햇살 추가해 주세요4.", "용현6","우유가 안나와요6", "2021-03-15 14:46:16", "확인안함"));
-        mSearchData.add(new BoardData("7", "아침햇살 추가해 주세요5.", "용현7","우유가 안나와요7", "2021-03-15 14:46:16", "확인안함"));
-        mSearchData.add(new BoardData("8", "아침햇살 추가해 주세요6.", "용현8","우유가 안나와요8", "2021-03-15 14:46:16", "확인안함"));
-        mSearchData.add(new BoardData("9", "아침햇살 추가해 주세요7.", "용현9","우유가 안나와요9", "2021-03-15 14:46:16", "확인안함"));
-        mSearchData.add(new BoardData("10", "아침햇살 추가해 주세요8.", "용현10","우유가 안나와요10", "2021-03-15 14:46:16", "확인안함"));
-        mSearchData.add(new BoardData("11", "아침햇살 추가해 주세요9.", "용현11","우유가 안나와요11", "2021-03-15 14:46:16", "확인안함"));
-        
+        mSearchData.add(new BoardData("1", "우유가 안나와요", "용현1", "우유가 안나와요1", "2021-03-15 14:46:16", "확인함", "킹송합니다1", "2021-03-15 14:46:16"));
+        mSearchData.add(new BoardData("2", "콜라가 뜨거워요", "용현2", "우유가 안나와요2", "2021-03-15 14:46:16", "확인함", "킹송합니다2", "2021-03-15 14:46:16"));
+        mSearchData.add(new BoardData("3", "아침햇살 추가해 주세요1.", "용현3", "우유가 안나와요3", "2021-03-15 14:46:16", "확인함", "킹송합니다3", "2021-03-15 14:46:16"));
+        mSearchData.add(new BoardData("4", "아침햇살 추가해 주세요2.", "용현4", "우유가 안나와요4", "2021-03-15 14:46:16", "확인함", "킹송합니다4", "2021-03-15 14:46:16"));
+        mSearchData.add(new BoardData("5", "아침햇살 추가해 주세요3.", "용현5", "우유가 안나와요5", "2021-03-15 14:46:16", "확인함", "킹송합니다5", "2021-03-15 14:46:16"));
+        mSearchData.add(new BoardData("6", "아침햇살 추가해 주세요4.", "용현6", "우유가 안나와요6", "2021-03-15 14:46:16", "확인함", "킹송합니다6", "2021-03-15 14:46:16"));
+        mSearchData.add(new BoardData("7", "아침햇살 추가해 주세요5.", "용현7", "우유가 안나와요7", "2021-03-15 14:46:16", "확인함", "킹송합니다7", "2021-03-15 14:46:16"));
+        mSearchData.add(new BoardData("8", "아침햇살 추가해 주세요6.", "용현8", "우유가 안나와요8", "2021-03-15 14:46:16", "확인함", "킹송합니다8", "2021-03-15 14:46:16"));
+        mSearchData.add(new BoardData("9", "아침햇살 추가해 주세요7.", "용현9", "우유가 안나와요9", "2021-03-15 14:46:16", "확인함", "킹송합니다9", "2021-03-15 14:46:16"));
+        mSearchData.add(new BoardData("10", "아침햇살 추가해 주세요8.", "용현10", "우유가 안나와요10", "2021-03-15 14:46:16", "확인함", "킹송합니다10", "2021-03-15 14:46:16"));
+        mSearchData.add(new BoardData("11", "아침햇살 추가해 주세요9.", "용현11", "우유가 안나와요11", "2021-03-15 14:46:16", "확인함", "킹송합니다11", "2021-03-15 14:46:16"));
+
     }
 }

@@ -40,10 +40,9 @@ public class BoardAdapter extends RecyclerView.Adapter<BoardAdapter.ViewHolder> 
         //ImageView profile;
         public TextView nickname;
         public TextView title;
-        public TextView code;
         public TextView contents;
         public TextView date;
-        public TextView answercontents;
+        public TextView managercomment;
         // public TextView time; 안씀
 
 
@@ -59,10 +58,9 @@ public class BoardAdapter extends RecyclerView.Adapter<BoardAdapter.ViewHolder> 
             // time = itemView.findViewById(R.id.txtTime); 안씀
             nickname = itemView.findViewById(R.id.txtNick);
             title = itemView.findViewById(R.id.txtTitle);
-            code = itemView.findViewById(R.id.code);
             contents = itemView.findViewById(R.id.contents);
             date = itemView.findViewById(R.id.txtDate);
-            answercontents = itemView.findViewById(R.id.txtManager);
+            managercomment = itemView.findViewById(R.id.txtManager);
 
 
 
@@ -103,12 +101,11 @@ public class BoardAdapter extends RecyclerView.Adapter<BoardAdapter.ViewHolder> 
     //position에 해당하는 데이터를 뷰홀더의 아이템뷰에 표시
     @Override
     public void onBindViewHolder(@NonNull BoardAdapter.ViewHolder holder, int position) {
-        holder.code.setText(iData.get(position).getCode()); //코드는 숨김
         holder.title.setText(iData.get(position).getTitle());
         holder.nickname.setText(iData.get(position).getNickname());
         holder.contents.setText(iData.get(position).getContents());
         holder.date.setText(iData.get(position).getDate());
-        holder.answercontents.setText(iData.get(position).getAnswercontents());
+        holder.managercomment.setText(iData.get(position).getManagercomment());
 
     }
 

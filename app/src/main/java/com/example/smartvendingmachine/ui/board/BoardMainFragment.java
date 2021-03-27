@@ -20,10 +20,19 @@ public class BoardMainFragment extends Fragment {
 
     private ImageView backspace;
 
-    private String nickname;
-    private TextView username;
-    String TAG = "유저 이름 테스트";
+    private String snickname;
+    private String scontents;
+    private String sdate;
+    private String stitle;
+    private String sanswer;
+    private String sanswerdate;
 
+    private TextView nickname;
+    private TextView contents;
+    private TextView date;
+    private TextView title;
+    private TextView answer;
+    private TextView answerdate;
 
 
     @Override
@@ -31,12 +40,28 @@ public class BoardMainFragment extends Fragment {
                              Bundle savedInstanceState) {
         ViewGroup rootView = (ViewGroup) inflater.inflate(R.layout.fragment_boardmain, container, false);
 
-        username = rootView.findViewById(R.id.txtCommentNick);
+        nickname = rootView.findViewById(R.id.txtCommentNick);
+        contents = rootView.findViewById(R.id.txtCommentContents);
+        date = rootView.findViewById(R.id.txtCommentDate);
+        title = rootView.findViewById(R.id.txtCommentTitle);
+        answer = rootView.findViewById(R.id.txtManagerComments);
+        answerdate = rootView.findViewById(R.id.txtManagerCommentDate);
 
         if(getArguments() != null)
         {
-            nickname = getArguments().getString("name");
-            username.setText(nickname);
+            snickname = getArguments().getString("nickname");
+            scontents = getArguments().getString("contents");
+            sdate = getArguments().getString("date");
+            stitle = getArguments().getString("title");
+            sanswer = getArguments().getString("answer");
+            sanswerdate = getArguments().getString("answerdate");
+
+            nickname.setText(snickname);
+            contents.setText(scontents);
+            date.setText(sdate);
+            title.setText(stitle);
+            answer.setText(sanswer);
+            answerdate.setText(sanswerdate);
         }
 
 
