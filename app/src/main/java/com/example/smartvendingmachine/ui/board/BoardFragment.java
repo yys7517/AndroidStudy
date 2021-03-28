@@ -84,11 +84,25 @@ public class BoardFragment extends Fragment {
             }
         });
 
+        //boarddata에 값 넣음
+        mSearchData.clear();
+        adapter.notifyDataSetChanged();
+        GetData task = new GetData();
+        task.execute("http://" + IP_ADDRESS + "/POST.php", "");
+
+
+
         swipeRefreshLayout = rootview.findViewById(R.id.refresh_layout);
 
         swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
+                mSearchData.clear();
+                adapter.notifyDataSetChanged();
+
+                BoardFragment.GetData task = new BoardFragment.GetData();
+                task.execute("http://" + IP_ADDRESS + "/POST.php", "");
+                swipeRefreshLayout.setRefreshing(false); //새로고침표시 없애기
                 //데이터 새로고침 코드 넣어야 함.
                 swipeRefreshLayout.setRefreshing(false); //새로고침표시 없애기
             }
@@ -104,7 +118,7 @@ public class BoardFragment extends Fragment {
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        initDataset();
+        //initDataset();
     }
 /*
     private void initDataset() {
@@ -123,14 +137,6 @@ public class BoardFragment extends Fragment {
         mSearchData.add(new BoardData("11", "아침햇살 추가해 주세요9.", "용현11", "우유가 안나와요11", "2021-03-15 14:46:16", "확인함", "킹송합니다11", "2021-03-15 14:46:16"));
     }
 */
-
-    private void get(View view){
-        mSearchData.clear();
-        adapter.notifyDataSetChanged();
-
-        GetData task = new GetData();
-        task.execute( "http://" + IP_ADDRESS + "/getjson.php", "");
-    }
 
     private class GetData extends AsyncTask<String, Void, String> {
 
@@ -258,57 +264,21 @@ public class BoardFragment extends Fragment {
 
                 BoardData boardData = new BoardData();
 
+                if(POST_MANAGER_COMMENT.equals("0")){
+                    POST_MANAGER_COMMENT = "확인안함";
+                }
+
                 boardData.setCode(POST_CODE);
                 boardData.setTitle(POST_TITLE);
                 boardData.setNickname(POST_NICKNAME);
-                boardData.setContents(POST_NICKNAME);
                 boardData.setDate(POST_DATE);
                 boardData.setManagercomment(POST_MANAGER_COMMENT);
-                boardData.setAnswercontents(POST_CONTENTS);
-                boardData.setManagercomment(POST_ANSWER_CONTENTS);
+                boardData.setContents(POST_CONTENTS);
+                boardData.setAnswercontents(POST_ANSWER_CONTENTS);
                 boardData.setAnswerdate(POST_ANSWER_DATE);
 
                 mSearchData.add(boardData);
-                mAdapter.notifyDataSetChanged();
-
-
-                //출력 switch 문
-                switch (mArrayList.get(i).getDRCode()) {
-                    case "CocaCola":
-                        mTextViewCocacolaPrice.setText("가격 : " + mArrayList.get(i).getDRPrice() + " 원");
-                        mTextViewCocacolaStock.setText("수량 : " + mArrayList.get(i).getDRStock() + " 개");
-                        break;
-
-                    case "Chilsung Cider":
-                        mTextViewChilsungPrice.setText("가격 : " + mArrayList.get(i).getDRPrice() + " 원");
-                        mTextViewChilsungStock.setText("수량 : " + mArrayList.get(i).getDRStock() + " 개");
-                        break;
-
-                    case "Ssekssek":
-                        mTextViewSsekssekPrice.setText("가격 : " + mArrayList.get(i).getDRPrice() + " 원");
-                        mTextViewSsekssekStock.setText("수량 : " + mArrayList.get(i).getDRStock() + " 개");
-                        break;
-
-                    case "Fanta Orange":
-                        mTextViewFantaPrice.setText("가격 : " + mArrayList.get(i).getDRPrice() + " 원");
-                        mTextViewFantaStock.setText("수량 : " + mArrayList.get(i).getDRStock() + " 개");
-                        break;
-
-                    case "Mountain Dew":
-                        mTextViewMountainPrice.setText("가격 : " + mArrayList.get(i).getDRPrice() + " 원");
-                        mTextViewMountainStock.setText("수량: " + mArrayList.get(i).getDRStock() + " 개");
-                        break;
-
-                    case "Galbae":
-                        mTextViewGalbaePrice.setText("가격 : " + mArrayList.get(i).getDRPrice() + " 원");
-                        mTextViewGalbaeStock.setText("수량: " + mArrayList.get(i).getDRStock() + " 개");
-                        break;
-
-                    default:
-                        break;
-                }
-
-
+                adapter.notifyDataSetChanged();
             }
 
         } catch (JSONException e) {

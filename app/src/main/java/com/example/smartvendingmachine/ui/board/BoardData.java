@@ -77,22 +77,8 @@ public class BoardData {
     public void setAnswercontents(String answercontents) {
         this.answercontents = answercontents;
     }
-
-    //프로필 이미지는 넣지 않았음
-    public BoardData(String code, String title, String nickname, String contents, String date, String managercomment, String answercontents, String answerdate) {
-        this.code = code;
-        this.title = title;
-        this.nickname = nickname;
-        this.contents = contents;
-        this.date = date;
-        this.managercomment = managercomment;
-        this.answercontents = answercontents;
-        this.answerdate = answerdate;
-    }
 }
 
-
-//
 
 
 
