@@ -1,13 +1,17 @@
 package com.example.smartvendingmachine.ui;
 
-import android.app.FragmentTransaction;
 import android.view.MenuItem;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 
 import android.os.Bundle;
+import android.widget.Toast;
+
 import com.example.smartvendingmachine.R;
 import com.example.smartvendingmachine.ui.Home.HomeFragment;
 import com.example.smartvendingmachine.ui.Profile.ProfileFragment;
@@ -22,9 +26,8 @@ public class MainActivity extends AppCompatActivity {
     HomeFragment homeFragment;
     ProfileFragment profileFragment;
 
-    private FragmentTransaction transaction;
-
-
+    private final long FINISH_INTERVAL_TIME = 2000;
+    private long   backPressedTime = 0;
 
 
     @Override
@@ -34,14 +37,13 @@ public class MainActivity extends AppCompatActivity {
 
 
         //프래그먼트 생성
-        boardFragment = new BoardFragment();
-        homeFragment = new HomeFragment();
-        profileFragment = new ProfileFragment();
+
 
         bottomNavigationView = findViewById(R.id.nav_view);
 
         // 처음에 띄울화면 이걸로 기릿~
-        getSupportFragmentManager().beginTransaction().replace(R.id.nav_host_fragment, homeFragment,"home").commitAllowingStateLoss();
+        homeFragment = new HomeFragment();
+        getSupportFragmentManager().beginTransaction().replace(R.id.nav_host_fragment, homeFragment,"home").commit();
 
         // 바텀 내비게이션 뷰 초기 선택 값 (홈)
         bottomNavigationView.setSelectedItemId(R.id.frag_navigation_home);
@@ -50,27 +52,53 @@ public class MainActivity extends AppCompatActivity {
         bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
+
+                FragmentManager fm = getSupportFragmentManager();
+                FragmentTransaction transaction = fm.beginTransaction();
+
                 switch (menuItem.getItemId()) {
                     case R.id.frag_navigation_home: {
-                        getSupportFragmentManager().beginTransaction().replace(R.id.nav_host_fragment, homeFragment,"home").addToBackStack(null).commitAllowingStateLoss();
-                        return true;
-                    }
-                    case R.id.frag_navigation_board: {
-                        getSupportFragmentManager().beginTransaction().replace(R.id.nav_host_fragment, boardFragment,"board").addToBackStack(null).commitAllowingStateLoss();
-                        return true;
-                    }
-                    case R.id.frag_navigation_profile: {
-                        getSupportFragmentManager().beginTransaction().replace(R.id.nav_host_fragment, profileFragment,"profile").addToBackStack(null).commitAllowingStateLoss();
+                        fm.popBackStack("home",FragmentManager.POP_BACK_STACK_INCLUSIVE);
+                        homeFragment = new HomeFragment();
+                        transaction.replace(R.id.nav_host_fragment, homeFragment,"home");
+                        transaction.addToBackStack("home");
+                        transaction.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE);
+                        transaction.commit();
+                        transaction.isAddToBackStackAllowed();
+                        //transaction.replace(R.id.nav_host_fragment, homeFragment,"home").addToBackStack(null).commitAllowingStateLoss();
                         return true;
                     }
 
+                    case R.id.frag_navigation_board: {
+                        fm.popBackStack("board",FragmentManager.POP_BACK_STACK_INCLUSIVE);
+                        boardFragment = new BoardFragment();
+                        transaction.replace(R.id.nav_host_fragment, boardFragment,"board");
+                        transaction.addToBackStack("board");
+                        transaction.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE);
+                        transaction.commit();
+                        transaction.isAddToBackStackAllowed();
+                        //transaction.replace(R.id.nav_host_fragment, boardFragment,"board").addToBackStack(null).commitAllowingStateLoss();
+                        return true;
+                    }
+
+
+                    case R.id.frag_navigation_profile:{
+                        fm.popBackStack("profile",FragmentManager.POP_BACK_STACK_INCLUSIVE);
+                        profileFragment = new ProfileFragment();
+                        transaction.replace(R.id.nav_host_fragment, profileFragment,"profile");
+                        transaction.addToBackStack("profile");
+                        transaction.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE);
+                        transaction.commit();
+                        transaction.isAddToBackStackAllowed();
+                        //transaction.replace(R.id.nav_host_fragment, profileFragment,"profile").addToBackStack(null).commitAllowingStateLoss();
+                        return true;
+                    }
                     default:
                         return false;
+
                 }
             }
         });
-
-
 
     }
 
@@ -78,25 +106,41 @@ public class MainActivity extends AppCompatActivity {
     {
         if(getSupportFragmentManager().findFragmentByTag("home") != null && getSupportFragmentManager().findFragmentByTag("home").isVisible() ) {
             bottomNavigationView.getMenu().findItem(R.id.frag_navigation_home).setChecked(true);
-            //bottomNavigationView.setSelectedItemId(R.id.frag_navigation_home);
         }
         else if(getSupportFragmentManager().findFragmentByTag("board") != null && getSupportFragmentManager().findFragmentByTag("board").isVisible() ) {
             bottomNavigationView.getMenu().findItem(R.id.frag_navigation_board).setChecked(true);
-            //bottomNavigationView.setSelectedItemId(R.id.frag_navigation_board);
         }
         else if(getSupportFragmentManager().findFragmentByTag("profile") != null && getSupportFragmentManager().findFragmentByTag("profile").isVisible() ) {
             bottomNavigationView.getMenu().findItem(R.id.frag_navigation_profile).setChecked(true);
-           //bottomNavigationView.setSelectedItemId(R.id.frag_navigation_profile);
         }
+    }
+
+    @Override
+    public void onBackPressed() {
+
+        long tempTime = System.currentTimeMillis();
+        long intervalTime = tempTime - backPressedTime;
+
+        //super.onBackPressed();
+        if (getSupportFragmentManager().getBackStackEntryCount() == 0) {
+            if (!(0 > intervalTime || FINISH_INTERVAL_TIME < intervalTime)) {
+                finishAffinity();
+                System.runFinalization();
+                System.exit(0);
+            } else {
+                backPressedTime = tempTime;
+                Toast.makeText(this, "'뒤로' 버튼을 한 번 더 누르면 종료됩니다.", Toast.LENGTH_SHORT).show();
+                return;
+            }
+        }
+        super.onBackPressed();
+        BottomNavigationView bnv = findViewById(R.id.nav_view);
+        updateBottomMenu(bnv);
     }
 
 
     @Override
-    public void onBackPressed() {
-        super.onBackPressed();
-        BottomNavigationView bnv = findViewById(R.id.nav_view);
-        updateBottomMenu(bnv);
-
+    public void supportFinishAfterTransition() {
+        ActivityCompat.finishAfterTransition(this);
     }
-
 }
