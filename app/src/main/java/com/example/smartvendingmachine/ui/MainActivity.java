@@ -102,6 +102,7 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
+    //
     public void updateBottomMenu (BottomNavigationView navigation)
     {
         if(getSupportFragmentManager().findFragmentByTag("home") != null && getSupportFragmentManager().findFragmentByTag("home").isVisible() ) {

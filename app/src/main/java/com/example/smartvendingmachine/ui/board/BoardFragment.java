@@ -1,7 +1,10 @@
 package com.example.smartvendingmachine.ui.board;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
+import android.os.AsyncTask;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,8 +20,19 @@ import androidx.recyclerview.widget.RecyclerView;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import com.example.smartvendingmachine.R;
+import com.example.smartvendingmachine.ui.Home.HomeData;
 import com.example.smartvendingmachine.ui.Home.HomeFragment;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.io.BufferedReader;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.io.OutputStream;
+import java.net.HttpURLConnection;
+import java.net.URL;
 import java.util.ArrayList;
 
 public class BoardFragment extends Fragment {
@@ -35,6 +49,7 @@ public class BoardFragment extends Fragment {
 
     private static String IP_ADDRESS = "211.211.158.42/yongrun/svm";
     private static String TAG = "phptest";
+    private String mJsonString;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -64,7 +79,8 @@ public class BoardFragment extends Fragment {
                 FragmentTransaction transaction = getActivity().getSupportFragmentManager().beginTransaction();
                 BoardMainFragment boardMainFragment = new BoardMainFragment();
                 boardMainFragment.setArguments(arguments);
-                transaction.replace(R.id.nav_host_fragment, boardMainFragment).commit();
+
+                transaction.replace(R.id.nav_host_fragment, boardMainFragment).addToBackStack(null).commit();
             }
         });
 
@@ -90,7 +106,7 @@ public class BoardFragment extends Fragment {
         super.onCreate(savedInstanceState);
         initDataset();
     }
-
+/*
     private void initDataset() {
         //테스트
         mSearchData = new ArrayList<>();
@@ -105,6 +121,200 @@ public class BoardFragment extends Fragment {
         mSearchData.add(new BoardData("9", "아침햇살 추가해 주세요7.", "용현9", "우유가 안나와요9", "2021-03-15 14:46:16", "확인함", "킹송합니다9", "2021-03-15 14:46:16"));
         mSearchData.add(new BoardData("10", "아침햇살 추가해 주세요8.", "용현10", "우유가 안나와요10", "2021-03-15 14:46:16", "확인함", "킹송합니다10", "2021-03-15 14:46:16"));
         mSearchData.add(new BoardData("11", "아침햇살 추가해 주세요9.", "용현11", "우유가 안나와요11", "2021-03-15 14:46:16", "확인함", "킹송합니다11", "2021-03-15 14:46:16"));
+    }
+*/
+
+    private void get(View view){
+        mSearchData.clear();
+        adapter.notifyDataSetChanged();
+
+        GetData task = new GetData();
+        task.execute( "http://" + IP_ADDRESS + "/getjson.php", "");
+    }
+
+    private class GetData extends AsyncTask<String, Void, String> {
+
+        ProgressDialog progressDialog;
+        String errorString = null;
+
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+
+            progressDialog = ProgressDialog.show(getActivity(), "Please Wait", null, true, true);
+        }
+
+
+        @Override
+        protected void onPostExecute(String result) {
+            super.onPostExecute(result);
+
+            progressDialog.dismiss();
+
+            Log.d(TAG, "response - " + result);
+
+            if (result == null) {
+
+            } else {
+
+                mJsonString = result;
+                showResult();
+            }
+        }
+
+
+        @Override
+        protected String doInBackground(String... params) {
+
+            String serverURL = params[0];
+            String postParameters = params[1];
+
+
+            try {
+
+                URL url = new URL(serverURL);
+                HttpURLConnection httpURLConnection = (HttpURLConnection) url.openConnection();
+
+
+                httpURLConnection.setReadTimeout(5000);
+                httpURLConnection.setConnectTimeout(5000);
+                httpURLConnection.setRequestMethod("POST");
+                httpURLConnection.setDoInput(true);
+                httpURLConnection.connect();
+
+
+                OutputStream outputStream = httpURLConnection.getOutputStream();
+                outputStream.write(postParameters.getBytes("UTF-8"));
+                outputStream.flush();
+                outputStream.close();
+
+
+                int responseStatusCode = httpURLConnection.getResponseCode();
+                Log.d(TAG, "response code - " + responseStatusCode);
+
+                InputStream inputStream;
+                if (responseStatusCode == HttpURLConnection.HTTP_OK) {
+                    inputStream = httpURLConnection.getInputStream();
+                } else {
+                    inputStream = httpURLConnection.getErrorStream();
+                }
+
+
+                InputStreamReader inputStreamReader = new InputStreamReader(inputStream, "UTF-8");
+                BufferedReader bufferedReader = new BufferedReader(inputStreamReader);
+
+                StringBuilder sb = new StringBuilder();
+                String line;
+
+                while ((line = bufferedReader.readLine()) != null) {
+                    sb.append(line);
+                }
+
+                bufferedReader.close();
+
+                return sb.toString().trim();
+
+
+            } catch (Exception e) {
+
+                Log.d(TAG, "GetData : Error ", e);
+                errorString = e.toString();
+
+                return null;
+            }
+
+        }
+    }
+
+    private void showResult() {
+
+        String TAG_JSON = "POST_DATA";
+        String TAG_CODE = "POST_CODE";
+        String TAG_TITLE = "POST_TITLE";
+        String TAG_NICKNAME = "POST_NICKNAME";
+        String TAG_DATE = "POST_DATE";
+        String TAG_MANAGER_COMMENT = "POST_MANAGER_COMMENT";
+        String TAG_CONTENTS = "POST_CONTENTS";
+        String TAG_ANSWER_CONTENTS = "POST_ANSWER_CONTENTS";
+        String TAG_ANSWER_DATE = "POST_ANSWER_DATE";
+
+
+        try {
+            JSONObject jsonObject = new JSONObject(mJsonString);
+            JSONArray jsonArray = jsonObject.getJSONArray(TAG_JSON);
+
+            for (int i = 0; i < jsonArray.length(); i++) {
+
+                JSONObject item = jsonArray.getJSONObject(i);
+
+                String POST_CODE = item.getString(TAG_CODE);
+                String POST_TITLE = item.getString(TAG_TITLE);
+                String POST_NICKNAME = item.getString(TAG_NICKNAME);
+                String POST_DATE = item.getString(TAG_DATE);
+                String POST_MANAGER_COMMENT = item.getString(TAG_MANAGER_COMMENT);
+                String POST_CONTENTS = item.getString(TAG_CONTENTS);
+                String POST_ANSWER_CONTENTS = item.getString(TAG_ANSWER_CONTENTS);
+                String POST_ANSWER_DATE = item.getString(TAG_ANSWER_DATE);
+
+                BoardData boardData = new BoardData();
+
+                boardData.setCode(POST_CODE);
+                boardData.setTitle(POST_TITLE);
+                boardData.setNickname(POST_NICKNAME);
+                boardData.setContents(POST_NICKNAME);
+                boardData.setDate(POST_DATE);
+                boardData.setManagercomment(POST_MANAGER_COMMENT);
+                boardData.setAnswercontents(POST_CONTENTS);
+                boardData.setManagercomment(POST_ANSWER_CONTENTS);
+                boardData.setAnswerdate(POST_ANSWER_DATE);
+
+                mSearchData.add(boardData);
+                mAdapter.notifyDataSetChanged();
+
+
+                //출력 switch 문
+                switch (mArrayList.get(i).getDRCode()) {
+                    case "CocaCola":
+                        mTextViewCocacolaPrice.setText("가격 : " + mArrayList.get(i).getDRPrice() + " 원");
+                        mTextViewCocacolaStock.setText("수량 : " + mArrayList.get(i).getDRStock() + " 개");
+                        break;
+
+                    case "Chilsung Cider":
+                        mTextViewChilsungPrice.setText("가격 : " + mArrayList.get(i).getDRPrice() + " 원");
+                        mTextViewChilsungStock.setText("수량 : " + mArrayList.get(i).getDRStock() + " 개");
+                        break;
+
+                    case "Ssekssek":
+                        mTextViewSsekssekPrice.setText("가격 : " + mArrayList.get(i).getDRPrice() + " 원");
+                        mTextViewSsekssekStock.setText("수량 : " + mArrayList.get(i).getDRStock() + " 개");
+                        break;
+
+                    case "Fanta Orange":
+                        mTextViewFantaPrice.setText("가격 : " + mArrayList.get(i).getDRPrice() + " 원");
+                        mTextViewFantaStock.setText("수량 : " + mArrayList.get(i).getDRStock() + " 개");
+                        break;
+
+                    case "Mountain Dew":
+                        mTextViewMountainPrice.setText("가격 : " + mArrayList.get(i).getDRPrice() + " 원");
+                        mTextViewMountainStock.setText("수량: " + mArrayList.get(i).getDRStock() + " 개");
+                        break;
+
+                    case "Galbae":
+                        mTextViewGalbaePrice.setText("가격 : " + mArrayList.get(i).getDRPrice() + " 원");
+                        mTextViewGalbaeStock.setText("수량: " + mArrayList.get(i).getDRStock() + " 개");
+                        break;
+
+                    default:
+                        break;
+                }
+
+
+            }
+
+        } catch (JSONException e) {
+
+            Log.d(TAG, "showResult : ", e);
+        }
 
     }
 }

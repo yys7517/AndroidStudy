@@ -22,8 +22,8 @@
 <!--        app:layout_constraintHorizontal_bias="0.0"/>-->
 
 
-     탭 바 클릭시 마다 교체될 프래그먼트
-    겹치지 않게 해주는 레이아웃이 framelayout 이다.
+    <!-- 탭 바 클릭시 마다 교체될 프래그먼트
+    겹치지 않게 해주는 레이아웃이 framelayout 이다.-->
     <FrameLayout
         android:id="@+id/nav_host_fragment"
         android:name="androidx.navigation.fragment.NavHostFragment"
