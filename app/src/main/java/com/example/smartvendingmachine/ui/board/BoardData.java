@@ -3,6 +3,9 @@ package com.example.smartvendingmachine.ui.board;
 import android.widget.ImageView;
 
 public class BoardData {
+
+    public BoardData() {}
+
     //ImageView profile;
     //게시물 ID
     private String code; //게시물 기본키
