@@ -1,6 +1,7 @@
 package com.example.smartvendingmachine.ui.board;
 
 import android.content.Intent;
+import android.graphics.Typeface;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -86,6 +87,7 @@ public class BoardMainFragment extends Fragment {
             else {
                 answer.setVisibility(View.VISIBLE);
                 answer.setText("답변 내용이 없습니다. 빠른 시일내에 답변 드리겠습니다.");
+                answer.setTypeface(null, Typeface.BOLD_ITALIC);
             }
 
         }
