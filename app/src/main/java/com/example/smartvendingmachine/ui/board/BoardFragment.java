@@ -73,12 +73,14 @@ public class BoardFragment extends Fragment {
             public void onItemClick(View v, int position) {
                 // TODO : 아이템 클릭 이벤트를 플레그먼트에서 처뤼
                 Bundle arguments = new Bundle();
-                arguments.putString("nickname", mSearchData.get(position).getNickname());
-                arguments.putString("contents", mSearchData.get(position).getContents());
-                arguments.putString("date", mSearchData.get(position).getDate());
-                arguments.putString("title", mSearchData.get(position).getTitle());
-                arguments.putString("answer", mSearchData.get(position).getAnswercontents());
-                arguments.putString("answerdate", mSearchData.get(position).getAnswerdate());
+                arguments.putString("nickname", mSearchData.get(position).getNickname());  //작성자 닉네임
+                arguments.putString("contents", mSearchData.get(position).getContents());  //작성자 글 내용
+                arguments.putString("date", mSearchData.get(position).getDate());          //작성자 글 작성 날짜
+                arguments.putString("title", mSearchData.get(position).getTitle());        //작성자 글 제목
+
+                arguments.putString("answer", mSearchData.get(position).getAnswercontents()); // 관리자 답변
+                arguments.putString("answerdate", mSearchData.get(position).getAnswerdate()); // 관리자 답변 작성 날짜
+
                 FragmentTransaction transaction = getActivity().getSupportFragmentManager().beginTransaction();
                 BoardMainFragment boardMainFragment = new BoardMainFragment();
                 boardMainFragment.setArguments(arguments);
@@ -282,15 +284,19 @@ public class BoardFragment extends Fragment {
                 if(POST_MANAGER_COMMENT.equals("0")){
                     POST_MANAGER_COMMENT = "확인안함";
                 }
+                else {
+                    POST_MANAGER_COMMENT = "확인됨";
+                }
 
-                boardData.setCode(POST_CODE);
-                boardData.setTitle(POST_TITLE);
-                boardData.setNickname(POST_NICKNAME);
-                boardData.setDate(POST_DATE);
-                boardData.setManagercomment(POST_MANAGER_COMMENT);
-                boardData.setContents(POST_CONTENTS);
-                boardData.setAnswercontents(POST_ANSWER_CONTENTS);
-                boardData.setAnswerdate(POST_ANSWER_DATE);
+                boardData.setCode(POST_CODE); // 게시글 코드
+                boardData.setTitle(POST_TITLE); // 게시글 제목
+                boardData.setNickname(POST_NICKNAME); // 게시글 작성자
+                boardData.setDate(POST_DATE); // 게시글 작성 날짜
+                boardData.setContents(POST_CONTENTS); // 게시글 내용
+
+                boardData.setManagercomment(POST_MANAGER_COMMENT); // 건의 확인 여부
+                boardData.setAnswercontents(POST_ANSWER_CONTENTS); // 답변 내용
+                boardData.setAnswerdate(POST_ANSWER_DATE); // 답변 작성 날짜
 
                 mSearchData.add(boardData);
                 adapter.notifyDataSetChanged();

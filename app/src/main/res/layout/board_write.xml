@@ -37,8 +37,8 @@
 
         <Button
             android:id="@+id/mButtonSubmit"
-            android:layout_width="80dp"
-            android:layout_height="40dp"
+            android:layout_width="60dp"
+            android:layout_height="30dp"
             android:layout_margin="20dp"
             android:background="@drawable/round_button"
             android:text="완료"

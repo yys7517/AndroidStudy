@@ -8,6 +8,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.Nullable;
@@ -34,6 +35,7 @@ public class BoardWriteActivity extends AppCompatActivity {
     EditText mEditTextTitle, mEditTextContents;
     TextView mTextViewPostResult;
     Button mButtonSubmit;
+    ImageView backspace;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -48,19 +50,27 @@ public class BoardWriteActivity extends AppCompatActivity {
 
         mButtonSubmit = (Button) findViewById(R.id.mButtonSubmit);
 
+        backspace = findViewById(R.id.backspace);
+
+        //건의사항 작성 완료 버튼.
         mButtonSubmit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 POST_TITLE = mEditTextTitle.getText().toString();
                 POST_NICKNAME = "익명";
                 POST_CONTENTS = mEditTextContents.getText().toString();
-
                 InsertData task = new InsertData();
                 task.execute("http://" + IP_ADDRESS + "/yongrun/svm/POST_WRITE_ANDROID.php", POST_TITLE, POST_NICKNAME, POST_CONTENTS);
-
-
                 mEditTextTitle.setText("");
                 mEditTextContents.setText("");
+            }
+        });
+
+        //뒤로가기 버튼
+        backspace.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
             }
         });
     }
@@ -73,7 +83,7 @@ public class BoardWriteActivity extends AppCompatActivity {
         protected void onPreExecute() {
             super.onPreExecute();
 
-            progressDialog = ProgressDialog.show(getApplicationContext(), "Please Wait", null, true, true);
+            progressDialog = ProgressDialog.show(BoardWriteActivity.this, "Please Wait", null, true, true);
         }
 
         @Override
@@ -87,6 +97,7 @@ public class BoardWriteActivity extends AppCompatActivity {
 
         @Override
         protected String doInBackground(String... params) {
+
             String POST_TITLE = (String) params[1];
             String POST_NICKNAME = (String) params[2];
             String POST_CONTENTS = (String) params[3];
@@ -150,13 +161,5 @@ public class BoardWriteActivity extends AppCompatActivity {
 
         }
     }
+
 }
-
-
-
-
-
-
-
-
-

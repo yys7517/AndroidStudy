@@ -105,8 +105,8 @@
                     android:layout_marginStart="16dp"
                     android:layout_marginTop="5dp"
                     android:fontFamily="@font/notosanscjkkrregular"
-                    android:text="디자인 진짜 거지같다."
                     android:textColor="#212529"
+                    android:text="게시글 제목"
                     android:textSize="23sp"
                     android:textStyle="bold"
                     app:layout_constraintStart_toStartOf="parent"
@@ -119,8 +119,8 @@
                     android:layout_marginStart="16dp"
                     android:layout_marginTop="5dp"
                     android:fontFamily="@font/notosanscjkkrregular"
-                    android:text="디자인은 이게 최선이랍니다 ㅎㅎ\n\n\n\n\n\n\n\n\\n\n\n\n\n\n\n\n\n\n\n\n"
                     android:textColor="#212529"
+                    android:text="게시글 내용"
                     android:textSize="15sp"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/txtCommentTitle" />
@@ -142,28 +142,19 @@
             </androidx.constraintlayout.widget.ConstraintLayout>
 
 
-            <View
-                android:id="@+id/view2"
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:layout_marginTop="10dp"
-                android:background="#e3e3e3"
-                app:layout_constraintTop_toBottomOf="@+id/userlayout" />
-
-
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/managerlayout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="50dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/view2">
+                app:layout_constraintTop_toBottomOf="@id/userlayout">
 
                 <View
                     android:id="@+id/view3"
                     android:layout_width="match_parent"
                     android:layout_height="1dp"
+                    android:layout_marginTop="10dp"
                     android:layout_marginBottom="10dp"
                     android:background="#e3e3e3"
                     app:layout_constraintTop_toTopOf="@id/managerlayout" />
@@ -174,13 +165,14 @@
                     android:layout_width="30dp"
                     android:layout_height="30dp"
                     android:layout_marginStart="16dp"
+                    android:visibility="gone"
                     android:layout_marginTop="10dp"
                     android:src="@drawable/circle"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="@id/managerlayout" />
+                    app:layout_constraintTop_toBottomOf="@id/view3" />
 
                 <TextView
-                    android:id="@+id/imgManagerName"
+                    android:id="@+id/ManagerName"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="6dp"
@@ -189,11 +181,12 @@
                     android:fontFamily="@font/notosanscjkkrmedium"
                     android:lineSpacingExtra="6sp"
                     android:text="관리자"
+                    android:visibility="gone"
                     android:textColor="#212529"
                     android:textSize="12sp"
                     app:layout_constraintBottom_toTopOf="@+id/txtManagerComments"
                     app:layout_constraintStart_toEndOf="@+id/imgManagerProfile"
-                    app:layout_constraintTop_toTopOf="@id/managerlayout" />
+                    app:layout_constraintTop_toTopOf="@id/view3" />
 
                 <TextView
                     android:id="@+id/txtManagerComments"
@@ -202,8 +195,9 @@
                     android:layout_marginStart="16dp"
                     android:layout_marginTop="5dp"
                     android:fontFamily="@font/notosanscjkkrregular"
-                    android:text="디자인은 이게 최선이랍니다 ㅎㅎ\n\n\n\n\n\n\n\n\\n\n\n\n\n\n\n\n\n\n\n\n"
+                    android:text="관리자 답변"
                     android:textColor="#212529"
+                    android:visibility="gone"
                     android:textSize="15sp"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/imgManagerProfile" />
@@ -213,6 +207,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="16dp"
+                    android:visibility="gone"
                     android:layout_marginTop="15dp"
                     android:lineSpacingExtra="6sp"
                     android:text="날짜"
