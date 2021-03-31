@@ -22,6 +22,7 @@ import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 import com.example.smartvendingmachine.R;
 import com.example.smartvendingmachine.ui.Home.HomeData;
 import com.example.smartvendingmachine.ui.Home.HomeFragment;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -50,6 +51,8 @@ public class BoardFragment extends Fragment {
     private static String IP_ADDRESS = "211.211.158.42/yongrun/svm";
     private static String TAG = "phptest";
     private String mJsonString;
+
+    private FloatingActionButton addbtn; //게시물 작성 버튼
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -107,6 +110,18 @@ public class BoardFragment extends Fragment {
                 swipeRefreshLayout.setRefreshing(false); //새로고침표시 없애기
             }
         });
+
+        //플로팅버튼
+        addbtn = (FloatingActionButton) rootview.findViewById(R.id.addBtn);
+        addbtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Log.i("버튼 작동확인", "게시물 추가 버튼 눌렀다.");
+                Intent intent = new Intent(getActivity(), BoardWriteActivity.class );
+                startActivity(intent);
+            }
+        });
+
         return rootview;
     }
 
