@@ -90,10 +90,7 @@ public class BoardFragment extends Fragment {
         });
 
         //boarddata에 값 넣음
-        mSearchData.clear();
-        adapter.notifyDataSetChanged();
-        GetData task = new GetData();
-        task.execute("http://" + IP_ADDRESS + "/POST.php", "");
+        PostUpdate();
 
 
 
@@ -125,6 +122,19 @@ public class BoardFragment extends Fragment {
         });
 
         return rootview;
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        PostUpdate();
+    }
+
+    public void PostUpdate() {
+        mSearchData.clear();
+        adapter.notifyDataSetChanged();
+        GetData task = new GetData();
+        task.execute("http://" + IP_ADDRESS + "/POST.php", "");
     }
 
     @Override

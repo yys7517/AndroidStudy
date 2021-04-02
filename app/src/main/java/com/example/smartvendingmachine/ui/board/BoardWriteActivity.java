@@ -10,11 +10,15 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 
 import com.example.smartvendingmachine.R;
+import com.example.smartvendingmachine.ui.MainActivity;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
@@ -61,8 +65,9 @@ public class BoardWriteActivity extends AppCompatActivity {
                 POST_CONTENTS = mEditTextContents.getText().toString();
                 InsertData task = new InsertData();
                 task.execute("http://" + IP_ADDRESS + "/yongrun/svm/POST_WRITE_ANDROID.php", POST_TITLE, POST_NICKNAME, POST_CONTENTS);
-                mEditTextTitle.setText("");
-                mEditTextContents.setText("");
+                Toast.makeText(getApplicationContext(), "건의사항이 등록되었습니다.", Toast.LENGTH_SHORT).show();
+
+                finish();
             }
         });
 
