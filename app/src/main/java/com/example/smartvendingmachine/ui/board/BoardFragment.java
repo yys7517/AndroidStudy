@@ -102,7 +102,7 @@ public class BoardFragment extends Fragment {
                 mSearchData.clear();
                 adapter.notifyDataSetChanged();
 
-                BoardFragment.GetData task = new BoardFragment.GetData();
+                GetData task = new GetData();
                 task.execute("http://" + IP_ADDRESS + "/POST.php", "");
                 swipeRefreshLayout.setRefreshing(false); //새로고침표시 없애기
                 //데이터 새로고침 코드 넣어야 함.

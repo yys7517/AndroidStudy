@@ -90,7 +90,7 @@ public class BoardAdapter extends RecyclerView.Adapter<BoardAdapter.ViewHolder> 
     @NonNull
     //아이템 뷰를 위한 뷰홀더 객체 생성하여 리턴
     @Override
-    public BoardAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         Context context = parent.getContext();
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.rv_notice_item, parent, false);
         ViewHolder viewHolder = new ViewHolder(view);
@@ -100,7 +100,7 @@ public class BoardAdapter extends RecyclerView.Adapter<BoardAdapter.ViewHolder> 
 
     //position에 해당하는 데이터를 뷰홀더의 아이템뷰에 표시
     @Override
-    public void onBindViewHolder(@NonNull BoardAdapter.ViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         holder.title.setText(iData.get(position).getTitle());
         holder.nickname.setText(iData.get(position).getNickname());
         holder.contents.setText(iData.get(position).getContents());
