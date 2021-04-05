@@ -1,7 +1,6 @@
 package com.example.smartvendingmachine.ui.board;
 
 import android.app.ProgressDialog;
-import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
@@ -14,11 +13,8 @@ import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.fragment.app.FragmentManager;
-import androidx.fragment.app.FragmentTransaction;
 
 import com.example.smartvendingmachine.R;
-import com.example.smartvendingmachine.ui.MainActivity;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;

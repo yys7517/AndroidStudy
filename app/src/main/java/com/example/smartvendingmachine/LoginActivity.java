@@ -1,4 +1,4 @@
-package com.example.smartvendingmachine.ui;
+package com.example.smartvendingmachine;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -8,7 +8,6 @@ import android.view.View;
 
 import androidx.viewpager2.widget.ViewPager2;
 
-import com.example.smartvendingmachine.R;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.kakao.sdk.auth.LoginClient;
 import com.kakao.sdk.auth.model.OAuthToken;
@@ -56,16 +55,16 @@ public class LoginActivity extends Activity implements View.OnClickListener {
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.mButtonKakao:
-                Log.i("GongGong", "카카오 로그인");
-                if (LoginClient.getInstance().isKakaoTalkLoginAvailable(com.example.gonggong.LoginActivity.this)) { //카카오 설치되어있는지 확인
-                    LoginClient.getInstance().loginWithKakaoTalk(com.example.gonggong.LoginActivity.this, callback);
+                Log.i("smartvendingmachine", "카카오 로그인");
+                if (LoginClient.getInstance().isKakaoTalkLoginAvailable(LoginActivity.this)) { //카카오 설치되어있는지 확인
+                    LoginClient.getInstance().loginWithKakaoTalk(LoginActivity.this, callback);
                 } else { //카톡이 설치되어있지 않을시
-                    LoginClient.getInstance().loginWithKakaoAccount(com.example.gonggong.LoginActivity.this, callback);
+                    LoginClient.getInstance().loginWithKakaoAccount(LoginActivity.this, callback);
                 }
                 break;
 
             case R.id.mButtonNaver:
-                Log.i("GongGong", "네이버 로그인");
+                Log.i("smartvendingmachine", "네이버 로그인");
                 finish();
                 Intent intent = new Intent(this, MainActivity.class);
                 finish();
@@ -73,7 +72,7 @@ public class LoginActivity extends Activity implements View.OnClickListener {
                 break;
 
             case R.id.mButtonFacebook:
-                Log.i("GongGong", "페이스북 로그인");
+                Log.i("smartvendingmachine", "페이스북 로그인");
                 break;
 
             default:

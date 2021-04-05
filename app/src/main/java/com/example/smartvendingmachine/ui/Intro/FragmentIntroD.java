@@ -10,7 +10,7 @@ import android.widget.Button;
 import androidx.fragment.app.Fragment;
 
 import com.example.smartvendingmachine.R;
-import com.example.smartvendingmachine.ui.LoginActivity;
+import com.example.smartvendingmachine.LoginActivity;
 
 
 public class FragmentIntroD extends Fragment {

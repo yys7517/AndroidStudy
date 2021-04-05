@@ -1,4 +1,4 @@
-package com.example.smartvendingmachine.ui;
+package com.example.smartvendingmachine;
 
 import android.view.MenuItem;
 
