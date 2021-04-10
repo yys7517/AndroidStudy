@@ -55,6 +55,17 @@ dependencies {
     implementation 'com.github.bumptech.glide:glide:4.9.0' //글라이드 이미지 로딩
     annotationProcessor 'com.github.bumptech.glide:compiler:4.9.0' //글라이드 이미지 로딩2
 
+    //네이버 로그인
+    implementation files('libs\\naveridlogin_android_sdk_4.2.5.aar')
+    implementation files('libs\\json-simple-1.1.1.jar')
+
+    // naveridlogin dependencies
+    def android_x_version = "1.0.0"
+    implementation "androidx.appcompat:appcompat:$android_x_version"
+    implementation "androidx.legacy:legacy-support-core-utils:$android_x_version"
+    implementation "androidx.browser:browser:$android_x_version"
+    implementation "androidx.legacy:legacy-support-v4:$android_x_version" //네이버 로그인
+
     implementation 'androidx.legacy:legacy-support-v4:1.0.0'
     implementation 'androidx.navigation:navigation-fragment:2.1.0'
     implementation 'androidx.navigation:navigation-ui:2.1.0'
