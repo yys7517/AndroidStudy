@@ -276,7 +276,7 @@ public class BoardFragment extends Fragment {
             JSONObject jsonObject = new JSONObject(mJsonString);
             JSONArray jsonArray = jsonObject.getJSONArray(TAG_JSON);
 
-            for (int i = 0; i < jsonArray.length(); i++) {
+            for (int i = jsonArray.length()-1; i>=0; i--) {
 
                 JSONObject item = jsonArray.getJSONObject(i);
 

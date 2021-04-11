@@ -136,7 +136,9 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                     };
                 };
                 mOAuthLoginModule.startOauthLoginActivity(LoginActivity.this, mOAuthLoginHandler);
-
+                finish();
+                Intent intent = new Intent(LoginActivity.this,MainActivity.class);
+                startActivity(intent);
                 break;
 
             case R.id.mButtonFacebook:
