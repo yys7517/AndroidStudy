@@ -48,7 +48,7 @@
             android:backgroundTint="#FFFFFF"
             app:borderWidth="0dp"
             app:fabCustomSize="63dp"
-            app:srcCompat="@drawable/google" />
+            app:srcCompat="@drawable/googlebtn" />
 
         <com.google.android.material.floatingactionbutton.FloatingActionButton
             android:id="@+id/mButtonKakao"
