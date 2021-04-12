@@ -37,8 +37,6 @@ public class MainActivity extends AppCompatActivity {
 
 
         //프래그먼트 생성
-
-
         bottomNavigationView = findViewById(R.id.nav_view);
 
         // 처음에 띄울화면 이걸로 기릿~
@@ -122,7 +120,6 @@ public class MainActivity extends AppCompatActivity {
         long tempTime = System.currentTimeMillis();
         long intervalTime = tempTime - backPressedTime;
 
-        //super.onBackPressed();
         if (getSupportFragmentManager().getBackStackEntryCount() == 0) {
             if (!(0 > intervalTime || FINISH_INTERVAL_TIME < intervalTime)) {
                 finishAffinity();

@@ -27,6 +27,7 @@ public class BoardMainFragment extends Fragment {
     private String stitle;
     private String sanswer;
     private String sanswerdate;
+
     //작성자 글
     private TextView nickname;
     private TextView contents;
