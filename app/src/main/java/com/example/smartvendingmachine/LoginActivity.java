@@ -65,7 +65,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
     //서버 IP
     private static String IP_ADDRESS = "211.211.158.42";
-    private static String StrUSER_ID, StrUSER_NICKNAME;
+    private static String StrUSER_ID, StrUSER_NICKNAME,StrUSER_EMAIL;
 
     //네이버 로그인
     private FloatingActionButton mButtonNaver;
@@ -98,7 +98,6 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         setContentView(R.layout.activity_login);
         mContext = getApplicationContext();
         init();
-        updateKakaoLoginUi();
     }
 
     @Override
@@ -241,12 +240,13 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
                     StrUSER_ID = jsonObject.getString("id");
                     StrUSER_NICKNAME = jsonObject.getString("nickname");
+                    StrUSER_EMAIL = jsonObject.getString("email");
 
                     Log.d("USER_ID", StrUSER_ID);
                     Log.d("USER_NICKNAME", StrUSER_NICKNAME);
 
                     InsertData task = new InsertData();
-                    task.execute("http://" + IP_ADDRESS + "/yongrun/svm/SIGNUP_ANDRIOD.php", StrUSER_ID, StrUSER_NICKNAME);
+                    task.execute("http://" + IP_ADDRESS + "/yongrun/svm/SIGNUP_ANDRIOD.php", StrUSER_ID, StrUSER_NICKNAME, StrUSER_EMAIL);
 
                 }
             } catch (Exception e) {
@@ -281,9 +281,10 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
             String USER_ID = (String) params[1];
             String USER_NICKNAME = (String) params[2];
+            String USER_EMAIL = (String) params[3];
             String serverURL = (String) params[0];
 
-            String postParameters = "USER_ID=" + USER_ID + "&USER_NICKNAME=" + USER_NICKNAME;
+            String postParameters = "&USER_ID=" + USER_ID + "&USER_NICKNAME=" + USER_NICKNAME + "&USER_EMAIL=" + USER_EMAIL;
 
 
             try {
@@ -354,6 +355,18 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                     Log.i(TAG, "invoke: gender=" + user.getKakaoAccount().getGender());
                     Log.i(TAG, "invoke: age=" + user.getKakaoAccount().getAgeRange());
 
+                    StrUSER_ID = String.valueOf(user.getId());
+                    StrUSER_NICKNAME = user.getKakaoAccount().getProfile().getNickname();
+                    StrUSER_EMAIL = user.getKakaoAccount().getEmail();
+
+                    InsertData task = new InsertData();
+                    task.execute("http://" + IP_ADDRESS + "/yongrun/svm/SIGNUP_ANDRIOD.php", StrUSER_ID, StrUSER_NICKNAME, StrUSER_EMAIL);
+
+                    Intent intent = new Intent(LoginActivity.this , MainActivity.class);
+                    startActivity(intent);
+
+                    Toast.makeText(getApplicationContext(), StrUSER_NICKNAME + " 님 안녕하세요.", Toast.LENGTH_SHORT).show();
+
                 } else { //로그아웃 상태
 
                 }
@@ -381,12 +394,26 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if(task.isSuccessful()){ //로그인이 성공했으면...
-                            Toast.makeText(getApplicationContext(), "로그인 성공", Toast.LENGTH_SHORT).show();
+
                             Log.i("아이디 확인", account.getId()); //기본키
                             Log.i("이메일 확인", account.getEmail());
                             Log.i("아이디 토큰 확인", account.getIdToken());
                             Log.i("닉네임 확인", account.getGivenName()); //닉네임
-                        } else{ //로그인이 실패했으면...
+
+                            StrUSER_ID = account.getId();
+                            StrUSER_NICKNAME = account.getGivenName();
+                            StrUSER_EMAIL = account.getEmail();
+
+                            InsertData insert = new InsertData();
+                            insert.execute("http://" + IP_ADDRESS + "/yongrun/svm/SIGNUP_ANDRIOD.php", StrUSER_ID, StrUSER_NICKNAME, StrUSER_EMAIL);
+
+                            Intent intent = new Intent(LoginActivity.this , MainActivity.class);
+                            startActivity(intent);
+
+                            Toast.makeText(getApplicationContext(), StrUSER_NICKNAME + " 님 안녕하세요.", Toast.LENGTH_SHORT).show();
+
+                        }
+                        else{ //로그인이 실패했으면...
                             Toast.makeText(getApplicationContext(), "로그인 실패", Toast.LENGTH_SHORT).show();
                         }
                     }

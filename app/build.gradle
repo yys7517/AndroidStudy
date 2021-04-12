@@ -1,5 +1,6 @@
 apply plugin: 'com.android.application'
 
+
 android {
     compileSdkVersion 30
     buildToolsVersion "30.0.1"
@@ -31,6 +32,8 @@ apply plugin: 'com.android.application'
 apply plugin: 'com.google.gms.google-services'
 
 dependencies {
+    implementation 'com.google.gms:google-services:4.0.1'
+
     implementation fileTree(dir: "libs", include: ["*.jar"])
     implementation 'androidx.appcompat:appcompat:1.2.0'
     implementation 'androidx.constraintlayout:constraintlayout:2.0.4'
@@ -54,6 +57,8 @@ dependencies {
     implementation 'com.firebaseui:firebase-ui-auth:4.2.1' //파이어베이스 인증2
     implementation 'com.github.bumptech.glide:glide:4.9.0' //글라이드 이미지 로딩
     annotationProcessor 'com.github.bumptech.glide:compiler:4.9.0' //글라이드 이미지 로딩2
+    implementation 'com.google.android.gms:play-services-auth:18.1.0'
+
 
     //네이버 로그인
     implementation files('libs\\naveridlogin_android_sdk_4.2.5.aar')
