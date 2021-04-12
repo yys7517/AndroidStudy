@@ -128,10 +128,10 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                 OAuthLoginHandler mOAuthLoginHandler = new OAuthLoginHandler() {
                     @Override
                     public void run(boolean success) {
-
                         if (success) {
-                            InsertData task = new InsertData();
-                            task.execute("http://" + IP_ADDRESS + "/yongrun/svm/SIGNUP_ANDRIOD.php", StrUSER_ID, StrUSER_NICKNAME);
+                            String accessToken = mOAuthLoginModule.getAccessToken(mContext);
+                            NaverTask task = new NaverTask();
+                            task.execute(accessToken);
                         }
                         else {
                             String errorCode = mOAuthLoginModule
@@ -186,7 +186,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
         auth = FirebaseAuth.getInstance(); // 파이어베이스 인증 객체 초기화
     }
-    //네이버 유저정보 가져오기
+    //네이버 로그인 작업
     class NaverTask extends AsyncTask<String, Void, String> {
         String result;
 
@@ -232,13 +232,21 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                 JSONObject object = new JSONObject(result);
                 if (object.getString("resultcode").equals("00")) {
                     JSONObject jsonObject = new JSONObject(object.getString("response"));
-//                    Log.d("jsonObject", jsonObject.toString());
-//                    Log.d("네아로_아이디", jsonObject.getString("id"));
-//                    Log.d("네아로_이메일", jsonObject.getString("email"));
-//                    Log.d("네아로_이름", jsonObject.getString("name"));
-//                    Log.d("네아로_닉네임", jsonObject.getString("nickname"));
-//                    Log.d("네아로_프로필사진", jsonObject.getString("profile_image"));
+                    Log.d("jsonObject", jsonObject.toString());
+                    Log.d("네아로_아이디", jsonObject.getString("id"));
+                    Log.d("네아로_이메일", jsonObject.getString("email"));
+                    Log.d("네아로_이름", jsonObject.getString("name"));
+                    Log.d("네아로_닉네임", jsonObject.getString("nickname"));
+                    Log.d("네아로_프로필사진", jsonObject.getString("profile_image"));
 
+                    StrUSER_ID = jsonObject.getString("id");
+                    StrUSER_NICKNAME = jsonObject.getString("nickname");
+
+                    Log.d("USER_ID", StrUSER_ID);
+                    Log.d("USER_NICKNAME", StrUSER_NICKNAME);
+
+                    InsertData task = new InsertData();
+                    task.execute("http://" + IP_ADDRESS + "/yongrun/svm/SIGNUP_ANDRIOD.php", StrUSER_ID, StrUSER_NICKNAME);
 
                 }
             } catch (Exception e) {
@@ -261,32 +269,11 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
         //정보 삽입 execute
         @Override
-        protected void onPostExecute(String s) {
-            super.onPostExecute(s);
+        protected void onPostExecute(String result) {
+            super.onPostExecute(result);
 
-            try {
-                progressDialog.dismiss();
-
-                String accessToken = mOAuthLoginModule.getAccessToken(mContext);
-
-                NaverTask task = new NaverTask();
-                task.execute(accessToken);
-
-                JSONObject object = new JSONObject(task.result);
-                if (object.getString("resultcode").equals("00")) {
-                    JSONObject jsonObject = new JSONObject(object.getString("response"));
-                    Log.d("jsonObject", jsonObject.toString());
-                    Log.d("네아로_아이디", jsonObject.getString("id"));
-                    Log.d("네아로_이메일", jsonObject.getString("email"));
-                    Log.d("네아로_이름", jsonObject.getString("name"));
-                    Log.d("네아로_닉네임", jsonObject.getString("nickname"));
-                    Log.d("네아로_프로필사진", jsonObject.getString("profile_image"));
-
-                    StrUSER_ID = jsonObject.getString("id");
-                    StrUSER_NICKNAME = jsonObject.getString("nickname");
-                }
-            }
-            catch (Exception e) { }
+            progressDialog.dismiss();
+            Log.d(TAG, "POST response  - " + result);
         }
 
         @Override
