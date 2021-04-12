@@ -2,8 +2,10 @@ package com.example.smartvendingmachine;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
@@ -16,6 +18,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.FragmentActivity;
 import androidx.viewpager2.widget.ViewPager2;
 
+import com.example.smartvendingmachine.ui.board.BoardWriteActivity;
 import com.google.android.gms.auth.api.Auth;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
@@ -40,7 +43,9 @@ import com.nhn.android.naverlogin.OAuthLoginHandler;
 import org.json.JSONObject;
 
 import java.io.BufferedReader;
+import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.io.OutputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
 
@@ -57,6 +62,10 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     private FirebaseAuth auth; //파이어 베이스 인증 객체
     private GoogleApiClient googleApiClient; //구글 API 클라이언트 객체
     private static final int REQ_SIGN_GOOGLE = 100; //구글 로그인 결과 코드
+
+    //서버 IP
+    private static String IP_ADDRESS = "211.211.158.42";
+    private static String StrUSER_ID, StrUSER_NICKNAME;
 
     //네이버 로그인
     private FloatingActionButton mButtonNaver;
@@ -121,10 +130,8 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                     public void run(boolean success) {
 
                         if (success) {
-                            //AccessToken으로 회원정보 가져오기
-                            String accessToken = mOAuthLoginModule.getAccessToken(mContext);
-                            NaverTask task = new NaverTask();
-                            task.execute(accessToken);
+                            InsertData task = new InsertData();
+                            task.execute("http://" + IP_ADDRESS + "/yongrun/svm/SIGNUP_ANDRIOD.php", StrUSER_ID, StrUSER_NICKNAME);
                         }
                         else {
                             String errorCode = mOAuthLoginModule
@@ -136,7 +143,6 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                     };
                 };
                 mOAuthLoginModule.startOauthLoginActivity(LoginActivity.this, mOAuthLoginHandler);
-                finish();
                 Intent intent = new Intent(LoginActivity.this,MainActivity.class);
                 startActivity(intent);
                 break;
@@ -226,12 +232,126 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                 JSONObject object = new JSONObject(result);
                 if (object.getString("resultcode").equals("00")) {
                     JSONObject jsonObject = new JSONObject(object.getString("response"));
-                    Log.d("jsonObject", jsonObject.toString());
+//                    Log.d("jsonObject", jsonObject.toString());
+//                    Log.d("네아로_아이디", jsonObject.getString("id"));
+//                    Log.d("네아로_이메일", jsonObject.getString("email"));
+//                    Log.d("네아로_이름", jsonObject.getString("name"));
+//                    Log.d("네아로_닉네임", jsonObject.getString("nickname"));
+//                    Log.d("네아로_프로필사진", jsonObject.getString("profile_image"));
+
 
                 }
             } catch (Exception e) {
                 e.printStackTrace();
             }
+        }
+    }
+    //네이버 회원 정보 서버 삽입
+    class InsertData extends AsyncTask<String, Void, String> {
+        ProgressDialog progressDialog;
+
+
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+
+            progressDialog = ProgressDialog.show(LoginActivity.this, "Please Wait", null, true, true);
+        }
+
+
+        //정보 삽입 execute
+        @Override
+        protected void onPostExecute(String s) {
+            super.onPostExecute(s);
+
+            try {
+                progressDialog.dismiss();
+
+                String accessToken = mOAuthLoginModule.getAccessToken(mContext);
+
+                NaverTask task = new NaverTask();
+                task.execute(accessToken);
+
+                JSONObject object = new JSONObject(task.result);
+                if (object.getString("resultcode").equals("00")) {
+                    JSONObject jsonObject = new JSONObject(object.getString("response"));
+                    Log.d("jsonObject", jsonObject.toString());
+                    Log.d("네아로_아이디", jsonObject.getString("id"));
+                    Log.d("네아로_이메일", jsonObject.getString("email"));
+                    Log.d("네아로_이름", jsonObject.getString("name"));
+                    Log.d("네아로_닉네임", jsonObject.getString("nickname"));
+                    Log.d("네아로_프로필사진", jsonObject.getString("profile_image"));
+
+                    StrUSER_ID = jsonObject.getString("id");
+                    StrUSER_NICKNAME = jsonObject.getString("nickname");
+                }
+            }
+            catch (Exception e) { }
+        }
+
+        @Override
+        protected String doInBackground(String... params) {
+
+            String USER_ID = (String) params[1];
+            String USER_NICKNAME = (String) params[2];
+            String serverURL = (String) params[0];
+
+            String postParameters = "USER_ID=" + USER_ID + "&USER_NICKNAME=" + USER_NICKNAME;
+
+
+            try {
+
+                URL url = new URL(serverURL);
+                HttpURLConnection httpURLConnection = (HttpURLConnection) url.openConnection();
+
+
+                httpURLConnection.setReadTimeout(5000);
+                httpURLConnection.setConnectTimeout(5000);
+                httpURLConnection.setRequestMethod("POST");
+                httpURLConnection.connect();
+
+
+                OutputStream outputStream = httpURLConnection.getOutputStream();
+                outputStream.write(postParameters.getBytes("UTF-8"));
+                outputStream.flush();
+                outputStream.close();
+
+
+                int responseStatusCode = httpURLConnection.getResponseCode();
+                Log.d(TAG, "POST response code - " + responseStatusCode);
+
+                InputStream inputStream;
+                if (responseStatusCode == HttpURLConnection.HTTP_OK) {
+                    inputStream = httpURLConnection.getInputStream();
+                } else {
+                    inputStream = httpURLConnection.getErrorStream();
+                }
+
+
+                InputStreamReader inputStreamReader = new InputStreamReader(inputStream, "UTF-8");
+                BufferedReader bufferedReader = new BufferedReader(inputStreamReader);
+
+                StringBuilder sb = new StringBuilder();
+                String line = null;
+
+                while ((line = bufferedReader.readLine()) != null) {
+                    sb.append(line);
+                }
+
+
+                bufferedReader.close();
+
+
+                return sb.toString();
+
+
+            } catch (Exception e) {
+
+                Log.d(TAG, "InsertData: Error ", e);
+
+                return new String("Error: " + e.getMessage());
+            }
+
         }
     }
 
