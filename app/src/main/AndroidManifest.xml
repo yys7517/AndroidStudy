@@ -20,13 +20,15 @@
         android:usesCleartextTraffic="true"> <!-- 모든 Http URL에 대해서 접근 허용 (서버 접속하려면 필수) -->
         <activity android:name=".LoginActivity"/>
         <activity android:name=".MainActivity"/>
-        <activity android:name=".ui.Intro.IntroActivity">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
+        <activity android:name=".ui.Intro.StartActivity">
+        <intent-filter>
+            <action android:name="android.intent.action.MAIN" />
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
+            <category android:name="android.intent.category.LAUNCHER" />
+        </intent-filter>
         </activity>
+        <activity android:name=".ui.Intro.IntroActivity"/>
+
         <!-- 게시글 Activity -->
         <activity android:name=".ui.board.BoardWriteActivity"/> <!-- 게시글 작성 Activity -->
 

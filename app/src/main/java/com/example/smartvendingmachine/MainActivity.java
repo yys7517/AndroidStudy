@@ -100,7 +100,6 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-    //
     public void updateBottomMenu (BottomNavigationView navigation)
     {
         if(getSupportFragmentManager().findFragmentByTag("home") != null && getSupportFragmentManager().findFragmentByTag("home").isVisible() ) {
@@ -135,7 +134,6 @@ public class MainActivity extends AppCompatActivity {
         BottomNavigationView bnv = findViewById(R.id.nav_view);
         updateBottomMenu(bnv);
     }
-
 
     @Override
     public void supportFinishAfterTransition() {

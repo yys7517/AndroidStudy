@@ -10,4 +10,5 @@ public class KakaoApplication extends Application {
 
         KakaoSdk.init(this,"cbc15b278157a56287ea87c5ae4b7b82");
     }
+
 }
