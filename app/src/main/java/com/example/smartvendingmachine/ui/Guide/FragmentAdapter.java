@@ -1,4 +1,4 @@
-package com.example.smartvendingmachine.ui.Intro;
+package com.example.smartvendingmachine.ui.Guide;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
@@ -21,16 +21,16 @@ public class FragmentAdapter extends FragmentStateAdapter {
 
         switch (index) {
             case 0:
-                return new FragmentIntroA();
+                return new FragmentGuideA();
 
             case 1:
-                return new FragmentIntroB();
+                return new FragmentGuideB();
 
             case 2:
-                return new FragmentIntroC();
+                return new FragmentGuideC();
 
             default:
-                return new FragmentIntroD();
+                return new FragmentGuideD();
         }
     }
 

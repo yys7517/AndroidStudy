@@ -1,6 +1,7 @@
-package com.example.smartvendingmachine.ui.Intro;
+package com.example.smartvendingmachine.ui.Guide;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -13,7 +14,7 @@ import com.example.smartvendingmachine.R;
 import com.example.smartvendingmachine.LoginActivity;
 
 
-public class FragmentIntroD extends Fragment {
+public class FragmentGuideD extends Fragment {
     private Button mButtonStart;
 
     @Override

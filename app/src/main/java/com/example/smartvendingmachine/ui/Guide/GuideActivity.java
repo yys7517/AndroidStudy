@@ -1,4 +1,4 @@
-package com.example.smartvendingmachine.ui.Intro;
+package com.example.smartvendingmachine.ui.Guide;
 
 import android.os.Bundle;
 import android.view.View;
@@ -14,7 +14,7 @@ import com.example.smartvendingmachine.R;
 import me.relex.circleindicator.CircleIndicator3;
 
 
-public class IntroActivity extends FragmentActivity {
+public class GuideActivity extends FragmentActivity {
 
     private ViewPager2 mPager;
     private FragmentStateAdapter pagerAdapter;
@@ -24,7 +24,7 @@ public class IntroActivity extends FragmentActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_intro);
+        setContentView(R.layout.activity_guide);
 
 
         //ViewPager2

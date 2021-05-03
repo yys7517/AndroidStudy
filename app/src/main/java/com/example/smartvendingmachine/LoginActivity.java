@@ -8,6 +8,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.se.omapi.Session;
 import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
@@ -75,6 +76,12 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     //구글 로그인
     private FloatingActionButton mButtonFacebook;
 
+    private boolean saveLoginData;
+    private SharedPreferences appData;
+
+    private String id;
+    private String nickname;
+
     private static final String TAG = "MainActivity";
     Function2<OAuthToken, Throwable, Unit> callback = new Function2<OAuthToken, Throwable, Unit>() { //function2 형태가 로그인
         @Override
@@ -98,6 +105,17 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         setContentView(R.layout.activity_login);
         mContext = getApplicationContext();
         init();
+
+        appData = getSharedPreferences("appData", MODE_PRIVATE);
+        //SharedPreferences 설정값 load ( saveLoginData, id, nickname )
+        load();
+        // 이전에 로그인 정보를 저장시킨 기록이 있다면
+        if (saveLoginData) {
+            Intent intent = new Intent(getApplicationContext() , MainActivity.class);
+            intent.putExtra("nickname",nickname);
+            startActivity(intent);
+        }
+
     }
 
     @Override
@@ -142,8 +160,6 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                     };
                 };
                 mOAuthLoginModule.startOauthLoginActivity(LoginActivity.this, mOAuthLoginHandler);
-                Intent intent = new Intent(LoginActivity.this,MainActivity.class);
-                startActivity(intent);
                 break;
 
             case R.id.mButtonFacebook:
@@ -185,6 +201,32 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
         auth = FirebaseAuth.getInstance(); // 파이어베이스 인증 객체 초기화
     }
+
+    // 설정값을 저장하는 함수
+    private void save(Boolean flag, String id, String nickname) {
+        // SharedPreferences 객체만으론 저장 불가능 Editor 사용
+        SharedPreferences.Editor editor = appData.edit();
+
+        // 에디터객체.put타입( 저장시킬 이름, 저장시킬 값 )
+        // 저장시킬 이름이 이미 존재하면 덮어씌움
+        editor.putBoolean("SAVE_LOGIN_DATA", flag);
+        editor.putString("ID", id);
+        editor.putString("NICKNAME", nickname);
+
+        // apply, commit 을 안하면 변경된 내용이 저장되지 않음
+        editor.apply();
+    }
+
+    // 설정값을 불러오는 함수
+    private void load() {
+        // SharedPreferences 객체.get타입( 저장된 이름, 기본값 )
+        // 저장된 이름이 존재하지 않을 시 기본값
+        saveLoginData = appData.getBoolean("SAVE_LOGIN_DATA", false);
+        id = appData.getString("ID", "");
+        nickname = appData.getString("NICKNAME", "");
+    }
+
+
     //네이버 로그인 작업
     class NaverTask extends AsyncTask<String, Void, String> {
         String result;
@@ -242,11 +284,21 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                     StrUSER_NICKNAME = jsonObject.getString("nickname");
                     StrUSER_EMAIL = jsonObject.getString("email");
 
+
                     Log.d("USER_ID", StrUSER_ID);
                     Log.d("USER_NICKNAME", StrUSER_NICKNAME);
 
                     InsertData task = new InsertData();
                     task.execute("http://" + IP_ADDRESS + "/yongrun/svm/SIGNUP_ANDRIOD.php", StrUSER_ID, StrUSER_NICKNAME, StrUSER_EMAIL);
+
+                    if ( ! (StrUSER_ID == null || StrUSER_NICKNAME == null || StrUSER_ID=="" || StrUSER_NICKNAME == "") )
+                        save(true,StrUSER_ID,StrUSER_NICKNAME);
+
+
+                    Intent intent = new Intent(LoginActivity.this , MainActivity.class);
+                    intent.putExtra("nickname",StrUSER_NICKNAME);
+                    startActivity(intent);
+
 
                 }
             } catch (Exception e) {
@@ -362,10 +414,12 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                     InsertData task = new InsertData();
                     task.execute("http://" + IP_ADDRESS + "/yongrun/svm/SIGNUP_ANDRIOD.php", StrUSER_ID, StrUSER_NICKNAME, StrUSER_EMAIL);
 
-                    Intent intent = new Intent(LoginActivity.this , MainActivity.class);
-                    startActivity(intent);
+                    if ( ! (StrUSER_ID == null || StrUSER_NICKNAME == null || StrUSER_ID=="" || StrUSER_NICKNAME == "") )
+                        save(true,StrUSER_ID,StrUSER_NICKNAME);
 
-                    Toast.makeText(getApplicationContext(), StrUSER_NICKNAME + " 님 안녕하세요.", Toast.LENGTH_SHORT).show();
+                    Intent intent = new Intent(LoginActivity.this , MainActivity.class);
+                    intent.putExtra("nickname",StrUSER_NICKNAME);
+                    startActivity(intent);
 
                 } else { //로그아웃 상태
 
@@ -407,10 +461,12 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                             InsertData insert = new InsertData();
                             insert.execute("http://" + IP_ADDRESS + "/yongrun/svm/SIGNUP_ANDRIOD.php", StrUSER_ID, StrUSER_NICKNAME, StrUSER_EMAIL);
 
-                            Intent intent = new Intent(LoginActivity.this , MainActivity.class);
-                            startActivity(intent);
+                            if ( ! (StrUSER_ID == null || StrUSER_NICKNAME == null || StrUSER_ID=="" || StrUSER_NICKNAME == "") )
+                                save(true,StrUSER_ID,StrUSER_NICKNAME);
 
-                            Toast.makeText(getApplicationContext(), StrUSER_NICKNAME + " 님 안녕하세요.", Toast.LENGTH_SHORT).show();
+                            Intent intent = new Intent(LoginActivity.this , MainActivity.class);
+                            intent.putExtra("nickname",StrUSER_NICKNAME);
+                            startActivity(intent);
 
                         }
                         else{ //로그인이 실패했으면...

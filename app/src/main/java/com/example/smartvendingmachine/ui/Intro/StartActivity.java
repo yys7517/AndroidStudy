@@ -10,8 +10,10 @@ import android.util.Log;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.smartvendingmachine.LoginActivity;
 import com.example.smartvendingmachine.MainActivity;
 import com.example.smartvendingmachine.R;
+import com.example.smartvendingmachine.ui.Guide.GuideActivity;
 
 public class StartActivity extends AppCompatActivity {
 
@@ -20,7 +22,7 @@ public class StartActivity extends AppCompatActivity {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_startintro);
+        setContentView(R.layout.activity_intro);
 
         handler = new Handler();
 
@@ -32,11 +34,13 @@ public class StartActivity extends AppCompatActivity {
             SharedPreferences.Editor editor = pref.edit();
             editor.putBoolean("isFirst",true);
             editor.commit();
+
+
             //앱 최초 실행시 하고 싶은 작업
             handler.postDelayed(new Runnable() {
                 @Override
                 public void run() {
-                    Intent intent = new Intent(getApplicationContext(),IntroActivity.class);
+                    Intent intent = new Intent(getApplicationContext(), GuideActivity.class);
                     startActivity(intent);
                     finish();
                 }
@@ -47,7 +51,7 @@ public class StartActivity extends AppCompatActivity {
             handler.postDelayed(new Runnable() {
                 @Override
                 public void run() {
-                    Intent intent = new Intent(getApplicationContext(),MainActivity.class);
+                    Intent intent = new Intent(getApplicationContext(), LoginActivity.class);
                     startActivity(intent);
                     finish();
                 }

@@ -27,7 +27,7 @@
             <category android:name="android.intent.category.LAUNCHER" />
         </intent-filter>
         </activity>
-        <activity android:name=".ui.Intro.IntroActivity"/>
+        <activity android:name=".ui.Guide.GuideActivity"/>
 
         <!-- 게시글 Activity -->
         <activity android:name=".ui.board.BoardWriteActivity"/> <!-- 게시글 작성 Activity -->

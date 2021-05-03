@@ -1,5 +1,6 @@
 package com.example.smartvendingmachine;
 
+import android.content.Intent;
 import android.view.MenuItem;
 
 import androidx.annotation.NonNull;
@@ -35,6 +36,9 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        Intent intent = getIntent();
+        String USER_NICKNAME = intent.getStringExtra("nickname");
+        Toast.makeText(getApplicationContext(), USER_NICKNAME + " 님 어서오세요.", Toast.LENGTH_SHORT).show();
 
         //프래그먼트 생성
         bottomNavigationView = findViewById(R.id.nav_view);
