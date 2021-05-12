@@ -56,6 +56,9 @@ import kotlin.jvm.functions.Function2;
 
 public class LoginActivity extends AppCompatActivity implements View.OnClickListener, GoogleApiClient.OnConnectionFailedListener {
 
+    //auto로그인
+    String userid,userpwd;
+
     //카카오 로그인
     private FloatingActionButton mButtonKakao;
     private ViewPager2 mViewPager2;
@@ -81,6 +84,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
     private String id;
     private String nickname;
+
 
     private static final String TAG = "MainActivity";
     Function2<OAuthToken, Throwable, Unit> callback = new Function2<OAuthToken, Throwable, Unit>() { //function2 형태가 로그인
@@ -284,7 +288,6 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                     StrUSER_NICKNAME = jsonObject.getString("nickname");
                     StrUSER_EMAIL = jsonObject.getString("email");
 
-
                     Log.d("USER_ID", StrUSER_ID);
                     Log.d("USER_NICKNAME", StrUSER_NICKNAME);
 
@@ -411,6 +414,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                     StrUSER_NICKNAME = user.getKakaoAccount().getProfile().getNickname();
                     StrUSER_EMAIL = user.getKakaoAccount().getEmail();
 
+
                     InsertData task = new InsertData();
                     task.execute("http://" + IP_ADDRESS + "/yongrun/svm/SIGNUP_ANDRIOD.php", StrUSER_ID, StrUSER_NICKNAME, StrUSER_EMAIL);
 
@@ -454,9 +458,12 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                             Log.i("아이디 토큰 확인", account.getIdToken());
                             Log.i("닉네임 확인", account.getGivenName()); //닉네임
 
+
+
                             StrUSER_ID = account.getId();
                             StrUSER_NICKNAME = account.getGivenName();
                             StrUSER_EMAIL = account.getEmail();
+
 
                             InsertData insert = new InsertData();
                             insert.execute("http://" + IP_ADDRESS + "/yongrun/svm/SIGNUP_ANDRIOD.php", StrUSER_ID, StrUSER_NICKNAME, StrUSER_EMAIL);

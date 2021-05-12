@@ -1,51 +1,161 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:background="@color/colorWhite"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="@color/colorWhite">
+    android:layout_height="match_parent">
 
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/constraint"
-        android:layout_width="match_parent"
-        android:layout_height="56dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:fontFamily="@font/notosanscjkkrmedium"
-            android:text="프로필"
-            android:textColor="#000000"
-            android:textSize="17sp"
-            app:layout_constraintBottom_toBottomOf="@id/constraint"
-            app:layout_constraintEnd_toEndOf="@id/constraint"
-            app:layout_constraintStart_toStartOf="@id/constraint"
-            app:layout_constraintTop_toTopOf="@id/constraint"
-
-            />
-
-
-    </androidx.constraintlayout.widget.ConstraintLayout>
-
-    <View
-        android:id="@+id/view"
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:background="#e3e3e3"
-        app:layout_constraintTop_toBottomOf="@+id/constraint" />
-
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
         android:layout_height="0dp"
+        android:background="#f4f4f4"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/constraint">
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0"
+        tools:layout_editor_absoluteX="0dp">
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/profile_main"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="#ffffff">
+            <!-- 회색바 -->
+            <View
+                android:id="@+id/profile_bar"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginTop="80dp"
+                android:background="#e3e3e3"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                android:visibility="invisible"/>
+
+            <!-- 사진 테두리 -->
+            <ImageView
+                android:id="@+id/img_profile_face_border"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="16dp"
+                android:src="@drawable/circle"
+                app:layout_constraintBottom_toBottomOf="@+id/profile_bar"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/profile_bar"
+                app:tint="@color/colorPrimary"/>
+            <!-- 프로필 사진 -->
+
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:layout_width="80dp"
+                android:layout_height="80dp"
+                app:cardCornerRadius="100dp"
+                app:layout_constraintBottom_toBottomOf="@id/img_profile_face_border"
+                app:layout_constraintEnd_toEndOf="@id/img_profile_face_border"
+                app:layout_constraintStart_toStartOf="@id/img_profile_face_border"
+                app:layout_constraintTop_toTopOf="@+id/img_profile_face_border" />
+
+            <!-- 프로필 이름 텍스트 -->
+            <TextView
+                android:id="@+id/txt_profile_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="8dp"
+                android:fontFamily="@font/notosanscjkkrmedium"
+                android:text="안녕난현호"
+                android:textColor="#212529"
+                android:textSize="18sp"
+                android:textStyle="bold"
+                app:layout_constraintStart_toEndOf="@+id/img_profile_face_border"
+                app:layout_constraintBottom_toBottomOf="@+id/profile_bar"/>
+
+            <!--팔로잉 수 -->
+            <TextView
+                android:id="@+id/txt_profile_following_number"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/notosanscjkkrregular"
+                android:padding="5dp"
+                android:text=""
+                android:textColor="#212529"
+                android:textSize="12sp"
+                app:layout_constraintStart_toEndOf="@+id/txt_profile_following"
+                app:layout_constraintTop_toBottomOf="@id/profile_bar"/>
+
+            <!--팔로잉 텍스트 -->
+            <TextView
+                android:id="@+id/txt_profile_following"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="13dp"
+                android:fontFamily="@font/notosanscjkkrregular"
+                android:padding="5dp"
+                android:text=""
+                android:textColor="#212529"
+                android:textSize="12sp"
+                app:layout_constraintStart_toEndOf="@id/txt_profile_follower_number"
+                app:layout_constraintTop_toBottomOf="@id/profile_bar"/>
+
+            <!--게시글 수 -->
+            <TextView
+                android:id="@+id/txt_profile_follower_number"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/notosanscjkkrregular"
+                android:layout_marginRight="16dp"
+                android:padding="5dp"
+                android:text="0개"
+                android:textColor="#212529"
+                android:textSize="12sp"
+                app:layout_constraintStart_toEndOf="@id/txt_profile_follower"
+                app:layout_constraintTop_toBottomOf="@id/profile_bar"/>
+
+            <!--팔로워 텍스트 -->
+            <TextView
+                android:id="@+id/txt_profile_follower"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="4dp"
+                android:fontFamily="@font/notosanscjkkrregular"
+                android:padding="5dp"
+                android:text="게시글"
+                android:textColor="#212529"
+                android:textSize="12sp"
+                app:layout_constraintStart_toEndOf="@id/img_profile_face_border"
+                app:layout_constraintTop_toBottomOf="@id/profile_bar"/>
+
+            <!-- 프로필 설정 -->
+            <ImageView
+                android:id="@+id/account_cog"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/account_cog"
+                app:layout_constraintBottom_toTopOf="@+id/profile_bar"
+                app:layout_constraintEnd_toEndOf="parent"
+                android:padding="10dp"
+                android:layout_marginRight="10dp"
+                />
+
+            <View
+                android:id="@+id/view"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="10dp"
+                android:background="#e3e3e3"
+                app:layout_constraintTop_toBottomOf="@+id/txt_profile_follower" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rv_profile"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toBottomOf="@id/view"
+                tools:layout_editor_absoluteX="0dp" />
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+    </androidx.core.widget.NestedScrollView>
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
