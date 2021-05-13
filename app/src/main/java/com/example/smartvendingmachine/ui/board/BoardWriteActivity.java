@@ -1,6 +1,8 @@
 package com.example.smartvendingmachine.ui.board;
 
 import android.app.ProgressDialog;
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
@@ -26,7 +28,7 @@ import java.net.URL;
 
 public class BoardWriteActivity extends AppCompatActivity {
 
-    private String POST_TITLE, POST_NICKNAME, POST_CONTENTS;
+    private String POST_TITLE, POST_NICKNAME, POST_ID ,POST_CONTENTS;
 
     private static String IP_ADDRESS = "211.211.158.42";
     private static String TAG = "SmartVendingMachine";
@@ -36,6 +38,9 @@ public class BoardWriteActivity extends AppCompatActivity {
     TextView mTextViewPostResult;
     Button mButtonSubmit;
     ImageView backspace;
+
+    //SharedPreferences
+    private SharedPreferences appData;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -52,15 +57,21 @@ public class BoardWriteActivity extends AppCompatActivity {
 
         backspace = findViewById(R.id.backspace);
 
+        //SharedPreferences
+        appData = getSharedPreferences("appData", MODE_PRIVATE);
+
+        String userid = appData.getString("ID", ""); // App 사용자 ID
+
         //건의사항 작성 완료 버튼.
         mButtonSubmit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                POST_ID = userid;
                 POST_TITLE = mEditTextTitle.getText().toString();
                 POST_NICKNAME = "익명";
                 POST_CONTENTS = mEditTextContents.getText().toString();
                 InsertData task = new InsertData();
-                task.execute("http://" + IP_ADDRESS + "/yongrun/svm/POST_WRITE_ANDROID.php", POST_TITLE, POST_NICKNAME, POST_CONTENTS);
+                task.execute("http://" + IP_ADDRESS + "/yongrun/svm/POST_WRITE_ANDROID.php", POST_TITLE, POST_ID ,POST_NICKNAME, POST_CONTENTS);
                 Toast.makeText(getApplicationContext(), "건의사항이 등록되었습니다.", Toast.LENGTH_SHORT).show();
 
                 finish();
@@ -100,12 +111,12 @@ public class BoardWriteActivity extends AppCompatActivity {
         protected String doInBackground(String... params) {
 
             String POST_TITLE = (String) params[1];
-            String POST_NICKNAME = (String) params[2];
-            String POST_CONTENTS = (String) params[3];
+            String POST_ID = (String) params[2];
+            String POST_NICKNAME = (String) params[3];
+            String POST_CONTENTS = (String) params[4];
             String serverURL = (String) params[0];
 
-            String postParameters = "POST_TITLE=" + POST_TITLE + "&POST_NICKNAME=" + POST_NICKNAME + "&POST_CONTENTS=" + POST_CONTENTS;
-
+            String postParameters = "POST_TITLE=" + POST_TITLE + "&POST_ID=" + POST_ID +"&POST_NICKNAME=" + POST_NICKNAME + "&POST_CONTENTS=" + POST_CONTENTS;
 
             try {
 
@@ -145,14 +156,10 @@ public class BoardWriteActivity extends AppCompatActivity {
                 while ((line = bufferedReader.readLine()) != null) {
                     sb.append(line);
                 }
-
-
                 bufferedReader.close();
 
-
                 return sb.toString();
-
-
+                
             } catch (Exception e) {
 
                 Log.d(TAG, "InsertData: Error ", e);

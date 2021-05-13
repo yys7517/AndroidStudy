@@ -73,6 +73,9 @@ public class BoardFragment extends Fragment {
             public void onItemClick(View v, int position) {
                 // TODO : 아이템 클릭 이벤트를 플레그먼트에서 처뤼
                 Bundle arguments = new Bundle();
+
+                arguments.putString("userid",mSearchData.get(position).getUserid());      // 글 작성자 ID
+
                 arguments.putString("nickname", mSearchData.get(position).getNickname());  //작성자 닉네임
                 arguments.putString("contents", mSearchData.get(position).getContents());  //작성자 글 내용
                 arguments.putString("date", mSearchData.get(position).getDate());          //작성자 글 작성 날짜
@@ -127,6 +130,7 @@ public class BoardFragment extends Fragment {
     @Override
     public void onResume() {
         super.onResume();
+        mSearchData.clear();
         PostUpdate();
     }
 

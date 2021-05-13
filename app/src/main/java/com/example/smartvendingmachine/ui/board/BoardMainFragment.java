@@ -1,6 +1,8 @@
 package com.example.smartvendingmachine.ui.board;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Typeface;
 import android.os.Bundle;
 
@@ -27,6 +29,7 @@ public class BoardMainFragment extends Fragment {
     private String stitle;
     private String sanswer;
     private String sanswerdate;
+    private String suserid;
 
     //작성자 글
     private TextView nickname;
@@ -40,11 +43,17 @@ public class BoardMainFragment extends Fragment {
     private TextView answerdate;
     ImageView imgManagerProfile;
 
+    private TextView BtnEdit, BtnDelete;
+
+    //SharedPreferences
+    private SharedPreferences appData;
+
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         ViewGroup rootView = (ViewGroup) inflater.inflate(R.layout.fragment_boardmain, container, false);
+
 
         //작성자
         nickname = rootView.findViewById(R.id.txtCommentNick);
@@ -58,11 +67,21 @@ public class BoardMainFragment extends Fragment {
         imgManagerProfile = rootView.findViewById(R.id.imgManagerProfile);
         ManagerName = rootView.findViewById(R.id.ManagerName);
 
+        //수정/삭제
+
+        BtnDelete = rootView.findViewById(R.id.BtnDelete);
+        BtnEdit = rootView.findViewById(R.id.BtnEdit);
 
 
+        //SharedPreferences
+        appData = getActivity().getSharedPreferences("appData", Context.MODE_PRIVATE);
+
+        String userid = appData.getString("ID", ""); // App 사용자 ID
 
         if(getArguments() != null)
         {
+            suserid = getArguments().getString("userid"); // 글 작성자 ID
+
             snickname = getArguments().getString("nickname"); // 작성자
             scontents = getArguments().getString("contents"); // 건의 내용
             sdate = getArguments().getString("date"); // 건의 작성 날짜
@@ -75,6 +94,7 @@ public class BoardMainFragment extends Fragment {
             contents.setText(scontents);
             date.setText(sdate);
             title.setText(stitle);
+
             if( ! ( sanswer.equals("null") || sanswer.equals("") ) )
             {
                 answer.setVisibility(View.VISIBLE);
@@ -92,6 +112,38 @@ public class BoardMainFragment extends Fragment {
             }
 
         }
+
+        //수정
+        BtnEdit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(suserid.equals(userid)) {
+                    // App 사용자 ID와 글 작성자 ID가 일치
+
+                }
+                else {
+                    // App 사용자 ID와 글 작성자 ID가 일치 X
+
+                }
+
+
+            }
+        });
+
+        //삭제
+        BtnDelete.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(suserid.equals(userid)) {
+                    // App 사용자 ID와 글 작성자 ID가 일치
+
+                }
+                else {
+                    // App 사용자 ID와 글 작성자 ID가 일치 X
+
+                }
+            }
+        });
 
 
         /// 뒤로가기 버튼

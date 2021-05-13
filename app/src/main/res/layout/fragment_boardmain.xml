@@ -102,6 +102,61 @@
                     app:layout_constraintTop_toTopOf="@id/userlayout" />
 
                 <TextView
+                    android:id="@+id/BtnEdit"
+                    android:background="@drawable/nobackground_button"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="15dp"
+                    android:layout_marginBottom="15dp"
+                    android:layout_marginRight="10dp"
+                    android:textAlignment="center"
+                    android:fontFamily="@font/notosanscjkkrmedium"
+                    android:lineSpacingExtra="6sp"
+                    android:text="수정"
+                    android:textColor="#212529"
+                    android:textSize="13sp"
+                    app:layout_constraintEnd_toStartOf="@+id/Seperate"
+                    app:layout_constraintBottom_toTopOf="@+id/txtCommentTitle"
+                    app:layout_constraintTop_toTopOf="@id/userlayout" />
+
+                <TextView
+                    android:id="@+id/Seperate"
+                    android:background="@drawable/nobackground_button"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="15dp"
+                    android:layout_marginBottom="15dp"
+                    android:layout_marginRight="10dp"
+                    android:fontFamily="@font/notosanscjkkrmedium"
+                    android:lineSpacingExtra="6sp"
+                    android:text="|"
+                    android:textStyle="bold"
+                    android:textColor="#212529"
+                    android:textSize="13sp"
+                    app:layout_constraintEnd_toStartOf="@+id/BtnDelete"
+                    app:layout_constraintBottom_toTopOf="@+id/txtCommentTitle"
+                    app:layout_constraintTop_toTopOf="@id/userlayout" />
+
+                <TextView
+                    android:id="@+id/BtnDelete"
+                    android:background="@drawable/nobackground_button"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="6dp"
+                    android:layout_marginTop="15dp"
+                    android:layout_marginBottom="15dp"
+                    android:layout_marginRight="15dp"
+                    android:fontFamily="@font/notosanscjkkrmedium"
+                    android:lineSpacingExtra="6sp"
+                    android:text="삭제"
+                    android:textColor="#212529"
+                    android:textSize="13sp"
+                    app:layout_constraintRight_toRightOf="parent"
+                    app:layout_constraintBottom_toTopOf="@+id/txtCommentTitle"
+                    app:layout_constraintTop_toTopOf="@id/userlayout" />
+
+
+                <TextView
                     android:id="@+id/txtCommentTitle"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"

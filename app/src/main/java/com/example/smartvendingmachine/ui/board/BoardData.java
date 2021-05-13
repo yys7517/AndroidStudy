@@ -7,7 +7,7 @@ public class BoardData {
     public BoardData() {}
 
     //ImageView profile;
-    //게시물 ID
+    private String userid; //게시물 작성자 ID
     private String code; //게시물 기본키
     private String title; //게시물 제목
     private String nickname; //사용자 이름
@@ -16,6 +16,14 @@ public class BoardData {
     private String managercomment; //관리자가 대답했는지
     private String answercontents; //관리자 대답
     private String answerdate; //관리자 대답 날짜
+
+    public String getUserid() {
+        return userid;
+    }
+
+    public void setUserid(String userid) {
+        this.userid = userid;
+    }
 
     public String getManagercomment() {
         return managercomment;

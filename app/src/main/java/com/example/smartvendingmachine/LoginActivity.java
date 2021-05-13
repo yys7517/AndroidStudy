@@ -77,7 +77,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     private static Context mContext;
 
     //구글 로그인
-    private FloatingActionButton mButtonFacebook;
+    private FloatingActionButton mButtonGoogle;
 
     private boolean saveLoginData;
     private SharedPreferences appData;
@@ -111,8 +111,10 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         init();
 
         appData = getSharedPreferences("appData", MODE_PRIVATE);
+
         //SharedPreferences 설정값 load ( saveLoginData, id, nickname )
         load();
+
         // 이전에 로그인 정보를 저장시킨 기록이 있다면
         if (saveLoginData) {
             Intent intent = new Intent(getApplicationContext() , MainActivity.class);
@@ -188,8 +190,8 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
 
         //facebook
-        mButtonFacebook = (FloatingActionButton) findViewById(R.id.mButtonFacebook);
-        mButtonFacebook.setOnClickListener(this);
+        mButtonGoogle = (FloatingActionButton) findViewById(R.id.mButtonFacebook);
+        mButtonGoogle.setOnClickListener(this);
 
 
         GoogleSignInOptions googleSignInOptions = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
@@ -295,13 +297,13 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                     task.execute("http://" + IP_ADDRESS + "/yongrun/svm/SIGNUP_ANDRIOD.php", StrUSER_ID, StrUSER_NICKNAME, StrUSER_EMAIL);
 
                     if ( ! (StrUSER_ID == null || StrUSER_NICKNAME == null || StrUSER_ID=="" || StrUSER_NICKNAME == "") )
-                        save(true,StrUSER_ID,StrUSER_NICKNAME);
-
-
-                    Intent intent = new Intent(LoginActivity.this , MainActivity.class);
-                    intent.putExtra("nickname",StrUSER_NICKNAME);
-                    startActivity(intent);
-
+                    {
+                        save(true,StrUSER_ID,StrUSER_NICKNAME); // SharedPreferences로 유저 아이디, 유저 닉네임 값 App내에 저장.
+                        load(); // nickname, savelogindata, id
+                        Intent intent = new Intent(LoginActivity.this , MainActivity.class);
+                        intent.putExtra("nickname",nickname);
+                        startActivity(intent);
+                    }
 
                 }
             } catch (Exception e) {
@@ -409,21 +411,25 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                     Log.i(TAG, "invoke: nickname=" + user.getKakaoAccount().getProfile().getNickname());
                     Log.i(TAG, "invoke: gender=" + user.getKakaoAccount().getGender());
                     Log.i(TAG, "invoke: age=" + user.getKakaoAccount().getAgeRange());
+                    Log.i(TAG, "invoke : profile = " +user.getKakaoAccount().getProfile());
 
                     StrUSER_ID = String.valueOf(user.getId());
                     StrUSER_NICKNAME = user.getKakaoAccount().getProfile().getNickname();
                     StrUSER_EMAIL = user.getKakaoAccount().getEmail();
+                    String profileImageUrl = user.getKakaoAccount().getProfile().getProfileImageUrl();
 
 
                     InsertData task = new InsertData();
                     task.execute("http://" + IP_ADDRESS + "/yongrun/svm/SIGNUP_ANDRIOD.php", StrUSER_ID, StrUSER_NICKNAME, StrUSER_EMAIL);
 
                     if ( ! (StrUSER_ID == null || StrUSER_NICKNAME == null || StrUSER_ID=="" || StrUSER_NICKNAME == "") )
-                        save(true,StrUSER_ID,StrUSER_NICKNAME);
-
-                    Intent intent = new Intent(LoginActivity.this , MainActivity.class);
-                    intent.putExtra("nickname",StrUSER_NICKNAME);
-                    startActivity(intent);
+                    {
+                        save(true,StrUSER_ID,StrUSER_NICKNAME); // SharedPreferences로 유저 아이디, 유저 닉네임 값 App내에 저장.
+                        load(); // nickname, savelogindata, id
+                        Intent intent = new Intent(LoginActivity.this , MainActivity.class);
+                        intent.putExtra("nickname",nickname);
+                        startActivity(intent);
+                    }
 
                 } else { //로그아웃 상태
 
@@ -469,11 +475,16 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                             insert.execute("http://" + IP_ADDRESS + "/yongrun/svm/SIGNUP_ANDRIOD.php", StrUSER_ID, StrUSER_NICKNAME, StrUSER_EMAIL);
 
                             if ( ! (StrUSER_ID == null || StrUSER_NICKNAME == null || StrUSER_ID=="" || StrUSER_NICKNAME == "") )
-                                save(true,StrUSER_ID,StrUSER_NICKNAME);
+                            {
+                                save(true,StrUSER_ID,StrUSER_NICKNAME); // SharedPreferences로 유저 아이디, 유저 닉네임 값 App내에 저장.
+                                load(); // nickname, savelogindata, id
+                                Intent intent = new Intent(LoginActivity.this , MainActivity.class);
+                                intent.putExtra("nickname",nickname);
+                                startActivity(intent);
+                            }
 
-                            Intent intent = new Intent(LoginActivity.this , MainActivity.class);
-                            intent.putExtra("nickname",StrUSER_NICKNAME);
-                            startActivity(intent);
+
+
 
                         }
                         else{ //로그인이 실패했으면...

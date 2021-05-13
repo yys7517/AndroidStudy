@@ -29,6 +29,7 @@ public class StartActivity extends AppCompatActivity {
         //최초 실행 여부 판단하는 구문
         SharedPreferences pref = getSharedPreferences("isFirst", Activity.MODE_PRIVATE);
         boolean first = pref.getBoolean("isFirst", false);
+
         if(first==false){
             Log.d("Is first Time?", "first");
             SharedPreferences.Editor editor = pref.edit();
