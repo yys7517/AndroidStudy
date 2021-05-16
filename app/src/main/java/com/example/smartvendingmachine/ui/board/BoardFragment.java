@@ -92,11 +92,6 @@ public class BoardFragment extends Fragment {
             }
         });
 
-        //boarddata에 값 넣음
-        PostUpdate();
-
-
-
         swipeRefreshLayout = rootview.findViewById(R.id.refresh_layout);
 
         swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
@@ -130,7 +125,6 @@ public class BoardFragment extends Fragment {
     @Override
     public void onResume() {
         super.onResume();
-        mSearchData.clear();
         PostUpdate();
     }
 
@@ -256,6 +250,7 @@ public class BoardFragment extends Fragment {
         String TAG_CONTENTS = "POST_CONTENTS";
         String TAG_ANSWER_CONTENTS = "POST_ANSWER_CONTENTS";
         String TAG_ANSWER_DATE = "POST_ANSWER_DATE";
+        String TAG_POST_ID = "POST_ID";
 
 
         try {
@@ -265,6 +260,8 @@ public class BoardFragment extends Fragment {
             for (int i = jsonArray.length()-1; i>=0; i--) {
 
                 JSONObject item = jsonArray.getJSONObject(i);
+
+                String POST_ID = item.getString(TAG_POST_ID);
 
                 String POST_CODE = item.getString(TAG_CODE);
                 String POST_TITLE = item.getString(TAG_TITLE);
@@ -289,6 +286,7 @@ public class BoardFragment extends Fragment {
                 boardData.setNickname(POST_NICKNAME); // 게시글 작성자
                 boardData.setDate(POST_DATE); // 게시글 작성 날짜
                 boardData.setContents(POST_CONTENTS); // 게시글 내용
+                boardData.setUserid(POST_ID);
 
                 boardData.setManagercomment(POST_MANAGER_COMMENT); // 건의 확인 여부
                 boardData.setAnswercontents(POST_ANSWER_CONTENTS); // 답변 내용

@@ -16,6 +16,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.smartvendingmachine.R;
 
@@ -119,11 +120,15 @@ public class BoardMainFragment extends Fragment {
             public void onClick(View v) {
                 if(suserid.equals(userid)) {
                     // App 사용자 ID와 글 작성자 ID가 일치
-
+                    Toast.makeText(getActivity().getApplicationContext(), "게시글을 수정합니다.",Toast.LENGTH_SHORT).show();
+                    Intent intent = new Intent(getActivity(), BoardWriteActivity.class);
+                    intent.putExtra("title",stitle);    // 제목
+                    intent.putExtra("contents",scontents);
+                    startActivity(intent);
                 }
                 else {
                     // App 사용자 ID와 글 작성자 ID가 일치 X
-
+                    Toast.makeText(getActivity().getApplicationContext(), "이 게시물을 수정할 수 없습니다.",Toast.LENGTH_SHORT).show();
                 }
 
 

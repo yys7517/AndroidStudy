@@ -2,9 +2,11 @@ package com.example.smartvendingmachine.ui.board;
 
 import android.app.ProgressDialog;
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -56,6 +58,14 @@ public class BoardWriteActivity extends AppCompatActivity {
         mButtonSubmit = (Button) findViewById(R.id.mButtonSubmit);
 
         backspace = findViewById(R.id.backspace);
+
+        // 수정 시 값 받아옴.
+        Intent intent = getIntent();
+        if ( ! ( TextUtils.isEmpty(intent.getStringExtra("title")) && TextUtils.isEmpty(intent.getStringExtra("contents")) ) ) {
+            mEditTextTitle.setText(intent.getStringExtra("title"));
+            mEditTextContents.setText(intent.getStringExtra("contents"));
+        }
+
 
         //SharedPreferences
         appData = getSharedPreferences("appData", MODE_PRIVATE);

@@ -68,42 +68,42 @@
                 app:layout_constraintStart_toEndOf="@+id/img_profile_face_border"
                 app:layout_constraintBottom_toBottomOf="@+id/profile_bar"/>
 
-            <!--팔로잉 수 -->
-            <TextView
-                android:id="@+id/txt_profile_following_number"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:fontFamily="@font/notosanscjkkrregular"
-                android:padding="5dp"
-                android:text=""
-                android:textColor="#212529"
-                android:textSize="12sp"
-                app:layout_constraintStart_toEndOf="@+id/txt_profile_following"
-                app:layout_constraintTop_toBottomOf="@id/profile_bar"/>
+<!--            &lt;!&ndash;팔로잉 수 &ndash;&gt;-->
+<!--            <TextView-->
+<!--                android:id="@+id/txt_profile_following_number"-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:fontFamily="@font/notosanscjkkrregular"-->
+<!--                android:padding="5dp"-->
+<!--                android:text=""-->
+<!--                android:textColor="#212529"-->
+<!--                android:textSize="12sp"-->
+<!--                app:layout_constraintStart_toEndOf="@+id/txt_profile_following"-->
+<!--                app:layout_constraintTop_toBottomOf="@id/profile_bar"/>-->
 
-            <!--팔로잉 텍스트 -->
-            <TextView
-                android:id="@+id/txt_profile_following"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="13dp"
-                android:fontFamily="@font/notosanscjkkrregular"
-                android:padding="5dp"
-                android:text=""
-                android:textColor="#212529"
-                android:textSize="12sp"
-                app:layout_constraintStart_toEndOf="@id/txt_profile_follower_number"
-                app:layout_constraintTop_toBottomOf="@id/profile_bar"/>
+<!--            &lt;!&ndash;팔로잉 텍스트 &ndash;&gt;-->
+<!--            <TextView-->
+<!--                android:id="@+id/txt_profile_following"-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:layout_marginLeft="13dp"-->
+<!--                android:fontFamily="@font/notosanscjkkrregular"-->
+<!--                android:padding="5dp"-->
+<!--                android:text=""-->
+<!--                android:textColor="#212529"-->
+<!--                android:textSize="12sp"-->
+<!--                app:layout_constraintStart_toEndOf="@id/txt_profile_board_number"-->
+<!--                app:layout_constraintTop_toBottomOf="@id/profile_bar"/>-->
 
             <!--게시글 수 -->
             <TextView
-                android:id="@+id/txt_profile_follower_number"
+                android:id="@+id/txt_profile_board_number"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/notosanscjkkrregular"
                 android:layout_marginRight="16dp"
                 android:padding="5dp"
-                android:text="0개"
+                android:text="0"
                 android:textColor="#212529"
                 android:textSize="12sp"
                 app:layout_constraintStart_toEndOf="@id/txt_profile_follower"
