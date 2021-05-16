@@ -90,6 +90,7 @@ public class ProfileFragment extends Fragment {
                 Bundle arguments = new Bundle();
 
                 arguments.putString("userid",mSearchData.get(position).getUserid());      // 글 작성자 ID
+                arguments.putString("post_code",mSearchData.get(position).getCode());      // 게시글 코드
 
                 arguments.putString("nickname", mSearchData.get(position).getNickname());  //작성자 닉네임
                 arguments.putString("contents", mSearchData.get(position).getContents());  //작성자 글 내용
