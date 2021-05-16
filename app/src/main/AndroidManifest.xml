@@ -31,6 +31,7 @@
 
         <!-- 게시글 Activity -->
         <activity android:name=".ui.board.BoardWriteActivity"/> <!-- 게시글 작성 Activity -->
+        <activity android:name=".ui.board.BoardEditActivity"/>  <!-- 게시글 수정 Activity -->
 
 
         <activity android:name="com.kakao.sdk.auth.AuthCodeHandlerActivity">

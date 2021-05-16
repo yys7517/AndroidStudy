@@ -75,6 +75,7 @@ public class BoardFragment extends Fragment {
                 Bundle arguments = new Bundle();
 
                 arguments.putString("userid",mSearchData.get(position).getUserid());      // 글 작성자 ID
+                arguments.putString("post_code",mSearchData.get(position).getCode());      // 게시글 코드
 
                 arguments.putString("nickname", mSearchData.get(position).getNickname());  //작성자 닉네임
                 arguments.putString("contents", mSearchData.get(position).getContents());  //작성자 글 내용
@@ -97,13 +98,7 @@ public class BoardFragment extends Fragment {
         swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
-                mSearchData.clear();
-                adapter.notifyDataSetChanged();
-
-                GetData task = new GetData();
-                task.execute("http://" + IP_ADDRESS + "/POST.php", "");
-                swipeRefreshLayout.setRefreshing(false); //새로고침표시 없애기
-                //데이터 새로고침 코드 넣어야 함.
+                PostUpdate();
                 swipeRefreshLayout.setRefreshing(false); //새로고침표시 없애기
             }
         });

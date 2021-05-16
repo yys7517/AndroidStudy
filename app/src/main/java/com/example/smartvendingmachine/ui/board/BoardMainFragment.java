@@ -1,9 +1,11 @@
 package com.example.smartvendingmachine.ui.board;
 
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Typeface;
+import android.os.AsyncTask;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -20,6 +22,17 @@ import android.widget.Toast;
 
 import com.example.smartvendingmachine.R;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.io.BufferedReader;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.io.OutputStream;
+import java.net.HttpURLConnection;
+import java.net.URL;
+
 public class BoardMainFragment extends Fragment {
 
     private ImageView backspace;
@@ -31,6 +44,7 @@ public class BoardMainFragment extends Fragment {
     private String sanswer;
     private String sanswerdate;
     private String suserid;
+    private String spostcode;
 
     //작성자 글
     private TextView nickname;
@@ -46,8 +60,15 @@ public class BoardMainFragment extends Fragment {
 
     private TextView BtnEdit, BtnDelete;
 
+    private static String TAG = "게시글 보기";
+
+    private String mJsonString;
+
     //SharedPreferences
     private SharedPreferences appData;
+
+    private static String IP_ADDRESS = "211.211.158.42/yongrun/svm";
+
 
 
     @Override
@@ -82,6 +103,7 @@ public class BoardMainFragment extends Fragment {
         if(getArguments() != null)
         {
             suserid = getArguments().getString("userid"); // 글 작성자 ID
+            spostcode = getArguments().getString("post_code"); // 게시글 코드~
 
             snickname = getArguments().getString("nickname"); // 작성자
             scontents = getArguments().getString("contents"); // 건의 내용
@@ -121,9 +143,10 @@ public class BoardMainFragment extends Fragment {
                 if(suserid.equals(userid)) {
                     // App 사용자 ID와 글 작성자 ID가 일치
                     Toast.makeText(getActivity().getApplicationContext(), "게시글을 수정합니다.",Toast.LENGTH_SHORT).show();
-                    Intent intent = new Intent(getActivity(), BoardWriteActivity.class);
+                    Intent intent = new Intent(getActivity(), BoardEditActivity.class);
+                    intent.putExtra("post_code",spostcode); // 게시글 코드
                     intent.putExtra("title",stitle);    // 제목
-                    intent.putExtra("contents",scontents);
+                    intent.putExtra("contents",scontents); // 내용
                     startActivity(intent);
                 }
                 else {
@@ -167,4 +190,183 @@ public class BoardMainFragment extends Fragment {
         return rootView;
     }
 
+    private class GetData extends AsyncTask<String, Void, String> {
+
+        ProgressDialog progressDialog;
+        String errorString = null;
+
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+
+            progressDialog = ProgressDialog.show(getActivity(), "Please Wait", null, true, true);
+        }
+
+
+        @Override
+        protected void onPostExecute(String result) {
+            super.onPostExecute(result);
+
+            progressDialog.dismiss();
+
+            Log.d(TAG, "response - " + result);
+
+            if (result == null) {
+
+            } else {
+
+                mJsonString = result;
+                showResult();
+            }
+        }
+
+
+        @Override
+        protected String doInBackground(String... params) {
+
+            String serverURL = params[0];
+            String postParameters = params[1];
+
+
+            try {
+
+                URL url = new URL(serverURL);
+                HttpURLConnection httpURLConnection = (HttpURLConnection) url.openConnection();
+
+
+                httpURLConnection.setReadTimeout(5000);
+                httpURLConnection.setConnectTimeout(5000);
+                httpURLConnection.setRequestMethod("POST");
+                httpURLConnection.setDoInput(true);
+                httpURLConnection.connect();
+
+
+                OutputStream outputStream = httpURLConnection.getOutputStream();
+                outputStream.write(postParameters.getBytes("UTF-8"));
+                outputStream.flush();
+                outputStream.close();
+
+
+                int responseStatusCode = httpURLConnection.getResponseCode();
+                Log.d(TAG, "response code - " + responseStatusCode);
+
+                InputStream inputStream;
+                if (responseStatusCode == HttpURLConnection.HTTP_OK) {
+                    inputStream = httpURLConnection.getInputStream();
+                } else {
+                    inputStream = httpURLConnection.getErrorStream();
+                }
+
+
+                InputStreamReader inputStreamReader = new InputStreamReader(inputStream, "UTF-8");
+                BufferedReader bufferedReader = new BufferedReader(inputStreamReader);
+
+                StringBuilder sb = new StringBuilder();
+                String line;
+
+                while ((line = bufferedReader.readLine()) != null) {
+                    sb.append(line);
+                }
+
+                bufferedReader.close();
+
+                return sb.toString().trim();
+
+
+            } catch (Exception e) {
+
+                Log.d(TAG, "GetData : Error ", e);
+                errorString = e.toString();
+
+                return null;
+            }
+
+        }
+    }
+
+    private void showResult() {
+
+        String TAG_JSON = "POST_DATA";
+        String TAG_CODE = "POST_CODE";
+        String TAG_TITLE = "POST_TITLE";
+        String TAG_NICKNAME = "POST_NICKNAME";
+        String TAG_DATE = "POST_DATE";
+        String TAG_MANAGER_COMMENT = "POST_MANAGER_COMMENT";
+        String TAG_CONTENTS = "POST_CONTENTS";
+        String TAG_ANSWER_CONTENTS = "POST_ANSWER_CONTENTS";
+        String TAG_ANSWER_DATE = "POST_ANSWER_DATE";
+        String TAG_POST_ID = "POST_ID";
+
+
+        try {
+            JSONObject jsonObject = new JSONObject(mJsonString);
+            JSONArray jsonArray = jsonObject.getJSONArray(TAG_JSON);
+
+            for (int i = jsonArray.length()-1; i>=0; i--) {
+
+                JSONObject item = jsonArray.getJSONObject(i);
+
+                String POST_ID = item.getString(TAG_POST_ID);
+
+                String POST_CODE = item.getString(TAG_CODE);
+
+                if ( POST_CODE.equals( spostcode ) ) {
+                    String POST_TITLE = item.getString(TAG_TITLE);
+                    String POST_NICKNAME = item.getString(TAG_NICKNAME);
+                    String POST_DATE = item.getString(TAG_DATE);
+                    String POST_MANAGER_COMMENT = item.getString(TAG_MANAGER_COMMENT);
+                    String POST_CONTENTS = item.getString(TAG_CONTENTS);
+                    String POST_ANSWER_CONTENTS = item.getString(TAG_ANSWER_CONTENTS);
+                    String POST_ANSWER_DATE = item.getString(TAG_ANSWER_DATE);
+
+                    if(POST_MANAGER_COMMENT.equals("0")){
+                        POST_MANAGER_COMMENT = "확인안함";
+                    }
+                    else {
+                        POST_MANAGER_COMMENT = "확인됨";
+                    }
+
+                    title.setText(POST_TITLE);
+                    contents.setText(POST_CONTENTS);
+                    nickname.setText(POST_NICKNAME);
+                    date.setText(POST_DATE);
+
+                    if( ! ( POST_ANSWER_CONTENTS.equals("null") || POST_ANSWER_CONTENTS.equals("") ) )
+                    {
+                        answer.setVisibility(View.VISIBLE);
+                        answerdate.setVisibility(View.VISIBLE);
+                        imgManagerProfile.setVisibility(View.VISIBLE);
+                        ManagerName.setVisibility(View.VISIBLE);
+
+                        answer.setText(POST_ANSWER_CONTENTS);
+                        answerdate.setText(POST_ANSWER_DATE);
+                    }
+                    else {
+                        answer.setVisibility(View.VISIBLE);
+                        answer.setText("답변 내용이 없습니다. 빠른 시일내에 답변 드리겠습니다.");
+                        answer.setTypeface(null, Typeface.BOLD_ITALIC);
+                    }
+
+                }
+
+            }
+
+        } catch (JSONException e) {
+
+            Log.d(TAG, "showResult : ", e);
+        }
+
+    }
+
+    public void PostUpdate() {
+        GetData task = new GetData();
+        task.execute("http://" + IP_ADDRESS + "/POST.php", "");
+    }
+
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        PostUpdate();
+    }
 }

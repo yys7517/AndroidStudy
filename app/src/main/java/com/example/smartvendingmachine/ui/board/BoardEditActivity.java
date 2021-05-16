@@ -1,7 +1,6 @@
 package com.example.smartvendingmachine.ui.board;
 
 import android.app.ProgressDialog;
-import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.AsyncTask;
@@ -21,16 +20,16 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.example.smartvendingmachine.R;
 
 import java.io.BufferedReader;
-import java.io.InputStreamReader;
-
 import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
 
-public class BoardWriteActivity extends AppCompatActivity {
+public class BoardEditActivity extends AppCompatActivity {
 
-    private String POST_TITLE, POST_NICKNAME, POST_ID ,POST_CONTENTS;
+    private String mTitle,mContents;
+    private String POST_CODE, POST_TITLE ,POST_CONTENTS;
 
     private static String IP_ADDRESS = "211.211.158.42";
     private static String TAG = "SmartVendingMachine";
@@ -59,6 +58,19 @@ public class BoardWriteActivity extends AppCompatActivity {
 
         backspace = findViewById(R.id.backspace);
 
+        // 수정 시 값 받아옴.
+        Intent intent = getIntent();
+        if ( ! ( TextUtils.isEmpty(intent.getStringExtra("title")) &&
+                TextUtils.isEmpty(intent.getStringExtra("contents")) && TextUtils.isEmpty(intent.getStringExtra("post_code"))) ) {
+
+            mTitle = intent.getStringExtra("title");
+            mContents =intent.getStringExtra("contents");
+            POST_CODE = intent.getStringExtra("post_code");
+
+        }
+
+        mEditTextTitle.setText(mTitle);     // Intent로 받아온 값 세팅
+        mEditTextContents.setText(mContents);   // Intent로 받아온 값 세팅
 
 
         //SharedPreferences
@@ -66,17 +78,16 @@ public class BoardWriteActivity extends AppCompatActivity {
 
         String userid = appData.getString("ID", ""); // App 사용자 ID
 
+
         //건의사항 작성 완료 버튼.
         mButtonSubmit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                POST_ID = userid;
                 POST_TITLE = mEditTextTitle.getText().toString();
-                POST_NICKNAME = "익명";
                 POST_CONTENTS = mEditTextContents.getText().toString();
                 InsertData task = new InsertData();
-                task.execute("http://" + IP_ADDRESS + "/yongrun/svm/POST_WRITE_ANDROID.php", POST_TITLE, POST_ID ,POST_NICKNAME, POST_CONTENTS);
-                Toast.makeText(getApplicationContext(), "건의사항이 등록되었습니다.", Toast.LENGTH_SHORT).show();
+                task.execute("http://" + IP_ADDRESS + "/yongrun/svm/POST_MODIFY_ANDRIOD.php", POST_CODE, POST_TITLE , POST_CONTENTS);
+                Toast.makeText(getApplicationContext(), "건의사항이 수정되었습니다.", Toast.LENGTH_SHORT).show();
 
                 finish();
             }
@@ -99,7 +110,7 @@ public class BoardWriteActivity extends AppCompatActivity {
         protected void onPreExecute() {
             super.onPreExecute();
 
-            progressDialog = ProgressDialog.show(BoardWriteActivity.this, "Please Wait", null, true, true);
+            progressDialog = ProgressDialog.show(BoardEditActivity.this, "Please Wait", null, true, true);
         }
 
         @Override
@@ -113,14 +124,12 @@ public class BoardWriteActivity extends AppCompatActivity {
 
         @Override
         protected String doInBackground(String... params) {
-
-            String POST_TITLE = (String) params[1];
-            String POST_ID = (String) params[2];
-            String POST_NICKNAME = (String) params[3];
-            String POST_CONTENTS = (String) params[4];
+            String POST_CODE = (String) params[1];
+            String POST_TITLE = (String) params[2];
+            String POST_CONTENTS = (String) params[3];
             String serverURL = (String) params[0];
 
-            String postParameters = "POST_TITLE=" + POST_TITLE + "&POST_ID=" + POST_ID +"&POST_NICKNAME=" + POST_NICKNAME + "&POST_CONTENTS=" + POST_CONTENTS;
+            String postParameters = "POST_CODE=" + POST_CODE + "&POST_TITLE=" + POST_TITLE + "&POST_CONTENTS=" + POST_CONTENTS;
 
             try {
 
