@@ -1,7 +1,9 @@
 package com.example.smartvendingmachine.ui.Profile;
 
+import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Typeface;
@@ -21,6 +23,7 @@ import androidx.fragment.app.FragmentTransaction;
 import com.example.smartvendingmachine.R;
 import com.example.smartvendingmachine.ui.board.BoardEditActivity;
 import com.example.smartvendingmachine.ui.board.BoardFragment;
+import com.example.smartvendingmachine.ui.board.BoardMainFragment;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -167,11 +170,40 @@ public class MyBoardFragment extends Fragment {
             public void onClick(View v) {
                 if(suserid.equals(userid)) {
                     // App 사용자 ID와 글 작성자 ID가 일치
+                    AlertDialog.Builder dlg = new AlertDialog.Builder(getActivity(), R.style.MyDialogTheme);
+                    dlg.setTitle("게시글 삭제");
+                    dlg.setMessage("게시글을 삭제하시겠습니까 ? ");
+                    dlg.setIcon(R.drawable.delete);
 
+                    dlg.setNegativeButton("아니요", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+
+                        }
+                    });
+                    dlg.setPositiveButton("예", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            Toast.makeText(getActivity(), "게시물이 삭제되었습니다.", Toast.LENGTH_SHORT).show();
+
+                            //게시글 삭제 코드
+                            PostDelete();
+
+                            //게시글 삭제 후 게시글 열람 창에서 나가기.
+                            FragmentTransaction transaction = getActivity().getSupportFragmentManager().beginTransaction();
+                            ProfileFragment profileFragment = new ProfileFragment();
+
+
+                            transaction.replace(R.id.nav_host_fragment,profileFragment).commit();
+                        }
+
+                    });
+
+                    AlertDialog alertDialog = dlg.create();
+                    dlg.show();
                 }
                 else {
                     // App 사용자 ID와 글 작성자 ID가 일치 X
-
                 }
             }
         });
@@ -359,6 +391,89 @@ public class MyBoardFragment extends Fragment {
             Log.d(TAG, "showResult : ", e);
         }
 
+    }
+
+    class DeleteData extends AsyncTask<String, Void, String> {
+        ProgressDialog progressDialog;
+
+
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+
+            progressDialog = ProgressDialog.show(getActivity(), "Please Wait", null, true, true);
+        }
+
+        @Override
+        protected void onPostExecute(String result) {
+            super.onPostExecute(result);
+
+            progressDialog.dismiss();
+            Log.d(TAG, "POST response  - " + result);
+        }
+
+        @Override
+        protected String doInBackground(String... params) {
+            String POST_CODE = (String) params[1];
+            String serverURL = (String) params[0];
+
+            String postParameters = "POST_CODE=" + POST_CODE;
+
+            try {
+
+                URL url = new URL(serverURL);
+                HttpURLConnection httpURLConnection = (HttpURLConnection) url.openConnection();
+
+
+                httpURLConnection.setReadTimeout(5000);
+                httpURLConnection.setConnectTimeout(5000);
+                httpURLConnection.setRequestMethod("POST");
+                httpURLConnection.connect();
+
+
+                OutputStream outputStream = httpURLConnection.getOutputStream();
+                outputStream.write(postParameters.getBytes("UTF-8"));
+                outputStream.flush();
+                outputStream.close();
+
+
+                int responseStatusCode = httpURLConnection.getResponseCode();
+                Log.d(TAG, "POST response code - " + responseStatusCode);
+
+                InputStream inputStream;
+                if (responseStatusCode == HttpURLConnection.HTTP_OK) {
+                    inputStream = httpURLConnection.getInputStream();
+                } else {
+                    inputStream = httpURLConnection.getErrorStream();
+                }
+
+
+                InputStreamReader inputStreamReader = new InputStreamReader(inputStream, "UTF-8");
+                BufferedReader bufferedReader = new BufferedReader(inputStreamReader);
+
+                StringBuilder sb = new StringBuilder();
+                String line = null;
+
+                while ((line = bufferedReader.readLine()) != null) {
+                    sb.append(line);
+                }
+                bufferedReader.close();
+
+                return sb.toString();
+
+            } catch (Exception e) {
+
+                Log.d(TAG, "InsertData: Error ", e);
+
+                return new String("Error: " + e.getMessage());
+            }
+
+        }
+    }
+
+    public void PostDelete() {
+       DeleteData deleteBoard = new DeleteData();
+        deleteBoard.execute("http://" + IP_ADDRESS + "/POST_DELETE_ANDROID.php", spostcode);
     }
 
     public void PostUpdate() {

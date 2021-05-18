@@ -165,6 +165,8 @@ public class BoardMainFragment extends Fragment {
             }
         });
 
+
+
         //삭제
         BtnDelete.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -477,14 +479,16 @@ public class BoardMainFragment extends Fragment {
         }
     }
 
+
+
     public void PostUpdate() {
         GetData task = new GetData();
         task.execute("http://" + IP_ADDRESS + "/POST.php", "");
     }
 
     public void PostDelete() {
-        DeleteData deleteData = new DeleteData();
-        deleteData.execute("http://" + IP_ADDRESS + "/yongrun/svm/POST_DELETE_ANDROID.php", spostcode);
+        DeleteData deleteBoard = new DeleteData();
+        deleteBoard.execute("http://" + IP_ADDRESS + "/POST_DELETE_ANDROID.php", spostcode);
     }
 
 

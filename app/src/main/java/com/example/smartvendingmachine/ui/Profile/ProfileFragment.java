@@ -1,6 +1,7 @@
 package com.example.smartvendingmachine.ui.Profile;
 
 import android.app.ProgressDialog;
+import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -10,6 +11,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.DefaultItemAnimator;
@@ -22,7 +24,9 @@ import com.example.smartvendingmachine.ui.board.BoardAdapter;
 import com.example.smartvendingmachine.ui.board.BoardData;
 import com.example.smartvendingmachine.ui.board.BoardFragment;
 import com.example.smartvendingmachine.ui.board.BoardMainFragment;
+import com.google.gson.JsonArray;
 
+import org.jetbrains.annotations.NotNull;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -43,8 +47,8 @@ public class ProfileFragment extends Fragment {
 
     private String sharedNickname;
     private String user_id;
-    private static int BoardCount = 0;
 
+    private int BoardCount = 0;
     private TextView txt_profile_name, txt_profile_board_number;
 
     private RecyclerView recyclerView;
@@ -58,19 +62,23 @@ public class ProfileFragment extends Fragment {
     private static String TAG = "프로필 게시물";
     private String mJsonString;
 
+
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         ViewGroup rootView = (ViewGroup) inflater.inflate(R.layout.fragment_profile, container, false);
         appData = getActivity().getSharedPreferences("appData", MODE_PRIVATE);
 
         getSharedLoad();    // user_id, sharedNickname
+        UserUpdate();
+
+        BoardCount = 0;
 
         txt_profile_name = rootView.findViewById(R.id.txt_profile_name);    // 닉네임
         txt_profile_board_number = rootView.findViewById(R.id.txt_profile_board_number);    //게시글 수
 
-        txt_profile_name.setText(sharedNickname);   // 이거 Shared값 말고 USER NICKNAME값을 가져와야함. 일단 보류.
 
-
+        txt_profile_name.setText(sharedNickname);
 
         recyclerView = (RecyclerView) rootView.findViewById(R.id.rv_profile);
         recyclerView.setHasFixedSize(true);
@@ -217,7 +225,7 @@ public class ProfileFragment extends Fragment {
 
     private void showResult() {
 
-        String TAG_JSON = "POST_DATA";
+        String TAG_POST = "POST_DATA";
         String TAG_CODE = "POST_CODE";
         String TAG_TITLE = "POST_TITLE";
         String TAG_NICKNAME = "POST_NICKNAME";
@@ -231,13 +239,15 @@ public class ProfileFragment extends Fragment {
 
         try {
             JSONObject jsonObject = new JSONObject(mJsonString);
-            JSONArray jsonArray = jsonObject.getJSONArray(TAG_JSON);
 
-            for (int i = jsonArray.length()-1; i>=0; i--) {
+            JSONArray MyPost = jsonObject.getJSONArray(TAG_POST);
 
-                JSONObject item = jsonArray.getJSONObject(i);
+            for (int i = MyPost.length()-1; i>=0; i--) {
+
+                JSONObject item = MyPost.getJSONObject(i);
 
                 String POST_ID = item.getString(TAG_POST_ID);
+
                 if( POST_ID.equals( user_id ) ){
                     BoardCount++;
                     String POST_CODE = item.getString(TAG_CODE);
@@ -274,9 +284,33 @@ public class ProfileFragment extends Fragment {
                     adapter.notifyDataSetChanged();
 
                 }
-                else {}
             }
             txt_profile_board_number.setText( String.valueOf(BoardCount) );
+
+            //유저 닉네임 가져오기 위함
+            String TAG_USER = "USER_DATA";
+            String TAG_USER_NICKNAME = "USER_NICKNAME";
+            String TAG_USER_ID = "USER_ID";
+
+            JSONArray User = jsonObject.getJSONArray(TAG_USER);
+
+            for (int i = 0; i < User.length(); i++) {
+
+                JSONObject user = User.getJSONObject(i);
+
+                String USER_ID = user.getString(TAG_USER_ID);
+
+
+                if ( USER_ID.equals(user_id) )
+                {
+                    String USER_NICKNAME = user.getString(TAG_USER_NICKNAME);
+                    save(USER_NICKNAME);
+                    getSharedLoad();
+                    txt_profile_name.setText(sharedNickname);
+                }
+            }
+
+
 
         } catch (JSONException e) {
 
@@ -284,9 +318,155 @@ public class ProfileFragment extends Fragment {
         }
     }
 
+
+    private class UserData extends AsyncTask<String, Void, String> {
+
+        ProgressDialog progressDialog;
+        String errorString = null;
+
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+
+            progressDialog = ProgressDialog.show(getActivity(), "Please Wait", null, true, true);
+        }
+
+
+        @Override
+        protected void onPostExecute(String result) {
+            super.onPostExecute(result);
+
+            progressDialog.dismiss();
+
+            Log.d(TAG, "response - " + result);
+
+            if (result == null) {
+
+            } else {
+
+                mJsonString = result;
+                showUser();
+            }
+        }
+
+
+        @Override
+        protected String doInBackground(String... params) {
+
+            String serverURL = params[0];
+            String postParameters = params[1];
+
+
+            try {
+
+                URL url = new URL(serverURL);
+                HttpURLConnection httpURLConnection = (HttpURLConnection) url.openConnection();
+
+
+                httpURLConnection.setReadTimeout(5000);
+                httpURLConnection.setConnectTimeout(5000);
+                httpURLConnection.setRequestMethod("POST");
+                httpURLConnection.setDoInput(true);
+                httpURLConnection.connect();
+
+
+                OutputStream outputStream = httpURLConnection.getOutputStream();
+                outputStream.write(postParameters.getBytes("UTF-8"));
+                outputStream.flush();
+                outputStream.close();
+
+
+                int responseStatusCode = httpURLConnection.getResponseCode();
+                Log.d(TAG, "response code - " + responseStatusCode);
+
+                InputStream inputStream;
+                if (responseStatusCode == HttpURLConnection.HTTP_OK) {
+                    inputStream = httpURLConnection.getInputStream();
+                } else {
+                    inputStream = httpURLConnection.getErrorStream();
+                }
+
+
+                InputStreamReader inputStreamReader = new InputStreamReader(inputStream, "UTF-8");
+                BufferedReader bufferedReader = new BufferedReader(inputStreamReader);
+
+                StringBuilder sb = new StringBuilder();
+                String line;
+
+                while ((line = bufferedReader.readLine()) != null) {
+                    sb.append(line);
+                }
+
+                bufferedReader.close();
+
+                return sb.toString().trim();
+
+
+            } catch (Exception e) {
+
+                Log.d(TAG, "GetData : Error ", e);
+                errorString = e.toString();
+
+                return null;
+            }
+
+        }
+    }
+
+    private void showUser() {
+        //유저 닉네임 가져오기 위함
+        String TAG_USER = "USER_DATA";
+        String TAG_USER_NICKNAME = "USER_NICKNAME";
+        String TAG_USER_ID = "USER_ID";
+
+        try {
+            JSONObject jsonObject = new JSONObject(mJsonString);
+            JSONArray User = jsonObject.getJSONArray(TAG_USER);
+
+            for (int i = 0; i < User.length(); i++) {
+
+                JSONObject user = User.getJSONObject(i);
+
+                String USER_ID = user.getString(TAG_USER_ID);
+
+
+                if ( USER_ID.equals(user_id) )
+                {
+                    String USER_NICKNAME = user.getString(TAG_USER_NICKNAME);
+                    save(USER_NICKNAME);
+                    getSharedLoad();
+                    txt_profile_name.setText(sharedNickname);
+                }
+            }
+
+
+
+        } catch (JSONException e) {
+
+            Log.d(TAG, "showResult : ", e);
+        }
+    }
+
+    // 설정값을 저장하는 함수
+    private void save(String nickname) {
+        // SharedPreferences 객체만으론 저장 불가능 Editor 사용
+        SharedPreferences.Editor editor = appData.edit();
+
+        editor.putString("NICKNAME", nickname);
+
+        // apply, commit 을 안하면 변경된 내용이 저장되지 않음
+        editor.apply();
+    }
+
+    public void UserUpdate() {
+        UserData task = new UserData();
+        task.execute("http://" + IP_ADDRESS + "/USER.php", "");
+
+    }
+
     public void PostUpdate() {
+        BoardCount = 0;
         mSearchData.clear();
-        adapter.notifyDataSetChanged();
         GetData task = new GetData();
         task.execute("http://" + IP_ADDRESS + "/POST.php", "");
     }
@@ -294,10 +474,9 @@ public class ProfileFragment extends Fragment {
     @Override
     public void onResume() {
         super.onResume();
-        BoardCount = 0;
+        getSharedLoad();
+        UserUpdate();
         PostUpdate();
     }
-
-
 
 }
