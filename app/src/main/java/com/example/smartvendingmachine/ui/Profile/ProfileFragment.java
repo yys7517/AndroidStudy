@@ -101,10 +101,10 @@ public class ProfileFragment extends Fragment {
                 arguments.putString("answerdate", mSearchData.get(position).getAnswerdate()); // 관리자 답변 작성 날짜
 
                 FragmentTransaction transaction = getActivity().getSupportFragmentManager().beginTransaction();
-                BoardMainFragment boardMainFragment = new BoardMainFragment();
-                boardMainFragment.setArguments(arguments);
+                MyBoardFragment myBoardFragment = new MyBoardFragment();
+                myBoardFragment.setArguments(arguments);
 
-                transaction.replace(R.id.nav_host_fragment, boardMainFragment).addToBackStack(null).commit();
+                transaction.replace(R.id.nav_host_fragment, myBoardFragment).addToBackStack(null).commit();
             }
         });
 

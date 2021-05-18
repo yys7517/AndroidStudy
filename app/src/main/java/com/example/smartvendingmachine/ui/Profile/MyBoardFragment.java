@@ -1,19 +1,12 @@
-package com.example.smartvendingmachine.ui.board;
+package com.example.smartvendingmachine.ui.Profile;
 
-import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Typeface;
 import android.os.AsyncTask;
 import android.os.Bundle;
-
-import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
-import androidx.fragment.app.FragmentTransaction;
-
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -22,7 +15,12 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentTransaction;
+
 import com.example.smartvendingmachine.R;
+import com.example.smartvendingmachine.ui.board.BoardEditActivity;
+import com.example.smartvendingmachine.ui.board.BoardFragment;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -35,7 +33,7 @@ import java.io.OutputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
 
-public class BoardMainFragment extends Fragment {
+public class MyBoardFragment extends Fragment {
 
     private ImageView backspace;
 
@@ -60,7 +58,8 @@ public class BoardMainFragment extends Fragment {
     private TextView answerdate;
     ImageView imgManagerProfile;
 
-    private TextView BtnEdit, BtnDelete, Seperate;
+    private TextView BtnEdit, BtnDelete;
+    private TextView edit_title;
 
     private static String TAG = "게시글 보기";
 
@@ -78,6 +77,8 @@ public class BoardMainFragment extends Fragment {
                              Bundle savedInstanceState) {
         ViewGroup rootView = (ViewGroup) inflater.inflate(R.layout.fragment_boardmain, container, false);
 
+        edit_title = rootView.findViewById(R.id.edit_title);
+        edit_title.setText("내가 쓴 글");
 
         //작성자
         nickname = rootView.findViewById(R.id.txtCommentNick);
@@ -95,7 +96,6 @@ public class BoardMainFragment extends Fragment {
 
         BtnDelete = rootView.findViewById(R.id.BtnDelete);
         BtnEdit = rootView.findViewById(R.id.BtnEdit);
-        Seperate = rootView.findViewById(R.id.Seperate);
 
 
         //SharedPreferences
@@ -115,7 +115,6 @@ public class BoardMainFragment extends Fragment {
 
             sanswer = getArguments().getString("answer"); // 답변
             sanswerdate = getArguments().getString("answerdate"); // 답변 날짜
-
 
             nickname.setText(snickname);
             contents.setText(scontents);
@@ -140,10 +139,6 @@ public class BoardMainFragment extends Fragment {
 
         }
 
-        if( ! suserid.equals(userid) )              // 사용자가 게시글 작성자가 아니면 그 게시글의 수정 삭제 버튼 안 보이게 함.
-            HideButton();
-
-
         //수정
         BtnEdit.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -153,12 +148,13 @@ public class BoardMainFragment extends Fragment {
                     Toast.makeText(getActivity().getApplicationContext(), "게시글을 수정합니다.",Toast.LENGTH_SHORT).show();
                     Intent intent = new Intent(getActivity(), BoardEditActivity.class);
                     intent.putExtra("post_code",spostcode); // 게시글 코드
-                    intent.putExtra("title",stitle);    // 제목
+                    intent.putExtra("title",stitle);        // 제목
                     intent.putExtra("contents",scontents); // 내용
                     startActivity(intent);
                 }
                 else {
                     // App 사용자 ID와 글 작성자 ID가 일치 X
+                    Toast.makeText(getActivity().getApplicationContext(), "이 게시물을 수정할 수 없습니다.",Toast.LENGTH_SHORT).show();
                 }
 
 
@@ -171,39 +167,11 @@ public class BoardMainFragment extends Fragment {
             public void onClick(View v) {
                 if(suserid.equals(userid)) {
                     // App 사용자 ID와 글 작성자 ID가 일치
-                    AlertDialog.Builder dlg = new AlertDialog.Builder(getActivity(), R.style.MyDialogTheme);
-                    dlg.setTitle("게시글 삭제");
-                    dlg.setMessage("게시글을 삭제하시겠습니까 ? ");
-                    dlg.setIcon(R.drawable.delete);
 
-                    dlg.setNegativeButton("아니요", new DialogInterface.OnClickListener() {
-                        @Override
-                        public void onClick(DialogInterface dialog, int which) {
-
-                        }
-                    });
-                    dlg.setPositiveButton("예", new DialogInterface.OnClickListener() {
-                        @Override
-                        public void onClick(DialogInterface dialog, int which) {
-                            Toast.makeText(getActivity(), "게시물이 삭제되었습니다.", Toast.LENGTH_SHORT).show();
-
-                            //게시글 삭제 코드
-                            PostDelete();
-
-                            //게시글 삭제 후 게시글 열람 창에서 나가기.
-                            FragmentTransaction transaction = getActivity().getSupportFragmentManager().beginTransaction();
-                            BoardFragment boardFragment = new BoardFragment();
-
-                            transaction.replace(R.id.nav_host_fragment,boardFragment).commit();
-                        }
-
-                    });
-
-                    AlertDialog alertDialog = dlg.create();
-                    dlg.show();
                 }
                 else {
                     // App 사용자 ID와 글 작성자 ID가 일치 X
+
                 }
             }
         });
@@ -216,19 +184,13 @@ public class BoardMainFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 FragmentTransaction transaction = getActivity().getSupportFragmentManager().beginTransaction();
-                BoardFragment boardFragment = new BoardFragment();
+                ProfileFragment profileFragment = new ProfileFragment();
 
-                transaction.replace(R.id.nav_host_fragment,boardFragment).commit();
+                transaction.replace(R.id.nav_host_fragment,profileFragment).commit();
             }
         });
 
         return rootView;
-    }
-
-    private void HideButton() {
-        BtnEdit.setVisibility(View.INVISIBLE);
-        BtnDelete.setVisibility(View.INVISIBLE);
-        Seperate.setVisibility(View.INVISIBLE);
     }
 
     private class GetData extends AsyncTask<String, Void, String> {
@@ -399,92 +361,9 @@ public class BoardMainFragment extends Fragment {
 
     }
 
-    class DeleteData extends AsyncTask<String, Void, String> {
-        ProgressDialog progressDialog;
-
-
-        @Override
-        protected void onPreExecute() {
-            super.onPreExecute();
-
-            progressDialog = ProgressDialog.show(getActivity(), "Please Wait", null, true, true);
-        }
-
-        @Override
-        protected void onPostExecute(String result) {
-            super.onPostExecute(result);
-
-            progressDialog.dismiss();
-            Log.d(TAG, "POST response  - " + result);
-        }
-
-        @Override
-        protected String doInBackground(String... params) {
-            String POST_CODE = (String) params[1];
-            String serverURL = (String) params[0];
-
-            String postParameters = "POST_CODE=" + POST_CODE;
-
-            try {
-
-                URL url = new URL(serverURL);
-                HttpURLConnection httpURLConnection = (HttpURLConnection) url.openConnection();
-
-
-                httpURLConnection.setReadTimeout(5000);
-                httpURLConnection.setConnectTimeout(5000);
-                httpURLConnection.setRequestMethod("POST");
-                httpURLConnection.connect();
-
-
-                OutputStream outputStream = httpURLConnection.getOutputStream();
-                outputStream.write(postParameters.getBytes("UTF-8"));
-                outputStream.flush();
-                outputStream.close();
-
-
-                int responseStatusCode = httpURLConnection.getResponseCode();
-                Log.d(TAG, "POST response code - " + responseStatusCode);
-
-                InputStream inputStream;
-                if (responseStatusCode == HttpURLConnection.HTTP_OK) {
-                    inputStream = httpURLConnection.getInputStream();
-                } else {
-                    inputStream = httpURLConnection.getErrorStream();
-                }
-
-
-                InputStreamReader inputStreamReader = new InputStreamReader(inputStream, "UTF-8");
-                BufferedReader bufferedReader = new BufferedReader(inputStreamReader);
-
-                StringBuilder sb = new StringBuilder();
-                String line = null;
-
-                while ((line = bufferedReader.readLine()) != null) {
-                    sb.append(line);
-                }
-                bufferedReader.close();
-
-                return sb.toString();
-
-            } catch (Exception e) {
-
-                Log.d(TAG, "InsertData: Error ", e);
-
-                return new String("Error: " + e.getMessage());
-            }
-
-        }
-    }
-
     public void PostUpdate() {
         GetData task = new GetData();
         task.execute("http://" + IP_ADDRESS + "/POST.php", "");
-    }
-
-    public void PostDelete() {
-        DeleteData deleteData = new DeleteData();
-        deleteData.execute("http://" + IP_ADDRESS + "/yongrun/svm/POST_DELETE_ANDROID.php", spostcode);
     }
 
 

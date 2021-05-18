@@ -85,7 +85,7 @@ public class BoardEditActivity extends AppCompatActivity {
             public void onClick(View v) {
                 POST_TITLE = mEditTextTitle.getText().toString();
                 POST_CONTENTS = mEditTextContents.getText().toString();
-                InsertData task = new InsertData();
+                EditData task = new EditData();
                 task.execute("http://" + IP_ADDRESS + "/yongrun/svm/POST_MODIFY_ANDRIOD.php", POST_CODE, POST_TITLE , POST_CONTENTS);
                 Toast.makeText(getApplicationContext(), "건의사항이 수정되었습니다.", Toast.LENGTH_SHORT).show();
 
@@ -102,7 +102,7 @@ public class BoardEditActivity extends AppCompatActivity {
         });
     }
 
-    class InsertData extends AsyncTask<String, Void, String> {
+    class EditData extends AsyncTask<String, Void, String> {
         ProgressDialog progressDialog;
 
 
