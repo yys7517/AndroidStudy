@@ -2,6 +2,7 @@ package com.example.smartvendingmachine.ui.Profile;
 
 import android.app.ProgressDialog;
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -9,6 +10,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -50,10 +52,13 @@ public class ProfileFragment extends Fragment {
 
     private int BoardCount = 0;
     private TextView txt_profile_name, txt_profile_board_number;
+    private ImageView edit_nickname;
 
     private RecyclerView recyclerView;
     private BoardAdapter adapter;
     private RecyclerView.LayoutManager mLayoutManager;
+
+
 
     private ArrayList<BoardData> list = new ArrayList<>();
     private ArrayList<BoardData> mSearchData = new ArrayList<>();
@@ -76,6 +81,17 @@ public class ProfileFragment extends Fragment {
 
         txt_profile_name = rootView.findViewById(R.id.txt_profile_name);    // 닉네임
         txt_profile_board_number = rootView.findViewById(R.id.txt_profile_board_number);    //게시글 수
+
+        edit_nickname = rootView.findViewById(R.id.edit_nickname);
+
+        edit_nickname.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getActivity(), NicknameEditActivity.class);
+                intent.putExtra("nickname",txt_profile_name.getText().toString());
+                startActivity(intent);
+            }
+        });
 
 
         txt_profile_name.setText(sharedNickname);
