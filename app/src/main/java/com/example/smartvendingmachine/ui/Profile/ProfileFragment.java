@@ -303,30 +303,6 @@ public class ProfileFragment extends Fragment {
             }
             txt_profile_board_number.setText( String.valueOf(BoardCount) );
 
-            //유저 닉네임 가져오기 위함
-            String TAG_USER = "USER_DATA";
-            String TAG_USER_NICKNAME = "USER_NICKNAME";
-            String TAG_USER_ID = "USER_ID";
-
-            JSONArray User = jsonObject.getJSONArray(TAG_USER);
-
-            for (int i = 0; i < User.length(); i++) {
-
-                JSONObject user = User.getJSONObject(i);
-
-                String USER_ID = user.getString(TAG_USER_ID);
-
-
-                if ( USER_ID.equals(user_id) )
-                {
-                    String USER_NICKNAME = user.getString(TAG_USER_NICKNAME);
-                    save(USER_NICKNAME);
-                    getSharedLoad();
-                    txt_profile_name.setText(sharedNickname);
-                }
-            }
-
-
 
         } catch (JSONException e) {
 
@@ -490,9 +466,9 @@ public class ProfileFragment extends Fragment {
     @Override
     public void onResume() {
         super.onResume();
-        getSharedLoad();
-        UserUpdate();
-        PostUpdate();
+        getSharedLoad();        // Shared값 변경되었을 수 있으니 최신화하기
+        UserUpdate();           // User 정보 최신화
+        PostUpdate();           // 내 게시글 정보 최신화
     }
 
 }
