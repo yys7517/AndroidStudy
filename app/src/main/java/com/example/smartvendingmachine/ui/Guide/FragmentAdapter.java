@@ -25,10 +25,10 @@ public class FragmentAdapter extends FragmentStateAdapter {
                 return new FragmentGuideA();
 
             case 1:
-                return new FragmentGuideA();
+                return new FragmentGuideB();
 
             default:
-                return new FragmentGuideB();
+                return new FragmentGuideC();
         }
     }
 
