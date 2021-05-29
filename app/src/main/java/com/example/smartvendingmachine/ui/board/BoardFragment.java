@@ -288,6 +288,7 @@ public class BoardFragment extends Fragment {
                 boardData.setAnswercontents(POST_ANSWER_CONTENTS); // 답변 내용
                 boardData.setAnswerdate(POST_ANSWER_DATE); // 답변 작성 날짜
 
+
                 mSearchData.add(boardData);
                 adapter.notifyDataSetChanged();
             }

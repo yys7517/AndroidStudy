@@ -101,11 +101,15 @@ public class BoardAdapter extends RecyclerView.Adapter<BoardAdapter.ViewHolder> 
     //position에 해당하는 데이터를 뷰홀더의 아이템뷰에 표시
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
+
         holder.title.setText(iData.get(position).getTitle());
         holder.nickname.setText(iData.get(position).getNickname());
         holder.contents.setText(iData.get(position).getContents());
         holder.date.setText(iData.get(position).getDate());
         holder.managercomment.setText(iData.get(position).getManagercomment());
+
+        // .child( iData.get(position).getImageSource ) .getdownloadurl().~~~~~
+        // 위에서 가져온 이미지가 uri에 담기고 Glide.Glide.with(getApplicationContext()).load(Uri).into(viewImage);
 
     }
 

@@ -303,7 +303,6 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                         save(true,StrUSER_ID,StrUSER_NICKNAME); // SharedPreferences로 유저 아이디, 유저 닉네임 값 App내에 저장.
                         load(); // App 내에 저장된 유저 정보 값 불러오기
                         Intent intent = new Intent(LoginActivity.this , MainActivity.class);
-                        intent.putExtra("nickname",nickname);
                         startActivity(intent);
                     }
 
@@ -430,7 +429,6 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                         save(true,StrUSER_ID,StrUSER_NICKNAME); // SharedPreferences로 유저 아이디, 유저 닉네임 값 App내에 저장.
                         load(); // nickname, savelogindata, id
                         Intent intent = new Intent(LoginActivity.this , MainActivity.class);
-                        intent.putExtra("nickname",nickname);
                         startActivity(intent);
                     }
 
@@ -482,7 +480,6 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                                 save(true,StrUSER_ID,StrUSER_NICKNAME); // SharedPreferences로 유저 아이디, 유저 닉네임 값 App내에 저장.
                                 load(); // nickname, savelogindata, id
                                 Intent intent = new Intent(LoginActivity.this , MainActivity.class);
-                                intent.putExtra("nickname",nickname);
                                 startActivity(intent);
                             }
 

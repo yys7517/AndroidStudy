@@ -42,12 +42,13 @@ public class StartActivity extends AppCompatActivity {
                 public void run() {
                     Intent intent = new Intent(getApplicationContext(), GuideActivity.class);   // 처음이면 가이드화면으로
                     startActivity(intent);
+                    editor.putBoolean("isFirst",false);         // 이제 처음이 아니니 가이드 화면 안보이게 first값 false로 설정.
+                    editor.commit();                            // 설정 값 저장.
                     finish();
                 }
             }, 800);
 
-            editor.putBoolean("isFirst",false);
-            editor.commit();
+
 
         }else{
             Log.d("Is first Time?", "not first");

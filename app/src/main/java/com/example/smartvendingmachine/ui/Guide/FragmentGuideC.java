@@ -8,6 +8,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
 
 import com.example.smartvendingmachine.R;
 import com.example.smartvendingmachine.LoginActivity;
@@ -22,10 +23,13 @@ public class FragmentGuideC extends Fragment {
 
         mButtonStart = (Button) rootView.findViewById(R.id.mButtonStart);
         mButtonStart.setOnClickListener(new View.OnClickListener() {
+
+
             @Override
             public void onClick(View view) {
                 Intent mIntentLogin = new Intent(getActivity(), LoginActivity.class); //시작하기 버튼 클릭 시 로그인 화면으로 이동.
                 startActivity(mIntentLogin);
+                getActivity().finish();
             }
         });
 

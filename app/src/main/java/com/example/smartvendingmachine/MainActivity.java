@@ -1,6 +1,7 @@
 package com.example.smartvendingmachine;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.view.MenuItem;
 
 import androidx.annotation.NonNull;
@@ -27,6 +28,8 @@ public class MainActivity extends AppCompatActivity {
     HomeFragment homeFragment;
     ProfileFragment profileFragment;
 
+    private SharedPreferences appData;
+
     private final long FINISH_INTERVAL_TIME = 2000;
     private long   backPressedTime = 0;
 
@@ -36,8 +39,9 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        Intent intent = getIntent();
-        String USER_NICKNAME = intent.getStringExtra("nickname");           // 로그인 한 사용자 닉네임 정보 값 가져오기
+        appData = getSharedPreferences("appData", MODE_PRIVATE);
+
+        String USER_NICKNAME =  appData.getString("NICKNAME", "");          // 로그인 한 사용자 닉네임 정보 값 가져오기
         Toast.makeText(getApplicationContext(), USER_NICKNAME + " 님 어서오세요.", Toast.LENGTH_SHORT).show();
 
         //프래그먼트 생성

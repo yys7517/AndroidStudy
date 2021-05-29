@@ -17,6 +17,7 @@ public class BoardData {
     private String answercontents; //관리자 대답
     private String answerdate; //관리자 대답 날짜
 
+
     public String getUserid() {
         return userid;
     }
