@@ -56,7 +56,6 @@ public class BoardAdapter extends RecyclerView.Adapter<BoardAdapter.ViewHolder> 
 
             //뷰 객체에 대한 참조.(Hold Strong reference)
             //profile = itemView.findViewById(R.id.imgProfile);
-            // time = itemView.findViewById(R.id.txtTime); 안씀
             nickname = itemView.findViewById(R.id.txtNick);
             title = itemView.findViewById(R.id.txtTitle);
             contents = itemView.findViewById(R.id.contents);

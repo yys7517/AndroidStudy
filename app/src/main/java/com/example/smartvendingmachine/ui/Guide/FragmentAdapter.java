@@ -19,27 +19,25 @@ public class FragmentAdapter extends FragmentStateAdapter {
     public Fragment createFragment(int position) {
         int index = getRealPosition(position);
 
-        switch (index) {
+        switch (index) {            // 가이드 화면 순서
+
             case 0:
                 return new FragmentGuideA();
 
             case 1:
-                return new FragmentGuideB();
-
-            case 2:
-                return new FragmentGuideC();
+                return new FragmentGuideA();
 
             default:
-                return new FragmentGuideD();
+                return new FragmentGuideB();
         }
     }
 
     @Override
     public int getItemCount() {
-        return 4;
-    }
+        return 3;
+    }           // 화면 개수
 
     public int getRealPosition(int position) {
         return position % mCount;
-    }
+    }       // 화면 순서 위치
 }

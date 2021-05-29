@@ -18,7 +18,7 @@ public class GuideActivity extends FragmentActivity {
 
     private ViewPager2 mPager;
     private FragmentStateAdapter pagerAdapter;
-    private int num_page = 4;
+    private int num_page = 3;
     private CircleIndicator3 mIndicator;
 
     @Override

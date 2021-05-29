@@ -213,6 +213,7 @@ public class HomeFragment extends Fragment {
 
                 JSONObject item = jsonArray.getJSONObject(i);
 
+                //태그 값에 맞는 값 출력
                 String DRID = item.getString(TAG_DRID);
                 String DRCode = item.getString(TAG_DRCode);
                 String DRStock = item.getString(TAG_DRStock);
@@ -229,7 +230,7 @@ public class HomeFragment extends Fragment {
                 mAdapter.notifyDataSetChanged();
 
 
-                //출력 switch 문
+                //출력 switch 문 ( 음료 Code에 따라서 무슨 음료인지 식별. 식별 후 음료의 가격과 개수를 표시한다. )
                 switch (mArrayList.get(i).getDRCode()) {
                     case "CocaCola":
                         mTextViewCocacolaPrice.setText("가격 : " + mArrayList.get(i).getDRPrice() + " 원");

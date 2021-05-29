@@ -37,13 +37,13 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         Intent intent = getIntent();
-        String USER_NICKNAME = intent.getStringExtra("nickname");
+        String USER_NICKNAME = intent.getStringExtra("nickname");           // 로그인 한 사용자 닉네임 정보 값 가져오기
         Toast.makeText(getApplicationContext(), USER_NICKNAME + " 님 어서오세요.", Toast.LENGTH_SHORT).show();
 
         //프래그먼트 생성
         bottomNavigationView = findViewById(R.id.nav_view);
 
-        // 처음에 띄울화면 이걸로 기릿~
+        // 처음에 띄울화면 홈 화면으로
         homeFragment = new HomeFragment();
         getSupportFragmentManager().beginTransaction().replace(R.id.nav_host_fragment, homeFragment,"home").commit();
 
@@ -104,6 +104,7 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
+    // 화면 전환 시 바텀 내비게이션 바 메뉴 선택 정보 갱신
     public void updateBottomMenu (BottomNavigationView navigation)
     {
         if(getSupportFragmentManager().findFragmentByTag("home") != null && getSupportFragmentManager().findFragmentByTag("home").isVisible() ) {
@@ -117,6 +118,8 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
+
+    //뒤로가기 버튼 눌렀을 때
     @Override
     public void onBackPressed() {
 

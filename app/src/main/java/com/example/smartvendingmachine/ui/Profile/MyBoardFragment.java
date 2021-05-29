@@ -40,6 +40,7 @@ public class MyBoardFragment extends Fragment {
 
     private ImageView backspace;
 
+    //Bundle로 가져온 값 가져와서 담기
     private String snickname;
     private String scontents;
     private String sdate;
@@ -472,7 +473,7 @@ public class MyBoardFragment extends Fragment {
     }
 
     public void PostDelete() {
-       DeleteData deleteBoard = new DeleteData();
+        DeleteData deleteBoard = new DeleteData();
         deleteBoard.execute("http://" + IP_ADDRESS + "/POST_DELETE_ANDROID.php", spostcode);
     }
 

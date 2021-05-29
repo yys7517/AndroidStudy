@@ -28,31 +28,33 @@ public class StartActivity extends AppCompatActivity {
 
         //최초 실행 여부 판단하는 구문
         SharedPreferences pref = getSharedPreferences("isFirst", Activity.MODE_PRIVATE);
-        boolean first = pref.getBoolean("isFirst", false);
+        boolean first = pref.getBoolean("isFirst", true);  //초기값 처음이니까
 
-        if(first==false){
+        if(first==true){
             Log.d("Is first Time?", "first");
             SharedPreferences.Editor editor = pref.edit();
-            editor.putBoolean("isFirst",true);
-            editor.commit();
+
 
 
             //앱 최초 실행시 하고 싶은 작업
             handler.postDelayed(new Runnable() {
                 @Override
                 public void run() {
-                    Intent intent = new Intent(getApplicationContext(), GuideActivity.class);
+                    Intent intent = new Intent(getApplicationContext(), GuideActivity.class);   // 처음이면 가이드화면으로
                     startActivity(intent);
                     finish();
                 }
             }, 800);
+
+            editor.putBoolean("isFirst",false);
+            editor.commit();
 
         }else{
             Log.d("Is first Time?", "not first");
             handler.postDelayed(new Runnable() {
                 @Override
                 public void run() {
-                    Intent intent = new Intent(getApplicationContext(), LoginActivity.class);
+                    Intent intent = new Intent(getApplicationContext(), LoginActivity.class);   //처음 접속이 아니면 로그인 화면으로
                     startActivity(intent);
                     finish();
                 }

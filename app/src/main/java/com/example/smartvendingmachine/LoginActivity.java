@@ -152,16 +152,16 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                     @Override
                     public void run(boolean success) {
                         if (success) {
-                            String accessToken = mOAuthLoginModule.getAccessToken(mContext);
+                            String accessToken = mOAuthLoginModule.getAccessToken(mContext);    // accessToken으로 사용자 정보 가져올 수 있음.
                             NaverTask task = new NaverTask();
-                            task.execute(accessToken);
+                            task.execute(accessToken);              // accessToken으로 Logic 실행.
                         }
                         else {
                             String errorCode = mOAuthLoginModule
                                     .getLastErrorCode(mContext).getCode();
                             String errorDesc = mOAuthLoginModule.getLastErrorDesc(mContext);
                             Toast.makeText(mContext, "errorCode:" + errorCode
-                                    + ", errorDesc:" + errorDesc, Toast.LENGTH_SHORT).show();
+                                    + ", errorDesc:" + errorDesc, Toast.LENGTH_SHORT).show();   // 에러문 출력
                         }
                     };
                 };
@@ -208,7 +208,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         auth = FirebaseAuth.getInstance(); // 파이어베이스 인증 객체 초기화
     }
 
-    // 설정값을 저장하는 함수
+    // 설정값을 저장하는 함수 ( 로그인 한적 있는지 , ID , 닉네임 )
     private void save(Boolean flag, String id, String nickname) {
         // SharedPreferences 객체만으론 저장 불가능 Editor 사용
         SharedPreferences.Editor editor = appData.edit();
@@ -223,7 +223,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         editor.apply();
     }
 
-    // 설정값을 불러오는 함수
+    // 설정값을 불러오는 함수 ( 로그인 한적 있는지 , ID , 닉네임 )
     private void load() {
         // SharedPreferences 객체.get타입( 저장된 이름, 기본값 )
         // 저장된 이름이 존재하지 않을 시 기본값
@@ -242,10 +242,10 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
             String token = strings[0];// 네이버 로그인 접근 토큰;
             String header = "Bearer " + token; // Bearer 다음에 공백 추가
             try {
-                String apiURL = "https://openapi.naver.com/v1/nid/me";
+                String apiURL = "https://openapi.naver.com/v1/nid/me";      // apiurl 주소
                 URL url = new URL(apiURL);
                 HttpURLConnection con = (HttpURLConnection) url.openConnection();
-                con.setRequestMethod("GET");
+                con.setRequestMethod("GET");        // GET메소드 사용
                 con.setRequestProperty("Authorization", header);
                 int responseCode = con.getResponseCode();
                 BufferedReader br;
@@ -286,6 +286,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                     Log.d("네아로_닉네임", jsonObject.getString("nickname"));
                     Log.d("네아로_프로필사진", jsonObject.getString("profile_image"));
 
+                    // accessToken으로 가져온 값 변수에 담기.
                     StrUSER_ID = jsonObject.getString("id");
                     StrUSER_NICKNAME = jsonObject.getString("nickname");
                     StrUSER_EMAIL = jsonObject.getString("email");
@@ -293,13 +294,14 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                     Log.d("USER_ID", StrUSER_ID);
                     Log.d("USER_NICKNAME", StrUSER_NICKNAME);
 
+                    // 유저 정보 서버에 저장 InsertData
                     InsertData task = new InsertData();
                     task.execute("http://" + IP_ADDRESS + "/yongrun/svm/SIGNUP_ANDRIOD.php", StrUSER_ID, StrUSER_NICKNAME, StrUSER_EMAIL);
 
                     if ( ! (StrUSER_ID == null || StrUSER_NICKNAME == null || StrUSER_ID=="" || StrUSER_NICKNAME == "") )
                     {
                         save(true,StrUSER_ID,StrUSER_NICKNAME); // SharedPreferences로 유저 아이디, 유저 닉네임 값 App내에 저장.
-                        load(); // nickname, savelogindata, id
+                        load(); // App 내에 저장된 유저 정보 값 불러오기
                         Intent intent = new Intent(LoginActivity.this , MainActivity.class);
                         intent.putExtra("nickname",nickname);
                         startActivity(intent);
@@ -311,7 +313,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
             }
         }
     }
-    //네이버 회원 정보 서버 삽입
+    // 회원 정보 서버 삽입
     class InsertData extends AsyncTask<String, Void, String> {
         ProgressDialog progressDialog;
 
@@ -400,6 +402,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         }
     }
 
+    //카카오 로그인
     private void updateKakaoLoginUi() {
         UserApiClient.getInstance().me(new Function2<User, Throwable, Unit>() {
             @Override
@@ -418,7 +421,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                     StrUSER_EMAIL = user.getKakaoAccount().getEmail();
                     String profileImageUrl = user.getKakaoAccount().getProfile().getProfileImageUrl();
 
-
+                    //회원 정보 서버 삽입
                     InsertData task = new InsertData();
                     task.execute("http://" + IP_ADDRESS + "/yongrun/svm/SIGNUP_ANDRIOD.php", StrUSER_ID, StrUSER_NICKNAME, StrUSER_EMAIL);
 
@@ -465,12 +468,12 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                             Log.i("닉네임 확인", account.getGivenName()); //닉네임
 
 
-
+                            //로그인 값 변수에 담기
                             StrUSER_ID = account.getId();
                             StrUSER_NICKNAME = account.getGivenName();
                             StrUSER_EMAIL = account.getEmail();
 
-
+                            //회원 정보 서버 삽입
                             InsertData insert = new InsertData();
                             insert.execute("http://" + IP_ADDRESS + "/yongrun/svm/SIGNUP_ANDRIOD.php", StrUSER_ID, StrUSER_NICKNAME, StrUSER_EMAIL);
 

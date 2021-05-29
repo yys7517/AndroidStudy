@@ -1,10 +1,10 @@
 package com.example.smartvendingmachine.ui.Home;
 
 public class HomeData {
-    private String DRID;
-    private String DRCode;
-    private String DRStock;
-    private String DRPrice;
+    private String DRID;    //음료 ID
+    private String DRCode;  //음료 코드
+    private String DRStock; //음료 개수
+    private String DRPrice; //음료 가격
 
     public String getDRID() {
         return DRID;

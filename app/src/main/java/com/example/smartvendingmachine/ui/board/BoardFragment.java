@@ -42,7 +42,6 @@ public class BoardFragment extends Fragment {
     private BoardAdapter adapter;
     private RecyclerView.LayoutManager mLayoutManager;
 
-    private ArrayList<BoardData> list = new ArrayList<>();
     private ArrayList<BoardData> mSearchData = new ArrayList<>();
 
     private SwipeRefreshLayout swipeRefreshLayout;
@@ -50,7 +49,7 @@ public class BoardFragment extends Fragment {
 
     private static String IP_ADDRESS = "211.211.158.42/yongrun/svm";
     private static String TAG = "phptest";
-    private String mJsonString;
+    private String mJsonString; // JSON 파싱 값을 받아서 임시로 담는 공간.
 
     private FloatingActionButton addbtn; //게시물 작성 버튼
 
@@ -72,7 +71,7 @@ public class BoardFragment extends Fragment {
             @Override
             public void onItemClick(View v, int position) {
                 // TODO : 아이템 클릭 이벤트를 플레그먼트에서 처뤼
-                Bundle arguments = new Bundle();
+                Bundle arguments = new Bundle();        // 프래그먼트 간 데이터 전달을 위한 Bundle 바구니 생성.
 
                 arguments.putString("userid",mSearchData.get(position).getUserid());      // 글 작성자 ID
                 arguments.putString("post_code",mSearchData.get(position).getCode());      // 게시글 코드
@@ -87,29 +86,29 @@ public class BoardFragment extends Fragment {
 
                 FragmentTransaction transaction = getActivity().getSupportFragmentManager().beginTransaction();
                 BoardMainFragment boardMainFragment = new BoardMainFragment();
-                boardMainFragment.setArguments(arguments);
+                boardMainFragment.setArguments(arguments);          // boardMainFragment ( 게시글 열람 ) 화면으로 데이터 바구니 전달.
 
-                transaction.replace(R.id.nav_host_fragment, boardMainFragment).addToBackStack(null).commit();
+                transaction.replace(R.id.nav_host_fragment, boardMainFragment).addToBackStack(null).commit();       // boardMainFragment로 전환.
             }
         });
 
-        swipeRefreshLayout = rootview.findViewById(R.id.refresh_layout);
+        swipeRefreshLayout = rootview.findViewById(R.id.refresh_layout);        // 스와이프 리프레시
 
         swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
-                PostUpdate();
+                PostUpdate();       // 게시글 목록 새로고침
                 swipeRefreshLayout.setRefreshing(false); //새로고침표시 없애기
             }
         });
 
-        //플로팅버튼
+        //게시글 작성 플로팅 버튼
         addbtn = (FloatingActionButton) rootview.findViewById(R.id.addBtn);
         addbtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Log.i("버튼 작동확인", "게시물 추가 버튼 눌렀다.");
-                Intent intent = new Intent(getActivity(), BoardWriteActivity.class );
+                Intent intent = new Intent(getActivity(), BoardWriteActivity.class ); // 게시글 작성 Activity로 이동.
                 startActivity(intent);
             }
         });
@@ -123,9 +122,11 @@ public class BoardFragment extends Fragment {
         PostUpdate();
     }
 
-    public void PostUpdate() {
-        mSearchData.clear();
-        adapter.notifyDataSetChanged();
+
+    public void PostUpdate() {      //게시글 새로고침 메소드
+
+        mSearchData.clear();        //게시글 목록 clear
+        adapter.notifyDataSetChanged();  // 게시글 목록 갱신
         GetData task = new GetData();
         task.execute("http://" + IP_ADDRESS + "/POST.php", "");
     }
@@ -139,7 +140,7 @@ public class BoardFragment extends Fragment {
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
     }
-
+    // 값 가져오는 클래스
     private class GetData extends AsyncTask<String, Void, String> {
 
         ProgressDialog progressDialog;
@@ -166,7 +167,7 @@ public class BoardFragment extends Fragment {
             } else {
 
                 mJsonString = result;
-                showResult();
+                showResult();   //  showResult 메소드 실행
             }
         }
 

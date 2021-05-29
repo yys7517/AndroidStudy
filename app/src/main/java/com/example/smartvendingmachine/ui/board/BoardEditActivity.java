@@ -28,8 +28,8 @@ import java.net.URL;
 
 public class BoardEditActivity extends AppCompatActivity {
 
-    private String mTitle,mContents;
-    private String POST_CODE, POST_TITLE ,POST_CONTENTS;
+    private String mTitle,mContents;                     // 기존 게시글의 제목과 내용 Intent로 가져오기.
+    private String POST_CODE, POST_TITLE ,POST_CONTENTS;   // 게시글 코드, 게시글 제목, 게시글 내용 PHP 파라미터 값.
 
     private static String IP_ADDRESS = "211.211.158.42";
     private static String TAG = "SmartVendingMachine";
@@ -41,7 +41,7 @@ public class BoardEditActivity extends AppCompatActivity {
     ImageView backspace;
 
     //SharedPreferences
-    private SharedPreferences appData;
+    private SharedPreferences appData;      // 앱 설정 값 공유하기 위한 변수
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -58,19 +58,19 @@ public class BoardEditActivity extends AppCompatActivity {
 
         backspace = findViewById(R.id.backspace);
 
-        // 수정 시 값 받아옴.
+        // 수정 시 기존 값이 있다면 받아오는 것 ( TextUtils.isempty )
         Intent intent = getIntent();
         if ( ! ( TextUtils.isEmpty(intent.getStringExtra("title")) &&
                 TextUtils.isEmpty(intent.getStringExtra("contents")) && TextUtils.isEmpty(intent.getStringExtra("post_code"))) ) {
 
-            mTitle = intent.getStringExtra("title");
-            mContents =intent.getStringExtra("contents");
-            POST_CODE = intent.getStringExtra("post_code");
+            mTitle = intent.getStringExtra("title");        //기존 게시글 제목
+            mContents =intent.getStringExtra("contents");   //기존 게시글 내용
+            POST_CODE = intent.getStringExtra("post_code"); //수정 하는 게시글 코드.
 
         }
 
-        mEditTextTitle.setText(mTitle);     // Intent로 받아온 값 세팅
-        mEditTextContents.setText(mContents);   // Intent로 받아온 값 세팅
+        mEditTextTitle.setText(mTitle);     // 기존 게시글 제목 가져오기
+        mEditTextContents.setText(mContents);   // 기존 게시글 내용 가져오기
 
 
         //SharedPreferences
@@ -86,10 +86,11 @@ public class BoardEditActivity extends AppCompatActivity {
                 POST_TITLE = mEditTextTitle.getText().toString();
                 POST_CONTENTS = mEditTextContents.getText().toString();
                 EditData task = new EditData();
+                //게시글 수정하는 php파일에 인자 값 전달.
                 task.execute("http://" + IP_ADDRESS + "/yongrun/svm/POST_MODIFY_ANDRIOD.php", POST_CODE, POST_TITLE , POST_CONTENTS);
                 Toast.makeText(getApplicationContext(), "건의사항이 수정되었습니다.", Toast.LENGTH_SHORT).show();
 
-                finish();
+                finish(); // 게시글 작성 창(수정 창) 종료.
             }
         });
 
@@ -172,7 +173,7 @@ public class BoardEditActivity extends AppCompatActivity {
                 bufferedReader.close();
 
                 return sb.toString();
-                
+
             } catch (Exception e) {
 
                 Log.d(TAG, "InsertData: Error ", e);

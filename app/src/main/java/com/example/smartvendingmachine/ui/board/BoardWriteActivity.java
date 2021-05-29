@@ -30,7 +30,7 @@ import java.net.URL;
 
 public class BoardWriteActivity extends AppCompatActivity {
 
-    private String POST_TITLE, POST_NICKNAME, POST_ID ,POST_CONTENTS;
+    private String POST_TITLE, POST_NICKNAME, POST_ID ,POST_CONTENTS;       //게시글 작성 PHP 제목, 닉네임, ID, 내용 인자 값
 
     private static String IP_ADDRESS = "211.211.158.42";
     private static String TAG = "SmartVendingMachine";
@@ -71,9 +71,9 @@ public class BoardWriteActivity extends AppCompatActivity {
         mButtonSubmit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                POST_ID = userid;
+                POST_ID = userid;       // APP 사용자 ID 값 작성자 ID값으로 인자 값 넘겨주기
                 POST_TITLE = mEditTextTitle.getText().toString();
-                POST_NICKNAME = user_nickname;
+                POST_NICKNAME = user_nickname;  // APP 사용자 닉네임 값 작성자 닉네임 값으로 인자 값 넘겨주기
                 POST_CONTENTS = mEditTextContents.getText().toString();
                 InsertData task = new InsertData();
                 task.execute("http://" + IP_ADDRESS + "/yongrun/svm/POST_WRITE_ANDROID.php", POST_TITLE, POST_ID ,POST_NICKNAME, POST_CONTENTS);
@@ -164,7 +164,7 @@ public class BoardWriteActivity extends AppCompatActivity {
                 bufferedReader.close();
 
                 return sb.toString();
-                
+
             } catch (Exception e) {
 
                 Log.d(TAG, "InsertData: Error ", e);

@@ -47,10 +47,10 @@ public class ProfileFragment extends Fragment {
 
     private SharedPreferences appData;
 
-    private String sharedNickname;
-    private String user_id;
+    private String sharedNickname;      //App 사용자 닉네임
+    private String user_id;             //App 사용자 ID
 
-    private int BoardCount = 0;
+    private int BoardCount = 0;         //내가 쓴 게시글 개수
     private TextView txt_profile_name, txt_profile_board_number;
     private ImageView edit_nickname;
 
@@ -58,9 +58,6 @@ public class ProfileFragment extends Fragment {
     private BoardAdapter adapter;
     private RecyclerView.LayoutManager mLayoutManager;
 
-
-
-    private ArrayList<BoardData> list = new ArrayList<>();
     private ArrayList<BoardData> mSearchData = new ArrayList<>();
 
     private static String IP_ADDRESS = "211.211.158.42/yongrun/svm";
@@ -74,10 +71,10 @@ public class ProfileFragment extends Fragment {
         ViewGroup rootView = (ViewGroup) inflater.inflate(R.layout.fragment_profile, container, false);
         appData = getActivity().getSharedPreferences("appData", MODE_PRIVATE);
 
-        getSharedLoad();    // user_id, sharedNickname
-        UserUpdate();
+        getSharedLoad();    // App 사용자 ID, App 사용자 닉네임 가져오기
+        UserUpdate();       // 유저 정보 새로고침.
 
-        BoardCount = 0;
+        BoardCount = 0;     // 게시글 개수 초기값 0
 
         txt_profile_name = rootView.findViewById(R.id.txt_profile_name);    // 닉네임
         txt_profile_board_number = rootView.findViewById(R.id.txt_profile_board_number);    //게시글 수
@@ -126,7 +123,7 @@ public class ProfileFragment extends Fragment {
 
                 FragmentTransaction transaction = getActivity().getSupportFragmentManager().beginTransaction();
                 MyBoardFragment myBoardFragment = new MyBoardFragment();
-                myBoardFragment.setArguments(arguments);
+                myBoardFragment.setArguments(arguments);        //내가 쓴 글 Fragment
 
                 transaction.replace(R.id.nav_host_fragment, myBoardFragment).addToBackStack(null).commit();
             }
@@ -264,8 +261,8 @@ public class ProfileFragment extends Fragment {
 
                 String POST_ID = item.getString(TAG_POST_ID);
 
-                if( POST_ID.equals( user_id ) ){
-                    BoardCount++;
+                if( POST_ID.equals( user_id ) ){            // 내가 쓴 글 가져오기 위해, 게시글 작성자 ID와 App사용자 ID를 비교.
+                    BoardCount++;                           // 게시글 한 개 씩 가져오면서 게시글 개수 1 증가.
                     String POST_CODE = item.getString(TAG_CODE);
                     String POST_TITLE = item.getString(TAG_TITLE);
                     String POST_NICKNAME = item.getString(TAG_NICKNAME);
@@ -337,7 +334,7 @@ public class ProfileFragment extends Fragment {
             } else {
 
                 mJsonString = result;
-                showUser();
+                showUser();                 //ShowUser() 메소드
             }
         }
 
@@ -406,7 +403,7 @@ public class ProfileFragment extends Fragment {
     }
 
     private void showUser() {
-        //유저 닉네임 가져오기 위함
+        //유저 닉네임 정보 보여주기 위함
         String TAG_USER = "USER_DATA";
         String TAG_USER_NICKNAME = "USER_NICKNAME";
         String TAG_USER_ID = "USER_ID";
@@ -439,7 +436,7 @@ public class ProfileFragment extends Fragment {
         }
     }
 
-    // 설정값을 저장하는 함수
+    // 설정값을 저장하는 함수 ( 닉네임 )
     private void save(String nickname) {
         // SharedPreferences 객체만으론 저장 불가능 Editor 사용
         SharedPreferences.Editor editor = appData.edit();

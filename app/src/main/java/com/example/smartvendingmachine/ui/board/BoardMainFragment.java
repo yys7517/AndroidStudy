@@ -39,14 +39,15 @@ public class BoardMainFragment extends Fragment {
 
     private ImageView backspace;
 
-    private String snickname;
-    private String scontents;
-    private String sdate;
-    private String stitle;
-    private String sanswer;
-    private String sanswerdate;
-    private String suserid;
-    private String spostcode;
+    // Bundle로 받은 값 담는 변수들.
+    private String snickname;   //닉네임
+    private String scontents;   //게시글 내용
+    private String sdate;   //작성일자
+    private String stitle;  //게시글 제목
+    private String sanswer; //게시글 답변
+    private String sanswerdate; //게시글 답변 일자
+    private String suserid;     //게시글 작성 사용자 ID
+    private String spostcode;   //게시글 코드
 
     //작성자 글
     private TextView nickname;
@@ -54,7 +55,7 @@ public class BoardMainFragment extends Fragment {
     private TextView date;
     private TextView title;
 
-    //관리자 글
+    //관리자 답변
     private TextView ManagerName;
     private TextView answer;
     private TextView answerdate;
@@ -106,7 +107,7 @@ public class BoardMainFragment extends Fragment {
         if(getArguments() != null)
         {
             suserid = getArguments().getString("userid"); // 글 작성자 ID
-            spostcode = getArguments().getString("post_code"); // 게시글 코드~
+            spostcode = getArguments().getString("post_code"); // 게시글 코드
 
             snickname = getArguments().getString("nickname"); // 작성자
             scontents = getArguments().getString("contents"); // 건의 내용
@@ -122,18 +123,18 @@ public class BoardMainFragment extends Fragment {
             date.setText(sdate);
             title.setText(stitle);
 
-            if( ! ( sanswer.equals("null") || sanswer.equals("") ) )
+            if( ! ( sanswer.equals("null") || sanswer.equals("") ) )    // 답변 내용이 있으면
             {
-                answer.setVisibility(View.VISIBLE);
-                answerdate.setVisibility(View.VISIBLE);
-                imgManagerProfile.setVisibility(View.VISIBLE);
-                ManagerName.setVisibility(View.VISIBLE);
+                answer.setVisibility(View.VISIBLE);                 // 보이게 하기
+                answerdate.setVisibility(View.VISIBLE);         // 보이게 하기
+                imgManagerProfile.setVisibility(View.VISIBLE);  // 보이게 하기
+                ManagerName.setVisibility(View.VISIBLE);    // 보이게 하기
 
                 answer.setText(sanswer);
                 answerdate.setText(sanswerdate);
             }
             else {
-                answer.setVisibility(View.VISIBLE);
+                answer.setVisibility(View.VISIBLE);     // 보이게 하기
                 answer.setText("답변 내용이 없습니다. 빠른 시일내에 답변 드리겠습니다.");
                 answer.setTypeface(null, Typeface.BOLD_ITALIC);
             }
@@ -141,10 +142,10 @@ public class BoardMainFragment extends Fragment {
         }
 
         if( ! suserid.equals(userid) )              // 사용자가 게시글 작성자가 아니면 그 게시글의 수정 삭제 버튼 안 보이게 함.
-            HideButton();
+            HideButton();   // 버튼 숨기는 메소드
 
 
-        //수정
+        //게시글 수정
         BtnEdit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -167,7 +168,7 @@ public class BoardMainFragment extends Fragment {
 
 
 
-        //삭제
+        //게시글 삭제
         BtnDelete.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

@@ -49,11 +49,11 @@ public class NicknameEditActivity extends AppCompatActivity {
         mTextViewPostResult = findViewById(R.id.mTextViewPostResult);
 
         Intent intent = getIntent();
-        String Default_nickname = intent.getStringExtra("nickname");
+        String Default_nickname = intent.getStringExtra("nickname");    // 기존 닉네임 값 받아옴.
 
         mEditNickname = findViewById(R.id.mEditNickname); // 닉네임 입력 창
 
-        mEditNickname.setText(Default_nickname);        // 기존 닉네임으로 닉네임 창에 입력
+        mEditNickname.setText(Default_nickname);        // 기존 닉네임을 가져와서 보여줌.
 
 
 
@@ -68,13 +68,13 @@ public class NicknameEditActivity extends AppCompatActivity {
 
         String userid = appData.getString("ID", ""); // App 사용자 ID
 
-        //건의사항 작성 완료 버튼.
+        //닉네임 변경 후 완료 버튼
         mButtonSubmit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
-                USER_NICKNAME = mEditNickname.getText().toString();
-                USER_ID = userid;
+                USER_NICKNAME = mEditNickname.getText().toString();     //바뀐 닉네임 값 가져오기
+                USER_ID = userid;                       // App 사용자 ID값 가져와서 인자 값으로 넣어주기
 
                 if ( USER_NICKNAME.equals(Default_nickname) )
                 {
@@ -104,6 +104,7 @@ public class NicknameEditActivity extends AppCompatActivity {
         });
     }
 
+    //사용자 닉네임 값 App에 Save
     private void save(String nickname) {
         // SharedPreferences 객체만으론 저장 불가능 Editor 사용
         SharedPreferences.Editor editor = appData.edit();
@@ -114,6 +115,7 @@ public class NicknameEditActivity extends AppCompatActivity {
         editor.apply();
     }
 
+    //닉네임 변경 클래스
     class EditData extends AsyncTask<String, Void, String> {
         ProgressDialog progressDialog;
 
@@ -184,7 +186,7 @@ public class NicknameEditActivity extends AppCompatActivity {
                 bufferedReader.close();
 
                 return sb.toString();
-                
+
             } catch (Exception e) {
 
                 Log.d(TAG, "InsertData: Error ", e);
