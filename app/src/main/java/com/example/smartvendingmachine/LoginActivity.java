@@ -56,8 +56,6 @@ import kotlin.jvm.functions.Function2;
 
 public class LoginActivity extends AppCompatActivity implements View.OnClickListener, GoogleApiClient.OnConnectionFailedListener {
 
-    //auto로그인
-    String userid,userpwd;
 
     //카카오 로그인
     private FloatingActionButton mButtonKakao;

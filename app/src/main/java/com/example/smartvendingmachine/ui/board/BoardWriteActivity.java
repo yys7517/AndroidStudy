@@ -75,11 +75,17 @@ public class BoardWriteActivity extends AppCompatActivity {
                 POST_TITLE = mEditTextTitle.getText().toString();
                 POST_NICKNAME = user_nickname;  // APP 사용자 닉네임 값 작성자 닉네임 값으로 인자 값 넘겨주기
                 POST_CONTENTS = mEditTextContents.getText().toString();
-                InsertData task = new InsertData();
-                task.execute("http://" + IP_ADDRESS + "/yongrun/svm/POST_WRITE_ANDROID.php", POST_TITLE, POST_ID ,POST_NICKNAME, POST_CONTENTS);
-                Toast.makeText(getApplicationContext(), "건의사항이 등록되었습니다.", Toast.LENGTH_SHORT).show();
+                if ( POST_TITLE.length() > 32 || POST_CONTENTS.length() > 255) {
+                    Toast.makeText(getApplicationContext(), "제목 또는 내용이 너무 깁니다.", Toast.LENGTH_SHORT).show();
+                }
+                else {
+                    InsertData task = new InsertData();
+                    task.execute("http://" + IP_ADDRESS + "/yongrun/svm/POST_WRITE_ANDROID.php", POST_TITLE, POST_ID ,POST_NICKNAME, POST_CONTENTS);
+                    Toast.makeText(getApplicationContext(), "건의사항이 등록되었습니다.", Toast.LENGTH_SHORT).show();
+                    finish();
+                }
 
-                finish();
+
             }
         });
 
