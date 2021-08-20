@@ -10,8 +10,10 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
@@ -21,12 +23,16 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
+import com.example.smartvendingmachine.LoginActivity;
 import com.example.smartvendingmachine.R;
 import com.example.smartvendingmachine.ui.board.BoardAdapter;
 import com.example.smartvendingmachine.ui.board.BoardData;
 import com.example.smartvendingmachine.ui.board.BoardFragment;
 import com.example.smartvendingmachine.ui.board.BoardMainFragment;
 import com.google.gson.JsonArray;
+import com.kakao.sdk.user.UserApiClient;
+import com.kakao.usermgmt.UserManagement;
+import com.kakao.usermgmt.callback.LogoutResponseCallback;
 
 import org.jetbrains.annotations.NotNull;
 import org.json.JSONArray;
@@ -49,10 +55,12 @@ public class ProfileFragment extends Fragment {
 
     private String sharedNickname;      //App 사용자 닉네임
     private String user_id;             //App 사용자 ID
+    private String current_login;       //App 사용자 현재 무슨 로그인했는지 ( 카카오? 구글? 네이버? )
 
     private int BoardCount = 0;         //내가 쓴 게시글 개수
     private TextView txt_profile_name, txt_profile_board_number;
     private ImageView edit_nickname;
+    private Button mButtonLogout;       //로그아웃 버튼
 
     private RecyclerView recyclerView;
     private BoardAdapter adapter;
@@ -71,6 +79,8 @@ public class ProfileFragment extends Fragment {
         ViewGroup rootView = (ViewGroup) inflater.inflate(R.layout.fragment_profile, container, false);
         appData = getActivity().getSharedPreferences("appData", MODE_PRIVATE);
 
+        SharedPreferences.Editor editor = appData.edit();           // SharedPreferences 에디터 선언.
+
         getSharedLoad();    // App 사용자 ID, App 사용자 닉네임 가져오기
         UserUpdate();       // 유저 정보 새로고침.
 
@@ -80,6 +90,48 @@ public class ProfileFragment extends Fragment {
         txt_profile_board_number = rootView.findViewById(R.id.txt_profile_board_number);    //게시글 수
 
         edit_nickname = rootView.findViewById(R.id.edit_nickname);
+
+        mButtonLogout = rootView.findViewById(R.id.mButtonLogout);                      //로그아웃 버튼
+
+        mButtonLogout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                if (current_login.equals("NAVER")) { // 네이버 로그아웃
+
+
+                    SharedPreferences.Editor editor = appData.edit();           // SharedPreferences 에디터 선언.
+                    editor.putString("CURRENT_LOGIN","");
+                    editor.putBoolean("SAVE_LOGIN_DATA", false);
+                }
+                else if(current_login.equals("KAKAO")) {
+                    UserApiClient.getInstance().logout(error -> {
+                        if (error != null) {
+                            Log.e(TAG, "로그아웃 실패, SDK에서 토큰 삭제됨", error);
+                        }else{
+                            Log.e(TAG, "로그아웃 성공, SDK에서 토큰 삭제됨");
+
+                            SharedPreferences.Editor editor = appData.edit();           // SharedPreferences 에디터 선언.
+                            editor.putString("CURRENT_LOGIN","");
+                            editor.putBoolean("SAVE_LOGIN_DATA", false);
+
+                            Toast.makeText(getActivity(),"로그아웃 하였습니다.",Toast.LENGTH_SHORT).show();
+
+                            getActivity().finish();
+                        }
+                        return null;
+                    });
+                }
+
+                else if (current_login.equals("GOOGLE")) { // 구글 로그아웃
+
+                    SharedPreferences.Editor editor = appData.edit();           // SharedPreferences 에디터 선언.
+                    editor.putString("CURRENT_LOGIN","");
+                    editor.putBoolean("SAVE_LOGIN_DATA", false);
+                }
+                else { }
+            }
+        });
 
         edit_nickname.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -136,6 +188,7 @@ public class ProfileFragment extends Fragment {
     private void getSharedLoad() {
         user_id = appData.getString("ID", "");
         sharedNickname = appData.getString("NICKNAME", "");
+        current_login = appData.getString("CURRENT_LOGIN","");
         Log.i("Id 가져오나 확인", "onCreateView : "+ user_id);
         Log.i("Nickname 가져오나 확인", "onCreateView : "+ sharedNickname);
     }
