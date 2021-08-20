@@ -122,6 +122,9 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
             intent.putExtra("nickname",nickname);
             startActivity(intent);
         }
+        else{
+
+        }
 
     }
 

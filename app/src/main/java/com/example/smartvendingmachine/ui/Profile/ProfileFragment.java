@@ -31,8 +31,7 @@ import com.example.smartvendingmachine.ui.board.BoardFragment;
 import com.example.smartvendingmachine.ui.board.BoardMainFragment;
 import com.google.gson.JsonArray;
 import com.kakao.sdk.user.UserApiClient;
-import com.kakao.usermgmt.UserManagement;
-import com.kakao.usermgmt.callback.LogoutResponseCallback;
+
 
 import org.jetbrains.annotations.NotNull;
 import org.json.JSONArray;
@@ -112,8 +111,13 @@ public class ProfileFragment extends Fragment {
                             Log.e(TAG, "로그아웃 성공, SDK에서 토큰 삭제됨");
 
                             SharedPreferences.Editor editor = appData.edit();           // SharedPreferences 에디터 선언.
+
                             editor.putString("CURRENT_LOGIN","");
                             editor.putBoolean("SAVE_LOGIN_DATA", false);
+                            editor.putString("ID", "");
+                            editor.putString("NICKNAME", "");
+
+                            editor.commit();
 
                             Toast.makeText(getActivity(),"로그아웃 하였습니다.",Toast.LENGTH_SHORT).show();
 
