@@ -29,6 +29,7 @@ import com.example.smartvendingmachine.ui.board.BoardAdapter;
 import com.example.smartvendingmachine.ui.board.BoardData;
 import com.example.smartvendingmachine.ui.board.BoardFragment;
 import com.example.smartvendingmachine.ui.board.BoardMainFragment;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.gson.JsonArray;
 import com.kakao.sdk.user.UserApiClient;
 
@@ -98,10 +99,10 @@ public class ProfileFragment extends Fragment {
 
                 if (current_login.equals("NAVER")) { // 네이버 로그아웃
 
-
                     SharedPreferences.Editor editor = appData.edit();           // SharedPreferences 에디터 선언.
                     editor.putString("CURRENT_LOGIN","");
                     editor.putBoolean("SAVE_LOGIN_DATA", false);
+                    editor.commit();
                 }
                 else if(current_login.equals("KAKAO")) {
                     UserApiClient.getInstance().logout(error -> {
@@ -129,9 +130,19 @@ public class ProfileFragment extends Fragment {
 
                 else if (current_login.equals("GOOGLE")) { // 구글 로그아웃
 
+                    FirebaseAuth.getInstance().signOut();
+
                     SharedPreferences.Editor editor = appData.edit();           // SharedPreferences 에디터 선언.
                     editor.putString("CURRENT_LOGIN","");
                     editor.putBoolean("SAVE_LOGIN_DATA", false);
+                    editor.putString("ID", "");
+                    editor.putString("NICKNAME", "");
+                    editor.commit();
+
+                    Toast.makeText(getActivity(),"로그아웃 하였습니다.",Toast.LENGTH_SHORT).show();
+
+                    getActivity().finish();
+
                 }
                 else { }
             }

@@ -33,7 +33,7 @@ public class BoardWriteActivity extends AppCompatActivity {
     private String POST_TITLE, POST_NICKNAME, POST_ID ,POST_CONTENTS;       //게시글 작성 PHP 제목, 닉네임, ID, 내용 인자 값
 
     private static String IP_ADDRESS = "211.211.158.42";
-    private static String TAG = "SmartVendingMachine";
+    private static String TAG = "BoardWrite";
 
 
     EditText mEditTextTitle, mEditTextContents;
