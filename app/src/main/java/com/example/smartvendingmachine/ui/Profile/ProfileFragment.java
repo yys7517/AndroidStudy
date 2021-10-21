@@ -68,7 +68,7 @@ public class ProfileFragment extends Fragment {
 
     private ArrayList<BoardData> mSearchData = new ArrayList<>();
 
-    private static String IP_ADDRESS = "211.211.158.42/yongrun/svm";
+    private static String IP_ADDRESS = "59.14.35.61/yongrun/svm";
     private static String TAG = "프로필 게시물";
     private String mJsonString;
 

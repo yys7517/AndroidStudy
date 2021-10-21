@@ -29,7 +29,7 @@ public class NicknameEditActivity extends AppCompatActivity {
 
     private String USER_NICKNAME, USER_ID;
 
-    private static String IP_ADDRESS = "211.211.158.42";
+    private static String IP_ADDRESS = "59.14.35.61";
     private static String TAG = "SmartVendingMachine";
 
 
