@@ -31,10 +31,10 @@ import com.example.smartvendingmachine.R;
 public class HomeFragment extends Fragment {
 
     //수량 TextView
-    private TextView mTextViewCocacolaStock, mTextViewChilsungStock, mTextViewSsekssekStock, mTextViewFantaStock, mTextViewMountainStock, mTextViewGalbaeStock;
+    private TextView mTextViewCocacolaStock, mTextViewSpriteStock, mTextViewFantaStock, mTextViewPepsiStock;
 
     //가격 TextView
-    private TextView mTextViewCocacolaPrice, mTextViewChilsungPrice, mTextViewSsekssekPrice, mTextViewFantaPrice, mTextViewMountainPrice, mTextViewGalbaePrice;
+    private TextView mTextViewCocacolaPrice, mTextViewSpritePrice, mTextViewFantaPrice, mTextViewPepsiPrice;
 
     private static String IP_ADDRESS = "59.14.35.61/yongrun/svm";
     private static String TAG = "phptest";
@@ -55,20 +55,15 @@ public class HomeFragment extends Fragment {
 
         // 수량
         mTextViewCocacolaStock = (TextView) rootview.findViewById(R.id.mTextViewCocacolaStock);
-        mTextViewChilsungStock = (TextView) rootview.findViewById(R.id.mTextViewChilsungStock);
-        mTextViewSsekssekStock = (TextView) rootview.findViewById(R.id.mTextViewSsekssekStock);
+        mTextViewSpriteStock = (TextView) rootview.findViewById(R.id.mTextViewSpriteStock);
         mTextViewFantaStock = (TextView) rootview.findViewById(R.id.mTextViewFantaStock);
-        mTextViewMountainStock = (TextView) rootview.findViewById(R.id.mTextViewMountainStock);
-        mTextViewGalbaeStock = (TextView) rootview.findViewById(R.id.mTextViewGalbaeStock);
+        mTextViewPepsiStock = (TextView) rootview.findViewById(R.id.mTextViewPepsiStock);
 
         // 가격
         mTextViewCocacolaPrice = (TextView) rootview.findViewById(R.id.mTextViewCocacolaPrice);
-        mTextViewChilsungPrice = (TextView) rootview.findViewById(R.id.mTextViewChilsungPrice);
-        mTextViewSsekssekPrice = (TextView) rootview.findViewById(R.id.mTextViewSsekssekPrice);
+        mTextViewSpritePrice = (TextView) rootview.findViewById(R.id.mTextViewSpritePrice);
         mTextViewFantaPrice = (TextView) rootview.findViewById(R.id.mTextViewFantaPrice);
-        mTextViewMountainPrice = (TextView) rootview.findViewById(R.id.mTextViewMountainPrice);
-        mTextViewGalbaePrice = (TextView) rootview.findViewById(R.id.mTextViewGalbaePrice);
-
+        mTextViewPepsiPrice = (TextView) rootview.findViewById(R.id.mTextViewPepsiPrice);
 
         mRecyclerView = (RecyclerView) rootview.findViewById(R.id.mRecyclerView);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
@@ -82,7 +77,10 @@ public class HomeFragment extends Fragment {
         mAdapter.notifyDataSetChanged();
 
         GetData task = new GetData();
+        // 59.14.35.61/yongrun/svm
         task.execute("http://" + IP_ADDRESS + "/drink.php", "");
+
+        // http:/59.14.35.61/yongrun/svm/drink.php
 
         swipeRefreshLayout = rootview.findViewById(R.id.refresh_layout);
 
@@ -237,14 +235,9 @@ public class HomeFragment extends Fragment {
                         mTextViewCocacolaStock.setText("수량 : " + mArrayList.get(i).getDRStock() + " 개");
                         break;
 
-                    case "Chilsung Cider":
-                        mTextViewChilsungPrice.setText("가격 : " + mArrayList.get(i).getDRPrice() + " 원");
-                        mTextViewChilsungStock.setText("수량 : " + mArrayList.get(i).getDRStock() + " 개");
-                        break;
-
-                    case "Ssekssek":
-                        mTextViewSsekssekPrice.setText("가격 : " + mArrayList.get(i).getDRPrice() + " 원");
-                        mTextViewSsekssekStock.setText("수량 : " + mArrayList.get(i).getDRStock() + " 개");
+                    case "Sprite":
+                        mTextViewSpritePrice.setText("가격 : " + mArrayList.get(i).getDRPrice() + " 원");
+                        mTextViewSpriteStock.setText("수량 : " + mArrayList.get(i).getDRStock() + " 개");
                         break;
 
                     case "Fanta Orange":
@@ -252,14 +245,9 @@ public class HomeFragment extends Fragment {
                         mTextViewFantaStock.setText("수량 : " + mArrayList.get(i).getDRStock() + " 개");
                         break;
 
-                    case "Mountain Dew":
-                        mTextViewMountainPrice.setText("가격 : " + mArrayList.get(i).getDRPrice() + " 원");
-                        mTextViewMountainStock.setText("수량: " + mArrayList.get(i).getDRStock() + " 개");
-                        break;
-
-                    case "Galbae":
-                        mTextViewGalbaePrice.setText("가격 : " + mArrayList.get(i).getDRPrice() + " 원");
-                        mTextViewGalbaeStock.setText("수량: " + mArrayList.get(i).getDRStock() + " 개");
+                    case "Pepsi":
+                        mTextViewPepsiPrice.setText("가격 : " + mArrayList.get(i).getDRPrice() + " 원");
+                        mTextViewPepsiStock.setText("수량 : " + mArrayList.get(i).getDRStock() + " 개");
                         break;
 
                     default:
