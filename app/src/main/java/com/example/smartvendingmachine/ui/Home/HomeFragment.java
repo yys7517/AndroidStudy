@@ -36,7 +36,7 @@ public class HomeFragment extends Fragment {
     //가격 TextView
     private TextView mTextViewCocacolaPrice, mTextViewChilsungPrice, mTextViewSsekssekPrice, mTextViewFantaPrice, mTextViewMountainPrice, mTextViewGalbaePrice;
 
-    private static String IP_ADDRESS = "211.211.158.42/yongrun/svm";
+    private static String IP_ADDRESS = "59.14.35.61/yongrun/svm";
     private static String TAG = "phptest";
 
 

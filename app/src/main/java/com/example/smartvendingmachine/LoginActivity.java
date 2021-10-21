@@ -66,7 +66,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     private static final int REQ_SIGN_GOOGLE = 100; //구글 로그인 결과 코드
 
     //서버 IP
-    private static String IP_ADDRESS = "211.211.158.42";
+    private static String IP_ADDRESS = "59.14.35.61";
     private static String StrUSER_ID, StrUSER_NICKNAME,StrUSER_EMAIL;
 
     //네이버 로그인
