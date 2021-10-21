@@ -1,12 +1,11 @@
 package com.example.smartvendingmachine.ui.board;
 
-import android.widget.ImageView;
 
 public class BoardData {
 
     public BoardData() {}
 
-    //ImageView profile;
+
     private String userid; //게시물 작성자 ID
     private String code; //게시물 기본키
     private String title; //게시물 제목
