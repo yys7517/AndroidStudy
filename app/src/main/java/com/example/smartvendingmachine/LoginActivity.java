@@ -307,7 +307,6 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                     if ( ! (StrUSER_ID == null || StrUSER_NICKNAME == null || StrUSER_ID=="" || StrUSER_NICKNAME == "") )
                     {
                         save(true,StrUSER_ID,StrUSER_NICKNAME,"NAVER"); // SharedPreferences로 유저 아이디, 유저 닉네임 값 App내에 저장.
-                        load();
                         Intent intent = new Intent(LoginActivity.this , MainActivity.class);
                         startActivity(intent);
                     }
@@ -433,7 +432,6 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                     if ( ! (StrUSER_ID == null || StrUSER_NICKNAME == null || StrUSER_ID=="" || StrUSER_NICKNAME == "") )
                     {
                         save(true,StrUSER_ID,StrUSER_NICKNAME,"KAKAO"); // SharedPreferences로 유저 아이디, 유저 닉네임 값 App내에 저장.
-                        load();
                         Intent intent = new Intent(LoginActivity.this , MainActivity.class);
                         startActivity(intent);
                     }
@@ -484,7 +482,6 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                             if ( ! (StrUSER_ID == null || StrUSER_NICKNAME == null || StrUSER_ID=="" || StrUSER_NICKNAME == "") )
                             {
                                 save(true,StrUSER_ID,StrUSER_NICKNAME,"GOOGLE"); // SharedPreferences로 유저 아이디, 유저 닉네임 값 App내에 저장.
-                                load();
                                 Intent intent = new Intent(LoginActivity.this , MainActivity.class);
                                 startActivity(intent);
                             }

@@ -82,6 +82,7 @@ public class ProfileFragment extends Fragment {
         SharedPreferences.Editor editor = appData.edit();           // SharedPreferences 에디터 선언.
 
         getSharedLoad();    // App 사용자 ID, App 사용자 닉네임 가져오기
+        Log.d("로그인 정보", current_login);
         UserUpdate();       // 유저 정보 새로고침.
 
         BoardCount = 0;     // 게시글 개수 초기값 0
@@ -102,7 +103,12 @@ public class ProfileFragment extends Fragment {
                     SharedPreferences.Editor editor = appData.edit();           // SharedPreferences 에디터 선언.
                     editor.putString("CURRENT_LOGIN","");
                     editor.putBoolean("SAVE_LOGIN_DATA", false);
+                    Log.d("로그인 정보", current_login);
                     editor.commit();
+
+                    Toast.makeText(getActivity(),"로그아웃 하였습니다.",Toast.LENGTH_SHORT).show();
+
+                    getActivity().finish();
                 }
                 else if(current_login.equals("KAKAO")) {
                     UserApiClient.getInstance().logout(error -> {
