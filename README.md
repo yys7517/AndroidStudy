@@ -1,4 +1,4 @@
-# smartvendingmachine
+# SmartVendingMachine
 ## 서비스 소개
 자판기 음료수 수량 현황을 알 수 있고, 사용자의 의견을 반영하여 고장이 나거나 음료수 종류를 다양하게 할 수 있도록 사용자들의 의견을 반영하는 애플리케이션 서비스입니다.
 
@@ -28,5 +28,5 @@
 ### Third Party
 [gson](https://github.com/google/gson) 
 
-### 시연영상
-[시연영상](https://www.youtube.com/watch?v=6tzyGNPS4sY)
+### 시현 영상
+[시현 영상](https://www.youtube.com/watch?v=6tzyGNPS4sY)
