@@ -1,0 +1,330 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#ffffff"
+    android:orientation="vertical"
+    tools:context=".MainActivity">
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="40dp"
+        android:layout_marginBottom="30dp"
+        android:adjustViewBounds="true"
+        android:src="@drawable/logo" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:background="@drawable/byregion_shape"
+        android:orientation="vertical"
+        android:padding="20dp"
+
+        >
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="70dp"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:id="@+id/sudokwon"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:layout_weight="1"
+                android:src="@drawable/sudokwon"></ImageView>
+
+            <ImageView
+                android:id="@+id/daejeon"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:layout_weight="1"
+                android:src="@drawable/daejeon"></ImageView>
+
+            <ImageView
+                android:id="@+id/daegu"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:layout_weight="1"
+                android:src="@drawable/daegu"></ImageView>
+
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="3dp"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/sudokwontext"
+                android:layout_width="70dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:fontFamily="@font/tmoney_bold"
+                android:text="수도권"
+                android:textAlignment="center"
+                android:textColor="#000000"
+                android:textSize="17dp"
+                android:textStyle="bold"></TextView>
+
+            <TextView
+                android:id="@+id/daejeontext"
+                android:layout_width="70dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:fontFamily="@font/tmoney_bold"
+                android:text="대전"
+                android:textAlignment="center"
+                android:textColor="#000000"
+                android:textSize="17dp"
+                android:textStyle="bold"></TextView>
+
+            <TextView
+                android:id="@+id/daegutext"
+                android:layout_width="70dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:fontFamily="@font/tmoney_bold"
+                android:text="대구"
+                android:textAlignment="center"
+                android:textColor="#000000"
+                android:textSize="17dp"
+                android:textStyle="bold"></TextView>
+
+
+        </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="2.5dp"
+            android:layout_centerInParent="true"
+            android:layout_marginLeft="12dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginRight="12dp"
+            android:layout_marginBottom="20dp"
+            android:background="#000000" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="70dp"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:id="@+id/kwangju"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:layout_weight="1"
+                android:src="@drawable/gwangju"></ImageView>
+
+
+            <ImageView
+                android:id="@+id/busan"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:layout_weight="1"
+                android:src="@drawable/busan"></ImageView>
+            <ImageView
+                android:id="@+id/mapimg"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:layout_weight="1"
+                android:src="@drawable/map_icon"
+                ></ImageView>
+
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="3dp"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/kwangjutext"
+                android:layout_width="70dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:fontFamily="@font/tmoney_bold"
+                android:text="광주"
+                android:textAlignment="center"
+                android:textColor="#000000"
+                android:textSize="17dp"
+                android:textStyle="bold"></TextView>
+
+
+            <TextView
+                android:id="@+id/busantext"
+                android:layout_width="70dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:fontFamily="@font/tmoney_bold"
+                android:text="부산"
+                android:textAlignment="center"
+                android:textColor="#000000"
+                android:textSize="17dp"
+                android:textStyle="bold"></TextView>
+            <TextView
+                android:id="@+id/maptext"
+                android:layout_width="70dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:fontFamily="@font/tmoney_bold"
+                android:text="주변 역 찾기"
+                android:textAlignment="center"
+                android:textColor="#000000"
+                android:textSize="17dp"
+                android:textStyle="bold">
+
+            </TextView>
+
+
+        </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="2.5dp"
+            android:layout_centerInParent="true"
+            android:layout_marginLeft="12dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginRight="12dp"
+            android:layout_marginBottom="20dp"
+            android:background="#000000" />
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="70dp"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:id="@+id/subwaymap"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:layout_weight="1"
+                android:src="@drawable/subwaymap"></ImageView>
+            <ImageView
+                android:id="@+id/webview"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:layout_weight="1"
+                android:src="@drawable/webview"></ImageView>
+
+
+
+            <ImageView
+                android:id="@+id/helpimg"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:layout_weight="1"
+                android:src="@drawable/help"
+                ></ImageView>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="3dp"
+            android:orientation="horizontal">
+
+
+            <TextView
+                android:id="@+id/subwaymaptext"
+                android:layout_width="70dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:fontFamily="@font/tmoney_bold"
+                android:text="지하철 노선도"
+                android:textAlignment="center"
+                android:textColor="#000000"
+                android:textSize="17dp"
+                android:textStyle="bold"></TextView>
+
+            <TextView
+                android:id="@+id/webviewtext"
+                android:layout_width="70dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:fontFamily="@font/tmoney_bold"
+                android:text="철도역 운영정보"
+                android:textAlignment="center"
+                android:textColor="#000000"
+                android:textSize="16dp"
+                android:textStyle="bold"></TextView>
+
+            <TextView
+                android:id="@+id/helptext"
+                android:layout_width="70dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:fontFamily="@font/tmoney_bold"
+                android:text="철도역 편의정보"
+                android:textAlignment="center"
+                android:textColor="#000000"
+                android:textSize="16dp"
+                android:textStyle="bold"
+                ></TextView>
+        </LinearLayout>
+
+
+    </LinearLayout>
+
+
+    <TextView
+        android:id="@+id/info"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:background="@drawable/byregion_shape"
+        android:fontFamily="@font/tmoney_bold"
+        android:padding="10dp"
+        android:text="정보 제공처 / 저작권 정보"
+        android:textAlignment="center"
+        android:textColor="#000000"
+        android:textSize="17dp"
+        android:textStyle="bold"
+        tools:ignore="RtlCompat"></TextView>
+    <TextView
+        android:id="@+id/opensource"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:layout_gravity="bottom"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:background="@drawable/byregion_shape"
+        android:fontFamily="@font/tmoney_bold"
+        android:padding="10dp"
+        android:text="오픈소스 정보"
+        android:textAlignment="center"
+        android:textColor="#000000"
+        android:textSize="17dp"
+        android:textStyle="bold"
+        tools:ignore="RtlCompat"></TextView>
+
+    <TextView
+        android:id="@+id/opensource_info"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:scrollbars="vertical|horizontal"
+        android:fontFamily="@font/tmoney_bold"
+        android:text=""
+        android:textColor="#000000"
+        android:textSize="10dp" />
+
+
+</LinearLayout>
