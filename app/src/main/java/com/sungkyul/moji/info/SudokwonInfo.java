@@ -21,7 +21,6 @@ import androidx.core.content.ContextCompat;
 
 import com.sungkyul.moji.FacilDBHelper;
 import com.sungkyul.moji.KricHelp;
-import com.sungkyul.moji.MainActivity;
 import com.sungkyul.moji.R;
 
 public class SudokwonInfo extends AppCompatActivity {
