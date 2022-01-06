@@ -8,10 +8,9 @@ import android.view.ViewGroup;
 import android.widget.Button;
 
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
 
-import com.example.smartvendingmachine.R;
 import com.example.smartvendingmachine.LoginActivity;
+import com.example.smartvendingmachine.R;
 
 
 public class FragmentGuideC extends Fragment {

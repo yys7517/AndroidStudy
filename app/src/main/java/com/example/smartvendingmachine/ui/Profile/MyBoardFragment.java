@@ -22,8 +22,6 @@ import androidx.fragment.app.FragmentTransaction;
 
 import com.example.smartvendingmachine.R;
 import com.example.smartvendingmachine.ui.board.BoardEditActivity;
-import com.example.smartvendingmachine.ui.board.BoardFragment;
-import com.example.smartvendingmachine.ui.board.BoardMainFragment;
 
 import org.json.JSONArray;
 import org.json.JSONException;

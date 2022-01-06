@@ -11,7 +11,6 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.smartvendingmachine.LoginActivity;
-import com.example.smartvendingmachine.MainActivity;
 import com.example.smartvendingmachine.R;
 import com.example.smartvendingmachine.ui.Guide.GuideActivity;
 

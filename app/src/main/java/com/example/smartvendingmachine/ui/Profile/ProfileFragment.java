@@ -1,7 +1,8 @@
 package com.example.smartvendingmachine.ui.Profile;
 
+import static android.content.Context.MODE_PRIVATE;
+
 import android.app.ProgressDialog;
-import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.AsyncTask;
@@ -15,26 +16,18 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.DefaultItemAnimator;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
-import com.example.smartvendingmachine.LoginActivity;
 import com.example.smartvendingmachine.R;
 import com.example.smartvendingmachine.ui.board.BoardAdapter;
 import com.example.smartvendingmachine.ui.board.BoardData;
-import com.example.smartvendingmachine.ui.board.BoardFragment;
-import com.example.smartvendingmachine.ui.board.BoardMainFragment;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.gson.JsonArray;
 import com.kakao.sdk.user.UserApiClient;
 
-
-import org.jetbrains.annotations.NotNull;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -46,8 +39,6 @@ import java.io.OutputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.ArrayList;
-
-import static android.content.Context.MODE_PRIVATE;
 
 public class ProfileFragment extends Fragment {
 

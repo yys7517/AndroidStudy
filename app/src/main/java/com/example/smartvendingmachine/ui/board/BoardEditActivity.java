@@ -61,7 +61,8 @@ public class BoardEditActivity extends AppCompatActivity {
         // 수정 시 기존 값이 있다면 받아오는 것 ( TextUtils.isempty )
         Intent intent = getIntent();
         if ( ! ( TextUtils.isEmpty(intent.getStringExtra("title")) &&
-                TextUtils.isEmpty(intent.getStringExtra("contents")) && TextUtils.isEmpty(intent.getStringExtra("post_code"))) ) {
+                TextUtils.isEmpty(intent.getStringExtra("contents"))
+                && TextUtils.isEmpty(intent.getStringExtra("post_code"))) ) {
 
             mTitle = intent.getStringExtra("title");        //기존 게시글 제목
             mContents =intent.getStringExtra("contents");   //기존 게시글 내용
