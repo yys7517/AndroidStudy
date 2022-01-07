@@ -30,3 +30,8 @@
 
 ### 시현 영상
 [시현 영상](https://www.youtube.com/watch?v=6tzyGNPS4sY)
+
+## Contact Us
+* [배용현](https://github.com/Baeyonghyeon)
+* [윤영선](https://github.com/yys7517)
+* [이현호](https://github.com/S4KITA)
