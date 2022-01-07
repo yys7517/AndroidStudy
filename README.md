@@ -5,7 +5,8 @@
 오산 장애인 시설 정보들을 파악할 수 있습니다. 시설정보는 시설명, 시설 위치, 주소, 연락처, 홈페이지, 장애인화장실, 휠체어리프트, 전동휠체어 충전설비, 프로그램 설명, 프로그램 이용료 가 포함됩니다.
    
 ## 서비스 스크린샷   
-   
+   ![Osan](https://user-images.githubusercontent.com/77232856/148517389-c57fd463-afd4-43ad-8379-05f9267947d0.png)   
+
 ## 사용된 라이브러리
 ### Foundation   
 [Appcompat](https://developer.android.com/topic/libraries/support-library/packages#v7-appcompat)   
