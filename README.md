@@ -27,9 +27,8 @@ Moji(모두의 지하철) 앱은 이러한 점을 보완하여 다양한 편의�
 [WebView](https://developer.android.com/guide/webapps/webview)  
 [Subsampling Scale Image View](https://github.com/davemorrissey/subsampling-scale-image-view)  
 
-##수상내역
-* 역 편의정보 공공데이터 활용 아이디어 기획 및 서비스 개발 공모전 최우수상
-+ [철도산업정보센터](http://www.kric.go.kr/jsp/board/portal/sub07/ntc/mainNoticeDetail.jsp?p_id=415979&pageNo=6&q_name=1&q_value=)
+## 수상내역
+* [역 편의정보 공공데이터 활용 아이디어 기획 및 서비스 개발 공모전 최우수상](http://www.kric.go.kr/jsp/board/portal/sub07/ntc/mainNoticeDetail.jsp?p_id=415979&pageNo=6&q_name=1&q_value=)
 
 ## Contact Us
 * [배용현](https://github.com/Baeyonghyeon)
