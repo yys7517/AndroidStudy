@@ -1,7 +1,6 @@
 package com.sungkyul.osan.map;
 
 import android.Manifest;
-
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
@@ -10,14 +9,13 @@ import android.content.pm.PackageManager;
 import android.location.Location;
 import android.location.LocationManager;
 import android.os.Bundle;
+import android.util.Log;
+import android.widget.ListView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
-
-import android.util.Log;
-import android.widget.ListView;
-import android.widget.Toast;
 
 import com.sungkyul.osan.R;
 

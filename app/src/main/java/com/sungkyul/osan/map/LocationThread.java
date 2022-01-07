@@ -1,8 +1,6 @@
 package com.sungkyul.osan.map;
 
 import android.os.Bundle;
-import android.os.Handler;
-import android.os.Message;
 
 import java.util.List;
 
