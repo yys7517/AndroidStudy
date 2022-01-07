@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
+    android:background="#ffffff">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:layout_marginBottom="10dp"
+        android:orientation="horizontal">
+
+        <ImageView
+            android:id="@+id/icon1"
+            android:layout_width="45dp"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="15dp"
+            android:layout_marginRight="15dp"
+            android:layout_weight="1"
+            ></ImageView>
+
+        <TextView
+            android:id="@+id/categoryname"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:fontFamily="@font/tmoney_bold"
+            android:text="차량지원 서비스"
+            android:textAlignment="center"
+            android:textColor="#000000"
+            android:textSize="37dp"
+            android:textStyle="bold"></TextView>
+
+        <ImageView
+            android:id="@+id/icon2"
+            android:layout_width="45dp"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="15dp"
+            android:layout_marginRight="15dp"
+            android:layout_weight="1"></ImageView>
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <AutoCompleteTextView
+            android:id="@+id/autocompfacil"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_marginRight="5dp"
+            android:layout_marginLeft="15dp"
+            android:layout_weight="2"
+            android:completionThreshold="1"
+            android:hint="   검색할 항목을 입력하세요."
+            android:textSize="20dp"
+            android:textColorHint="#a0a0a0"
+            android:background="@drawable/white_edittext" />
+
+        <Button
+            android:id="@+id/btnSearch"
+            android:layout_width="80dp"
+            android:layout_height="match_parent"
+            android:layout_marginRight="15dp"
+            android:background="@drawable/btn_bg"
+            android:fontFamily="@font/tmoney_bold"
+            android:text="검색"
+            android:textColor="#4472c4"
+            android:textSize="20dp"
+            android:textStyle="bold"
+            />
+
+    </LinearLayout>
+
+
+    <ListView
+        android:id="@+id/facil_listview"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="15dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginRight="15dp"
+        android:textAlignment="center"
+        android:layout_gravity="center"
+        android:background="@drawable/list_shape"
+        android:divider="#000000"
+        android:dividerHeight="2dp"
+        android:fastScrollEnabled="true"
+        android:fontFamily="@font/tmoney_bold">
+    </ListView>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/test"
+        android:visibility="invisible"/>
+</LinearLayout>
