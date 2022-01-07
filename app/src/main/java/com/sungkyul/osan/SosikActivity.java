@@ -56,7 +56,7 @@ public class SosikActivity extends AppCompatActivity {
         mWebView.getSettings().setUseWideViewPort(true);
 
         Intent intent = getIntent();
-        String url = "https://www.osan.go.kr/osan/bbs/list.do?bbsMstIdx=1&bbsIdx=1&mId=0301000000";
+        String url = "https://www.osan.go.kr/portal/bbs/list.do?ptIdx=111&mId=0301010000";
         String title = intent.getStringExtra("title");
 
 
