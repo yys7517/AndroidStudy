@@ -9,18 +9,24 @@
 
 ## 사용된 라이브러리
 ### Foundation   
-[Appcompat](https://developer.android.com/topic/libraries/support-library/packages#v7-appcompat)   
+[Appcompat](https://developer.android.com/topic/libraries/support-library/packages#v7-appcompat) 
+
 ### Architcture   
 [Lifecycles](https://developer.android.com/topic/libraries/architecture/lifecycle)   
-[ViewModel](https://developer.android.com/topic/libraries/architecture/viewmodel)   
+[ViewModel](https://developer.android.com/topic/libraries/architecture/viewmodel) 
+
 ### UI   
 [LinearLayout](https://developer.android.com/reference/android/widget/LinearLayout)   
 [RelativeLayout](https://developer.android.com/reference/kotlin/android/widget/RelativeLayout)  
 [WebView](https://developer.android.com/guide/webapps/webview)  
 [MaterialDesign](https://material.io/design)  
-[ScrollView](https://developer.android.com/reference/androidx/core/view/ScrollingView)  
+[ScrollView](https://developer.android.com/reference/androidx/core/view/ScrollingView)
+
 ### Third Party   
 [kakaomap](https://apis.map.kakao.com/web/guide/)
+
+### Google Play
+https://play.google.com/store/apps/details?id=com.sungkyul.osan
 
 ## Contact Us
 * [배용현](https://github.com/Baeyonghyeon)   
