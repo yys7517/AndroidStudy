@@ -18,6 +18,15 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+        <activity android:name=".Img1_Activity"/>
+        <activity android:name=".Img2_Activity"/>
+        <activity android:name=".Img3_Activity"/>
+        <activity android:name=".Img4_Activity"/>
+        <activity android:name=".Img5_Activity"/>
+        <activity android:name=".Img6_Activity"/>
+        <activity android:name=".Img7_Activity"/>
+
     </application>
 
 </manifest>
