@@ -20,6 +20,7 @@
             app:cardCornerRadius="50dp" >   <!-- CardView의 테두리를 둥글게 하는 기능. -->
 
             <ImageView
+                android:id="@+id/member1"
                 android:src="@drawable/member_1"
                 android:scaleType="fitXY"
                 android:layout_width="120dp"
@@ -36,6 +37,7 @@
             app:cardCornerRadius="50dp" >
 
             <ImageView
+                android:id="@+id/member2"
                 android:src="@drawable/member_2"
                 android:scaleType="fitXY"
                 android:layout_width="120dp"
@@ -51,6 +53,7 @@
             app:cardCornerRadius="50dp" >
 
             <ImageView
+                android:id="@+id/member3"
                 android:src="@drawable/member_3"
                 android:scaleType="fitXY"
                 android:layout_width="120dp"
@@ -72,6 +75,7 @@
             app:cardCornerRadius="50dp" >
 
             <ImageView
+                android:id="@+id/member4"
                 android:src="@drawable/member_4"
                 android:scaleType="fitXY"
                 android:layout_width="120dp"
@@ -84,6 +88,7 @@
         app:cardCornerRadius="50dp" >
 
         <ImageView
+            android:id="@+id/member5"
             android:src="@drawable/member_5"
             android:scaleType="fitXY"
             android:layout_width="120dp"
@@ -96,6 +101,7 @@
         app:cardCornerRadius="50dp" >
 
         <ImageView
+            android:id="@+id/member6"
             android:src="@drawable/member_6"
             android:scaleType="fitXY"
             android:layout_width="120dp"
@@ -117,6 +123,7 @@
             app:cardCornerRadius="50dp" >
 
             <ImageView
+                android:id="@+id/member7"
                 android:src="@drawable/member_7"
                 android:scaleType="fitXY"
                 android:layout_width="120dp"
@@ -129,6 +136,7 @@
         app:cardCornerRadius="50dp" >
 
         <ImageView
+            android:id="@+id/member8"
             android:src="@drawable/member_8"
             android:scaleType="fitXY"
             android:layout_width="120dp"
@@ -141,6 +149,7 @@
         app:cardCornerRadius="50dp" >
 
         <ImageView
+            android:id="@+id/member9"
             android:src="@drawable/member_9"
             android:scaleType="fitXY"
             android:layout_width="120dp"
