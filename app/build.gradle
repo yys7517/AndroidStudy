@@ -29,6 +29,11 @@ android {
     kotlinOptions {
         jvmTarget = '1.8'
     }
+
+    // 1. DataBinding을 위해 gradle 설정.
+    dataBinding {
+        enabled = true
+    }
 }
 
 dependencies {
