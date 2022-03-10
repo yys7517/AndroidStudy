@@ -7,6 +7,13 @@ import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import com.youngsun.databinding_ex.databinding.ActivityMainBinding
 
+//  DataBinding
+/*
+    findViewById()의 경우, 런타임 시 뷰의 계층을 타고 들어가는 방식이라
+    앱이 커질 경우 비효율적인 함수이다.
+    DataBinding은 각 레이아웃마다 binding class를 만들게 되고, binding 클래스를 통해 쉽게 뷰에 접근할 수 있다.
+    MVVM 아키텍쳐에서 주로 사용하는 방식.
+ */
 class MainActivity : AppCompatActivity() {
 
     private lateinit var binding : ActivityMainBinding
