@@ -6,7 +6,7 @@
 
     <TextView
         android:id="@+id/listViewTextArea"
-        android:textSize="30sp"
+        android:textSize="15sp"
         android:layout_margin="10dp"
         android:text="TextArea"
         android:fontFamily="@font/bmjua_ttf"
