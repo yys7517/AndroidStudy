@@ -26,6 +26,13 @@ class SentenceActivity : AppCompatActivity() {
         val listAdapter = ListViewAdapter(senteceList)
         listview.adapter = listAdapter
 
+
+    }
+
+    override fun onBackPressed() {
+        val intent = Intent(this, MainActivity::class.java)
+        startActivity(intent)
+        finish()
     }
 
 }
