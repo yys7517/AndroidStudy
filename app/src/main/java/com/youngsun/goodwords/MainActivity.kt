@@ -29,9 +29,16 @@ class MainActivity : AppCompatActivity() {
         senteceList.add("그 사람 입장에 서기 전까지 절대 그 사람을 욕하거나 책망하지 마라.")
         senteceList.add("뛰어난 말에게도 채찍이 필요하다.")
 
-        // MainActivity의 명언 초기 값을 설정.
-        // sentenceList에서 랜덤한 값을 꺼내오자 -> senteceList.random()
-        binding.showSentenceText.setText( senteceList.random() )
+        // 전체 명언 리스트에서 클릭되어 Intent로 넘겨받은 명언 내용.
+        val goodword = intent.getStringExtra("goodword")
+
+        // 아이템이 클릭되어 Intent로 전달받은 명언이 없다면 ?
+        if( goodword == null )
+            binding.showSentenceText.setText( senteceList.random() ) // sentenceList에서 랜덤한 값을 꺼내오자 -> senteceList.random()
+
+        // 아이템이 클릭되어 Intent로 전달받은 명언이 있다면 ?
+        else
+            binding.showSentenceText.setText( goodword )    // 리스트에서 선택된 명언으로 설정.
 
         // 전체 명언 보기 버튼 클릭 시 전체 명언 리스트를 보여주는 Activity로 이동.
         binding.showAllSentenceBtn.setOnClickListener{

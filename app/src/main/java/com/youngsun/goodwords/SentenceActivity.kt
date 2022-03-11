@@ -26,6 +26,11 @@ class SentenceActivity : AppCompatActivity() {
         val listAdapter = ListViewAdapter(senteceList)
         listview.adapter = listAdapter
 
+        listview.setOnItemClickListener { parent, view, position, id ->
+            val intent = Intent( this, MainActivity::class.java )
+            intent.putExtra("goodword", senteceList[position])
+            startActivity(intent)
+        }
 
     }
 
