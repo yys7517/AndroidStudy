@@ -11,6 +11,8 @@ import androidx.recyclerview.widget.RecyclerView
 // RecyclerView의 경우, ViewHolder 패턴을 강제하여, 뷰 바인딩을 한 번만 해주고,
 // 그 후에는 바인딩 된 뷰 객체를 재활용 한다는 장점.
 
+// 참고 : https://beenii.tistory.com/73
+
 class RecyclerViewAdapter( val items : MutableList<String> ) : RecyclerView.Adapter<RecyclerViewAdapter.ViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerViewAdapter.ViewHolder {
