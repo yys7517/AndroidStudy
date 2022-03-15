@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main_nav"
+    app:startDestination="@id/singer1_Fragment">
+    <fragment
+        android:id="@+id/singer1_Fragment"
+        android:name="com.youngsun.trotsong_list.Singer1_Fragment"
+        android:label="fragment_singer1"
+        tools:layout="@layout/fragment_singer1" >
+        <action
+            android:id="@+id/action_singer1_Fragment_to_singer2_Fragment2"
+            app:destination="@id/singer2_Fragment2" />
+        <action
+            android:id="@+id/action_singer1_Fragment_to_singer3_Fragment"
+            app:destination="@id/singer3_Fragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/singer2_Fragment2"
+        android:name="com.youngsun.trotsong_list.Singer2_Fragment"
+        android:label="fragment_singer2"
+        tools:layout="@layout/fragment_singer2" >
+        <action
+            android:id="@+id/action_singer2_Fragment2_to_singer1_Fragment"
+            app:destination="@id/singer1_Fragment" />
+        <action
+            android:id="@+id/action_singer2_Fragment2_to_singer3_Fragment"
+            app:destination="@id/singer3_Fragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/singer3_Fragment"
+        android:name="com.youngsun.trotsong_list.Singer3_Fragment"
+        android:label="fragment_singer3"
+        tools:layout="@layout/fragment_singer3" >
+        <action
+            android:id="@+id/action_singer3_Fragment_to_singer1_Fragment"
+            app:destination="@id/singer1_Fragment" />
+        <action
+            android:id="@+id/action_singer3_Fragment_to_singer2_Fragment2"
+            app:destination="@id/singer2_Fragment2" />
+    </fragment>
+</navigation>
