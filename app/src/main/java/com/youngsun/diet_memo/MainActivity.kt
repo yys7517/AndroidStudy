@@ -55,7 +55,7 @@ class MainActivity : AppCompatActivity() {
 
             saveBtn?.setOnClickListener {
                 // Firebase Realtime database 에 메모 내용과 날짜를 저장.
-                // Write a message to the database
+
                 val database = Firebase.database
                 val myRef = database.getReference("myMemo")
 
@@ -65,13 +65,13 @@ class MainActivity : AppCompatActivity() {
                 // myRef.setValue("Hello, World!")          // database 내 값 설정하기.
                 // myRef.push().setValue("Hello, World!")   // database 내에 값 push하기.
 
-                if( dateText == "" ) {
+                if( dateText == "" ) {  // 날짜 선택 미 완료 시
                     Toast.makeText(this, "날짜를 선택하세요 !", Toast.LENGTH_SHORT).show()
                 }
-                else if ( myMemo == "" || myMemo == null ) {
+                else if ( myMemo == "" || myMemo == null ) {    // 메모 내용 미 입력 시
                     Toast.makeText(this, "메모 내용을 입력하세요 !", Toast.LENGTH_SHORT).show()
                 }
-                else {
+                else {  // 날짜 선택 + 메모 내용 입력 완료 시
                     // 값 삽입.
                     val data = DataModel( dateText, myMemo )
                     myRef
