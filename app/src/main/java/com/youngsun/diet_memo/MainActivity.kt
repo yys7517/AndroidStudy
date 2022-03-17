@@ -5,10 +5,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
-import android.widget.Button
-import android.widget.DatePicker
-import android.widget.EditText
-import android.widget.ImageView
+import android.widget.*
 import androidx.appcompat.app.AlertDialog
 import com.google.firebase.database.ktx.database
 import com.google.firebase.ktx.Firebase
@@ -60,16 +57,32 @@ class MainActivity : AppCompatActivity() {
                 // Firebase Realtime database 에 메모 내용과 날짜를 저장.
                 // Write a message to the database
                 val database = Firebase.database
-                val myRef = database.getReference("message")
+                val myRef = database.getReference("myMemo")
 
                 // 입력된 메모 내용을 가져온다.
-                val memo = mAlertDialog.findViewById<EditText>(R.id.edtMemo)?.text.toString()
+                val myMemo = mAlertDialog.findViewById<EditText>(R.id.edtMemo)?.text.toString()
 
                 // myRef.setValue("Hello, World!")          // database 내 값 설정하기.
                 // myRef.push().setValue("Hello, World!")   // database 내에 값 push하기.
 
+                if( dateText == "" ) {
+                    Toast.makeText(this, "날짜를 선택하세요 !", Toast.LENGTH_SHORT).show()
+                }
+                else if ( myMemo == "" || myMemo == null ) {
+                    Toast.makeText(this, "메모 내용을 입력하세요 !", Toast.LENGTH_SHORT).show()
+                }
+                else {
+                    // 값 삽입.
+                    val data = DataModel( dateText, myMemo )
+                    myRef
+                        .push()
+                        .setValue( data )
 
+                    Toast.makeText(this, "메모가 성공적으로 저장되었습니다 !", Toast.LENGTH_SHORT).show()
 
+                    // Dialog 창 닫기.
+                    mAlertDialog.dismiss()
+                }
             }
         }
     }
