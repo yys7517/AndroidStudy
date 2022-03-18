@@ -4,17 +4,22 @@
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:background="@drawable/radius"
-    android:layout_height="150dp">
+    android:layout_margin="10dp"
+    android:layout_height="170dp">
 
     <ImageView
         android:id="@+id/rvImage"
         android:src="@drawable/ic_launcher_background"
         android:layout_marginTop="10dp"
         android:layout_gravity="center"
+        android:scaleType="fitXY"
         android:layout_width="wrap_content"
-        android:layout_height="100dp"/>
+        android:layout_height="120dp"/>
 
     <TextView
+        android:textColor="@color/black"
+        android:fontFamily="@font/bmjua_ttf"
+        android:textSize="20sp"
         android:id="@+id/rvTitle"
         android:text="text"
         android:layout_marginTop="10dp"
