@@ -13,6 +13,9 @@
         android:theme="@style/Theme.Mango_contents"
         android:usesCleartextTraffic="true">
         <activity
+            android:name=".JoinActivity"
+            android:exported="false" />
+        <activity
             android:name=".ViewActivity"
             android:exported="false" />
         <activity
