@@ -31,6 +31,7 @@ class JoinActivity : AppCompatActivity() {
                         Toast.makeText(this, "회원가입 성공!", Toast.LENGTH_SHORT).show()
                         val intent = Intent( this, MainActivity::class.java )
                         startActivity(intent)
+                        finish()
 
                     } else {
                         Toast.makeText(this, "회원가입 실패!", Toast.LENGTH_SHORT).show()
