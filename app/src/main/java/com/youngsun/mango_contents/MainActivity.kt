@@ -1,7 +1,9 @@
 package com.youngsun.mango_contents
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.View
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -99,5 +101,15 @@ class MainActivity : AppCompatActivity() {
         recyclerView.adapter = rvAdapter
         // recyclerView.layoutManager = LinearLayoutManager(this)
         recyclerView.layoutManager = GridLayoutManager(this, 2)
+
+        // RecyclerView 아이템 클릭 이벤트
+       rvAdapter.itemClick = object  : RVAdapter.ItemClick {
+            override fun onClick(view: View, position: Int) {
+                val intent = Intent( baseContext, ViewActivity::class.java )
+                intent.putExtra("url",items[position].url)
+                startActivity(intent)
+
+            }
+        }
     }
 }
