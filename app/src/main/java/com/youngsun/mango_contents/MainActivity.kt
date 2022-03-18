@@ -33,13 +33,13 @@ class MainActivity : AppCompatActivity() {
         items.add(
             ContentsModel(
                 "https://www.mangoplate.com/restaurants/ByuIW33rXc",
-                "https://mp-seoul-image-production-s3.mangoplate.com/219116/488522_1639565714575_24422?fit=around|512:512&crop=512:512;*,*&output-format=jpg&output-quality=80",
+                "https://mp-seoul-image-production-s3.mangoplate.com/219116/488522_1639565714575_24420?fit=around|512:512&crop=512:512;*,*&output-format=jpg&output-quality=80",
                 "알라프리마"
             )
         )
 
         val recyclerView = findViewById<RecyclerView>(R.id.rv)
-        val rvAdapter = RVAdapter(items)
+        val rvAdapter = RVAdapter(baseContext, items)
         recyclerView.adapter = rvAdapter
         // recyclerView.layoutManager = LinearLayoutManager(this)
         recyclerView.layoutManager = GridLayoutManager(this, 2)
