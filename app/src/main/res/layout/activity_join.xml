@@ -18,6 +18,7 @@
         android:layout_margin="20dp"
         android:id="@+id/edtPass"
         android:hint="password"
+        android:inputType="textPassword"
         android:layout_width="match_parent"
         android:layout_height="50dp" />
 
