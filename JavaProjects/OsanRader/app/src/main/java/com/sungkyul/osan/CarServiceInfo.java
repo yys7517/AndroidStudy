@@ -231,9 +231,9 @@ public class CarServiceInfo extends AppCompatActivity {
 
         }
 
-// OS가 Marshmallow 이전일 경우 권한체크를 하지 않는다.
-        else {
 
+        else {
+            // OS가 Marshmallow 이전일 경우 권한체크를 하지 않는다.
         }
     }
 
