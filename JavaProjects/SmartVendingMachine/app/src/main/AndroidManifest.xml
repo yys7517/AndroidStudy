@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.example.smartvendingmachine">
+
+    <!-- 인터넷 사용 권한 (서버 접속하려면 필수) -->
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <!-- 인터넷 사용 권한 (서버 접속하려면 필수) -->
+
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+
+    <application
+        android:allowBackup="true"
+        android:icon="@mipmap/ic_launcher"
+        android:name=".KakaoApplication"
+        android:label="@string/app_name"
+        android:roundIcon="@mipmap/ic_launcher_round"
+        android:supportsRtl="true"
+        android:theme="@style/AppTheme"
+        android:usesCleartextTraffic="true"> <!-- 모든 Http URL에 대해서 접근 허용 (서버 접속하려면 필수) -->
+        <activity android:name=".LoginActivity"/>
+        <activity android:name=".MainActivity"/>
+        <activity android:name=".ui.Intro.StartActivity">
+        <intent-filter>
+            <action android:name="android.intent.action.MAIN" />
+
+            <category android:name="android.intent.category.LAUNCHER" />
+        </intent-filter>
+        </activity>
+        <activity android:name=".ui.Guide.GuideActivity"/>
+
+        <!-- 게시글 Activity -->
+        <activity android:name=".ui.board.BoardWriteActivity"/> <!-- 게시글 작성 Activity -->
+        <activity android:name=".ui.board.BoardEditActivity"/>  <!-- 게시글 수정 Activity -->
+        <activity android:name=".ui.Profile.NicknameEditActivity"/> <!-- 닉네임 수정 Activity -->
+
+
+        <activity android:name="com.kakao.sdk.auth.AuthCodeHandlerActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+
+                <!-- Redirect URI: "kakao{NATIVE_APP_KEY}://oauth“ -->
+                <data
+                    android:host="oauth"
+                    android:scheme="kakaocbc15b278157a56287ea87c5ae4b7b82" />
+            </intent-filter>
+        </activity>
+
+    </application>
+
+</manifest>

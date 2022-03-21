@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">smartvendingmachine</string>
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="naver_client_id">vcHA7esvTzOY9Fr3q9eY</string>
+    <string name="naver_client_secret">sgmCkwS4vH</string>
+    <string name="naver_client_name">스마트 자판기</string>
+</resources>
