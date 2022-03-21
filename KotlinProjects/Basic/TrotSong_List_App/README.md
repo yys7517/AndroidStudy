@@ -1,5 +1,5 @@
 # TrotSong_List (Basic)
-RecylerView와 Navigation을 사용한 Fragment를 전환하여 트로트 노래 목록을 보여주는 Project
+트로트 가수 사진으로 Fragment를 Navigation Action으로 전환하여 가수 별 트로트 곡 리스트를 RecyclerView로 보여주는 App.
 - RecyclerView
 - Navigation
 - Fragment
