@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="DesignSurface">
+    <option name="filePathToZoomLevelMap">
+      <map>
+        <entry key="..\:/Users/yys75/ASProjects/Mango_contents/app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.373" />
+        <entry key="..\:/Users/yys75/ASProjects/Mango_contents/app/src/main/res/drawable/radius.xml" value="0.373" />
+        <entry key="..\:/Users/yys75/ASProjects/Mango_contents/app/src/main/res/layout/activity_bookmark.xml" value="0.5276041666666667" />
+        <entry key="..\:/Users/yys75/ASProjects/Mango_contents/app/src/main/res/layout/activity_join.xml" value="0.5276041666666667" />
+        <entry key="..\:/Users/yys75/ASProjects/Mango_contents/app/src/main/res/layout/activity_login.xml" value="0.5276041666666667" />
+        <entry key="..\:/Users/yys75/ASProjects/Mango_contents/app/src/main/res/layout/activity_main.xml" value="0.5276041666666667" />
+        <entry key="..\:/Users/yys75/ASProjects/Mango_contents/app/src/main/res/layout/activity_splash.xml" value="0.5276041666666667" />
+        <entry key="..\:/Users/yys75/ASProjects/Mango_contents/app/src/main/res/layout/activity_view.xml" value="0.2869791666666667" />
+        <entry key="..\:/Users/yys75/ASProjects/Mango_contents/app/src/main/res/layout/rv_item.xml" value="0.5276041666666667" />
+      </map>
+    </option>
+  </component>
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" project-jdk-name="1.8" project-jdk-type="JavaSDK">
+    <output url="file://$PROJECT_DIR$/build/classes" />
+  </component>
+  <component name="ProjectType">
+    <option name="id" value="Android" />
+  </component>
+</project>
