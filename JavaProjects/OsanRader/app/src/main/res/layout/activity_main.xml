@@ -1,0 +1,384 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#ffffff"
+    android:orientation="vertical"
+    tools:context=".MainActivity">
+
+    <TextView
+        android:id="@+id/info"
+        android:layout_width="45dp"
+        android:layout_height="45dp"
+        android:layout_gravity="bottom|right"
+        android:layout_marginTop="10dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:background="@drawable/info"
+        android:fontFamily="@font/tmoney_bold"
+        android:gravity="right|bottom"
+        android:padding="10dp"
+        android:textAlignment="center"
+        android:textColor="#000000"
+        android:textSize="10dp"
+        android:textStyle="bold"
+        tools:ignore="RtlCompat"></TextView>
+
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="10dp"
+        android:adjustViewBounds="true"
+        android:src="@drawable/logo1" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/tmoney_bold"
+        android:text="메뉴를 선택해 기관 정보를 확인하세요!"
+        android:textAlignment="center"
+        android:layout_marginTop="5dp"
+        android:textColor="#3949AB"
+        android:textSize="20dp"
+        android:textStyle="bold"></TextView>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:background="@drawable/byregion_shape"
+                android:orientation="vertical"
+                android:padding="20dp"
+
+                >
+
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="70dp"
+                    android:orientation="horizontal">
+
+                    <ImageView
+                        android:id="@+id/baldal"
+                        android:layout_width="60dp"
+                        android:src="@drawable/baldal"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        ></ImageView>
+
+                    <ImageView
+                        android:id="@+id/jungsin"
+                        android:layout_width="60dp"
+                        android:layout_height="wrap_content"
+                        android:src="@drawable/jungsin"
+                        android:layout_weight="1"
+                        ></ImageView>
+                    <ImageView
+                        android:id="@+id/welfare"
+                        android:layout_width="60dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:src="@drawable/listen"></ImageView>
+
+
+
+
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="3dp"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:id="@+id/baldaltext"
+                        android:layout_width="70dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:fontFamily="@font/tmoney_bold"
+                        android:text="발달장애"
+                        android:layout_marginTop="5dp"
+                        android:textAlignment="center"
+                        android:textColor="#000000"
+                        android:textSize="20dp"
+                        android:textStyle="bold"></TextView>
+
+                    <TextView
+                        android:id="@+id/jungsintext"
+                        android:layout_width="70dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:fontFamily="@font/tmoney_bold"
+                        android:text="정신장애"
+                        android:textAlignment="center"
+                        android:layout_marginTop="5dp"
+                        android:textColor="#000000"
+                        android:textSize="20dp"
+                        android:textStyle="bold"></TextView>
+
+                    <TextView
+                        android:id="@+id/welfaretext"
+                        android:layout_width="70dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:fontFamily="@font/tmoney_bold"
+                        android:text="청각장애"
+                        android:layout_marginTop="5dp"
+                        android:textAlignment="center"
+                        android:textColor="#000000"
+                        android:textSize="20dp"
+                        android:textStyle="bold"></TextView>
+
+
+
+
+                </LinearLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="2.5dp"
+                    android:layout_centerInParent="true"
+                    android:layout_marginLeft="12dp"
+                    android:layout_marginTop="20dp"
+                    android:layout_marginRight="12dp"
+                    android:layout_marginBottom="20dp"
+                    android:background="#000000" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="70dp"
+                    android:orientation="horizontal">
+
+                    <ImageView
+                        android:id="@+id/carservice"
+                        android:layout_width="60dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:src="@drawable/carservice"></ImageView>
+
+
+                    <ImageView
+                        android:id="@+id/association"
+                        android:src="@drawable/association"
+                        android:layout_width="60dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        ></ImageView>
+
+                    <ImageView
+                        android:id="@+id/mapimg"
+                        android:layout_width="60dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:src="@drawable/map"
+                        ></ImageView>
+
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="3dp"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:id="@+id/carservicetext"
+                        android:layout_width="70dp"
+                        android:layout_marginTop="5dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:fontFamily="@font/tmoney_bold"
+                        android:text="차량지원 서비스"
+                        android:textAlignment="center"
+                        android:textColor="#000000"
+                        android:textSize="16dp"></TextView>
+
+
+                    <TextView
+                        android:id="@+id/associationtext"
+                        android:layout_width="70dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:fontFamily="@font/tmoney_bold"
+                        android:text="장애인 협회"
+                        android:layout_marginTop="5dp"
+                        android:textAlignment="center"
+                        android:textColor="#000000"
+                        android:textSize="20dp"
+                        android:textStyle="bold"></TextView>
+
+                    <TextView
+                        android:id="@+id/maptext"
+                        android:layout_width="70dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:layout_marginTop="5dp"
+                        android:fontFamily="@font/tmoney_bold"
+                        android:text="주변 시설"
+                        android:textAlignment="center"
+                        android:textColor="#000000"
+                        android:textSize="20dp"
+                        android:textStyle="bold">
+
+                    </TextView>
+
+
+                </LinearLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="2.5dp"
+                    android:layout_centerInParent="true"
+                    android:layout_marginLeft="12dp"
+                    android:layout_marginTop="20dp"
+                    android:layout_marginRight="12dp"
+                    android:layout_marginBottom="20dp"
+                    android:background="#000000" />
+
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="70dp"
+                    android:orientation="horizontal">
+
+                    <ImageView
+                        android:id="@+id/service"
+                        android:layout_width="60dp"
+                        android:layout_height="wrap_content"
+                        android:src="@drawable/sangdam"
+                        android:layout_weight="1"
+                        ></ImageView>
+
+
+                    <ImageView
+                        android:id="@+id/job"
+                        android:layout_width="60dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:src="@drawable/job"></ImageView>
+
+
+                    <ImageView
+                        android:id="@+id/etc"
+                        android:src="@drawable/more"
+                        android:layout_width="60dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"></ImageView>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="3dp"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:id="@+id/servicetext"
+                        android:layout_width="70dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:fontFamily="@font/tmoney_bold"
+                        android:text="상담"
+                        android:layout_marginTop="5dp"
+                        android:textAlignment="center"
+                        android:textColor="#000000"
+                        android:textSize="20dp"
+                        android:textStyle="bold"></TextView>
+
+
+
+
+                    <TextView
+                        android:id="@+id/jobtext"
+                        android:layout_width="70dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:fontFamily="@font/tmoney_bold"
+                        android:text="일자리"
+                        android:layout_marginTop="5dp"
+                        android:textAlignment="center"
+                        android:textColor="#000000"
+                        android:textSize="20dp"
+                        android:textStyle="bold"></TextView>
+
+                    <TextView
+                        android:id="@+id/etctext"
+                        android:layout_width="70dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:fontFamily="@font/tmoney_bold"
+                        android:text="기타"
+                        android:textAlignment="center"
+                        android:textColor="#000000"
+                        android:textSize="20dp"
+                        android:layout_marginTop="5dp"
+                        android:textStyle="bold"
+                        ></TextView>
+                </LinearLayout>
+
+
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/allfacil"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="bottom"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:background="@drawable/byall_shape"
+                android:fontFamily="@font/tmoney_bold"
+                android:padding="10dp"
+                android:text="시설 모두 보기"
+                android:textAlignment="center"
+                android:textColor="#000000"
+                android:textSize="25dp"
+                android:textStyle="bold"
+                tools:ignore="RtlCompat"></TextView>
+
+            <TextView
+                android:id="@+id/sosik"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/tmoney_bold"
+                android:text=" 오산시 소식 > "
+                android:padding="10dp"
+                android:layout_marginTop="10dp"
+                android:layout_gravity="right|bottom"
+                android:background="@drawable/list_shape"
+                android:layout_marginRight="10dp"
+                android:textColor="#3949AB"
+                android:textSize="20dp"
+                android:textStyle="bold"></TextView>
+
+        </LinearLayout>
+
+
+    </ScrollView>
+
+
+
+
+
+</LinearLayout>
