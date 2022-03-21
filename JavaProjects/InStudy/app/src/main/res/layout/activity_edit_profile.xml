@@ -1,0 +1,144 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#ffffff">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/constraintLayout_edit_profile"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+        <ImageView
+                android:id="@+id/backspace"
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:src="@drawable/chevron_left"
+                android:layout_marginLeft="24dp"
+                android:layout_marginTop="16dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+        />
+        <TextView
+                android:id="@+id/edit_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="프로필 설정"
+                android:textSize="17sp"
+                android:fontFamily="@font/notosanscjkkrmedium"
+                android:lineSpacingExtra="-5sp"
+                android:textColor="#000000"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"/>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+    <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/cardView"
+             android:layout_width="150dp"
+            android:layout_height="150dp"
+            android:layout_marginTop="40dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/constraintLayout_edit_profile"
+            app:layout_constraintStart_toStartOf="parent"
+            android:src="@drawable/test"/>
+
+    <ImageButton
+            android:id="@+id/imgbtnCamera"
+            android:layout_width="27dp"
+            android:layout_height="27dp"
+            android:layout_marginRight="8dp"
+            android:layout_marginBottom="8dp"
+            app:layout_constraintEnd_toEndOf="@id/cardView"
+            app:layout_constraintBottom_toBottomOf="@id/cardView"
+            android:background="@drawable/background_circle_camera"
+            android:src="@drawable/camera_outline"
+            android:backgroundTint="@color/colorPrimary"
+            android:tint="#FFFFFF"
+    />
+
+    <EditText
+        android:id="@+id/nicknameViewedit"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:lineSpacingExtra="28sp"
+        android:text="닉네임"
+        android:textColor="#212529"
+        android:textSize="16sp"
+        android:fontFamily="@font/notosanscjkkrmedium"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/cardView" />
+
+    <TextView
+            android:id="@+id/textViewedit"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="10dp"
+            android:lineSpacingExtra="28sp"
+            android:text="소개"
+            android:textColor="#212529"
+            android:textSize="16sp"
+            android:fontFamily="@font/notosanscjkkrmedium"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/nicknameViewedit" />
+
+    <EditText
+            android:id="@+id/edtSetProfileContents"
+            android:layout_width="match_parent"
+            android:layout_height="100dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="5dp"
+            android:layout_marginEnd="16dp"
+            android:background="@drawable/btn_line_for_set_profile"
+            android:ems="10"
+            android:hint="최소 20자 최대 40자로 입력해주세요."
+            android:gravity="left"
+            android:maxLength="40"
+            android:inputType="textMultiLine"
+            android:paddingLeft="10dp"
+            android:paddingTop="10dp"
+            android:paddingRight="10dp"
+            android:scrollbars="vertical"
+            android:fontFamily="@font/notosanscjkkrmedium"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textViewedit" />
+
+    <Button
+            android:id="@+id/mButtonStart"
+            android:layout_width="match_parent"
+
+            android:layout_height="60dp"
+            android:layout_gravity="right|bottom"
+            android:layout_marginStart="16dp"
+            android:layout_marginEnd="16dp"
+            android:background="@drawable/btn_start"
+            android:text="확인"
+            android:textColor="@color/colorWhite"
+            android:textSize="25dp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.95" />
+
+    <TextView
+        android:id="@+id/mTextViewPostResult"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="invisible"
+        app:layout_constraintTop_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
