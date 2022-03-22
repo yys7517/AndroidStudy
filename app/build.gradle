@@ -29,6 +29,11 @@ android {
     kotlinOptions {
         jvmTarget = '1.8'
     }
+
+    // 데이터바인딩
+    dataBinding{
+        enabled = true
+    }
 }
 // Firebase
 apply plugin: 'com.android.application'
@@ -38,6 +43,8 @@ dependencies {
     // Firebase
     implementation platform('com.google.firebase:firebase-bom:29.2.0')
     implementation 'com.google.firebase:firebase-analytics-ktx'
+    implementation 'com.google.firebase:firebase-auth-ktx'      // FireBase Auth.
+    implementation 'com.google.firebase:firebase-database-ktx'  // Firebase Realtime Database
 
     implementation 'androidx.core:core-ktx:1.7.0'
     implementation 'androidx.appcompat:appcompat:1.4.1'
