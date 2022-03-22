@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "61750749776",
+    "project_id": "mysampleproject-3b9e3",
+    "storage_bucket": "mysampleproject-3b9e3.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:61750749776:android:f772119695f931ec0a7f55",
+        "android_client_info": {
+          "package_name": "com.youngsun.firebasesample"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "61750749776-qqbcuqcrbjgdft8nlvfhh0d3gn3ataov.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAxBq5yTbdvIP_9gDM4Y29rMlUMi6uyd2g"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "61750749776-qqbcuqcrbjgdft8nlvfhh0d3gn3ataov.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
