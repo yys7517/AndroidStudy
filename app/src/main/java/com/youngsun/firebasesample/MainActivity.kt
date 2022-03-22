@@ -1,5 +1,6 @@
 package com.youngsun.firebasesample
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Toast
@@ -40,8 +41,7 @@ class MainActivity : AppCompatActivity() {
                 .addOnCompleteListener(this) { task ->
                     if (task.isSuccessful) {
                         Toast.makeText(this, "회원가입 성공!", Toast.LENGTH_SHORT).show()
-                        Toast.makeText(this, "로그인 되었습니다.", Toast.LENGTH_SHORT).show()
-                        // 회원가입이 이뤄지고, 자동으로 유저 정보가 저장되면 로그인이 된다.
+                        // 회원가입이 이뤄지고, 자동으로 유저 정보가 저장된다. uid 값이 null이 아니다.
 
                         binding.edtEmailArea.text.clear()       // 이메일 입력 창 비우기.
                         binding.edtPassArea.text.clear()        // 비밀번호 입력 창 비우기.
@@ -67,6 +67,12 @@ class MainActivity : AppCompatActivity() {
 
                         binding.edtEmailArea.text.clear()       // 이메일 입력 창 비우기.
                         binding.edtPassArea.text.clear()        // 비밀번호 입력 창 비우기.
+
+                        // 로그인에 성공하면 게시글 목록 Activity로 이동.
+                        val intent = Intent( this, BoardListActivity::class.java )
+                        startActivity(intent)
+                        finish()
+
                     } else {
                         Toast.makeText(this, "로그인 실패", Toast.LENGTH_SHORT).show()
                     }
